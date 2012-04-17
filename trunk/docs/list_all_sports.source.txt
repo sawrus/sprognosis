@@ -1,0 +1,145 @@
+Basketball
+Football
+Archery
+Swimming
+Skeet Shooting
+Wrestling
+Pool Playing
+Synchronized Swimming
+Volleyball
+Badminton
+Baseball
+Boxing
+Canoeing
+Cycling
+Tennis
+Gymnastics
+Hockey
+Karate
+Hang Gliding
+Parachuting
+Water Skiing
+Down Hill Skiing
+Cross Country Skiing
+Water Polo
+Bowling
+Racket ball
+Darts
+Foosball
+Decathlon
+Hunting
+Speed Skating
+Figure Skating
+Handball
+Rowing
+Sailing
+Synchronized Swimming
+Table Tennis
+Triathlon
+Weight Lifting
+Crochet
+Horseshoes
+Bocce Ball
+Soccer
+Rugby
+Motorcycle Racing
+Automobile Racing
+Aquatics
+Archery
+Equestrian
+Fencing
+Judo
+Modern Pentathlon
+Rowing
+Taekwondo
+Biathlon
+Bobsleigh
+Curling
+Ice Hockey
+Luge
+Golf
+Roller Skating
+Surfing
+Scuba Diving
+Mountaineering and Climbing
+Squash
+Sumo Wrestling
+Wushu
+Chess
+Netball
+Kayaking
+Snowshoeing
+Mountain Biking
+Sprint Running
+Cross Country Running
+Power Walking
+Snow Sledding
+Paint ball
+Rock Climbing
+Hiking
+Roller Skating
+Ice Skating
+Fishing
+Water Tubing
+Boomerang
+Cricket
+Cheerleading
+
+Jai Alai
+Fencing
+Paddle Ball
+Lacrosse
+Petanque
+Skateboarding
+Tchoukball
+Track and Field
+Bird Watching
+Horseback Riding
+Prospecting
+Snow Biking
+White Water Rafting
+Water Snorkling
+Dog Sledding
+Sport Fishing
+River Rafting
+Whale Watching
+Sky Diving
+Camping
+Inline Skating
+Metal Detecting
+Bull Fighting
+Falconry
+Dog Training
+Rodeo Riding
+Snow Boarding
+Shuffle Board
+Flag Football
+Fox Hunting
+Model Flying
+Remote Control Boating
+Medicine Ball
+Hot Air Ballooning
+Wheelchair Basketball
+Caving
+Diving
+Modern Dance
+Classical Dance
+Para Gliding
+Knee Boarding
+Yachting
+Land Sailing
+Jump Roping
+Sombo
+Tug of War
+Wind Surfing
+Yoga
+Stunt Plane Flying
+Train Collecting
+Biathlon
+Log Rolling
+Tree Topping
+Body Building
+High Jump
+Long Jump
+Snooker
+Shot Put 

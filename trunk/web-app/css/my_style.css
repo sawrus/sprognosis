@@ -1,0 +1,200 @@
+/*border for anyone tags*/
+html * {
+    margin: 0;
+}
+
+/*font size for anyone <div> tags*/
+div {
+    font-size: xx-large;
+}
+
+/*TOP----------------------------*/
+#topPanel {
+    background-color: #ffe4c4;
+    height: 160px;
+}
+
+#linkPanel {
+    background-color: #DBEAFF;
+    height: 30px;
+    font-size: 13pt;
+}
+
+#categoryPanel {
+    background-color: #ffffcc;
+    height: 100px;
+}
+
+#searchPanel {
+    background-color: #fff8dc;
+    height: 30px;
+    font-size: 12pt;
+    padding: 0;
+    margin: 0;
+    float: right;
+}
+
+/*TOP----------------------------*/
+
+/*MAIN----------------------------*/
+#mainPanel {
+    background-color: #E3EDFA;
+}
+
+/*MAIN----------------------------*/
+
+/*LEFT----------------------------*/
+#leftNavigationPanel {
+    background-color: #90A029;
+    width: 20%;
+    float: left;
+}
+
+#postListPanel {
+    background-color: #dadbdb;
+}
+
+#payProfilePanel {
+    background-color: #DBEAFF;
+    font-size: 13pt;
+}
+
+/*LEFT----------------------------*/
+
+/*CONTENT-------------------------*/
+#contentPanel {
+    background-color: #D3D3D3;
+    width: 80%;
+    float: right;
+}
+
+#textPanel {
+    background-color: #F58516;
+    width: 80%;
+    float: left;
+}
+
+#commentPanel {
+    background-color: #EBF09E;
+}
+
+/*CONTENT-------------------------*/
+
+/*RIGHT---------------------------*/
+#rightNavigationPanel {
+    background-color: #b9b9b9;
+    width: 20%;
+    float: right;
+}
+
+#prognosisPanel {
+    background-color: #FDFFB4;
+}
+
+#tagPanel {
+    background-color: #E5EFFD;
+}
+
+/*RIGHT---------------------------*/
+
+/*DOWN---------------------------*/
+#downPanel {
+    background-color: #d8bfd8;
+    height: 200px;
+    clear: both;
+}
+
+/*DOWN---------------------------*/
+
+/*STYLES---------------------------*/
+.postListLi {
+    font-size: 12pt;
+}
+
+.postListUl {
+}
+
+.categoryListLi {
+    font-size: 14pt;
+}
+
+.textPanelTr {
+}
+
+.textPanelTd {
+}
+
+.textPanelTable {
+    border-width: 1px;
+    border-color: #000000;
+    border-spacing: 2px;
+    border-style: solid;
+    background-color: white;
+}
+
+.textPanelTable tr td p {
+    font-size: 12pt;
+}
+
+.textPanelTable tr td {
+    font-size: 12pt;
+}
+
+.textPanelTable tr th {
+    font-size: 12pt;
+}
+
+.textPanelP {
+    font-size: 12pt;
+    font-family: Times, serif;
+}
+
+.downPanelP {
+    font-size: 9pt;
+    font-family: Times, serif;
+}
+
+.commentP {
+    font-size: 10pt;
+    font-family: Times, serif;
+}
+
+.rightNavUl {
+}
+
+.rightNavLi {
+    font-size: 16pt;
+    text-align: left;
+}
+
+.prognosisLi {
+    font-size: 8pt;
+}
+
+ul.link {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+}
+
+ul.link a:hover {
+    color: #cc0000;
+}
+
+ul.link a {
+}
+
+li.link {
+    float: left;
+    text-decoration: none;
+    color: #57585A;
+}
+
+input.search {
+    background-color: white;
+    vertical-align: top;
+    width: 400px;
+}
+
+/*STYLES---------------------------*/

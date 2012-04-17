@@ -1,0 +1,126 @@
+<%@ page import="com.sp.site.Image; com.sp.site.SiteController; com.sp.profiles.UserProfile; com.sp.auth.User; com.sp.profiles.PayProfile; com.sp.site.PostCategory; com.sp.site.Post; com.sp.site.Comment" contentType="text/html;charset=UTF-8" %>
+<html>
+<head>
+    <title>sPrognosis: ${(postInstance != null && postInstance.title != null) ? postInstance.title : "noname"}</title>
+    <meta name="layout" content="bodyLayout"/>
+    <g:set var="entityName" value="${message(code: 'post.label', default: 'Post')}"/>
+</head>
+
+<body>
+<g:isLoggedIn>
+    <g:ifAnyGranted role="ROLE_USER">
+        <g:set var="payProfile" value="${userProfile.payProfile}"/>
+    </g:ifAnyGranted>
+</g:isLoggedIn>
+
+<g:if test="${flash.message}">
+    <div class="message">${flash.message}</div>
+</g:if>
+
+<div id="mainPanel">
+    <div id="leftNavigationPanel">Left navigation panel
+        <g:ifAnyGranted role="ROLE_USER">
+            <div id="payProfilePanel">Pay Profile Panel:
+                <g:isLoggedIn>
+                    <li>Name: ${payProfile.name}</li>
+                    <li>Description: ${payProfile.description}</li>
+                    <li>Price: ${payProfile.price}${payProfile.priceType}</li>
+                    <li>Period: ${payProfile.period}${payProfile.periodType}</li>
+                </g:isLoggedIn>
+            </div>
+        </g:ifAnyGranted>
+
+        <div id="postListPanel">Post Panel:
+            <g:each in="${PostCategory.listOrderByLastUpdated(PostCategory.list())}" var="postCategory"
+                    status="postCategoryStatus">
+
+                <li class="categoryListLi">${postCategory.name} (${Post.findAllByCategory(postCategory).size()})</p>
+                <ul class="postListUl">
+                    <g:each in="${Post.findAllByCategoryAndCategoryVisible(postCategory, true)}" var="post"
+                            status="postStatus">
+                        <li class="postListLi">
+                            <g:link controller="site" action="index"
+                                    id="${post?.id}">${post?.name}</g:link>
+                        </li>
+                    </g:each>
+                </ul>
+                </li>
+            </g:each>
+        </div>
+    </div>
+
+    <div id="contentPanel">
+        <div id="textPanel">Text panel:
+            <g:isLoggedIn>Welcome <g:loggedInUsername/>!</g:isLoggedIn>
+            <g:if test="${postInstance.visible}">
+                <table class="textPanelTable">
+                    <tr class="textPanelTr">
+                        <td class="textPanelTd">
+                            <h4>Title: ${postInstance?.name}. Updated date: ${postInstance.lastUpdated}</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="textPanelP">${postInstance?.content}${Image.findByNameLike("IDEA%")}</p>
+                        </td>
+                    </tr>
+                </table>
+                <g:if test="${postInstance.allowComments}">
+                    <div id="commentPanel">Comment Panel:
+                        <g:form controller="comment" action="save">
+                            <input type="text" style="width: 90%; height: 100px; background-color: #ffaaaa;"
+                                   value="${commentInstance?.content}" name="content">
+                            <g:hiddenField name="id" value="${commentInstance?.id}"/>
+                            <g:hiddenField name="post" value="${postInstance?.id}"/>
+                            <div class="buttons">
+                                <span class="button"><g:submitButton name="create" class="save"
+                                                                     value="${message(code: 'default.button.create.label', default: 'Create')}"/></span>
+                            </div>
+                        </g:form>
+                        <table>
+                            <g:each in="${postComments}" status="commentStatus" var="comment">
+                                <tr>
+                                    <td><p class="commentP">Comment: ${comment.name}</p></td>
+                                    <td>
+                                        <p class="commentP">
+                                            <g:textField name="differentPoints" value="${comment?.content}"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </g:each>
+                        </table>
+                    </div>
+                </g:if>
+            </g:if>
+
+        </div>
+
+        <div id="rightNavigationPanel">Right navigation panel
+            <div id="tagPanel">Tag Panel (${postTags.size()}):
+                <ul class="rightNavUl">
+                    <g:each in="${postTags}" status="tagStatus" var="tag">
+                        <li class="rightNavLi">${tag?.name}</li>
+                    </g:each>
+                </ul>
+            </div>
+
+            <g:ifAnyGranted role="ROLE_USER">
+                <div id="prognosisPanel">Prognosis Panel:
+                    <p style="font-size: 12pt; font-style: italic;">Count Prognosis: ${userProfile.prognosisList.size()}</p>
+                    <g:each in="${userProfile.prognosisList}" status="prognosisStatus" var="prognosis">
+                        <p style="font-size: 10pt; font-style: italic;">Category:${prognosis.category}</p>
+                        <ul>
+                            <li class="prognosisLi">Actual date:${prognosis.actualDate}</li>
+                            <li class="prognosisLi">First: ${prognosis.first}: ${prognosis.firstPoints}</li>
+                            <li class="prognosisLi">Second: ${prognosis.second}: ${prognosis.secondPoints}</li>
+                            <li class="prognosisLi">Different: ${prognosis.differentPoints}</li>
+                            <li class="prognosisLi">Event: ${prognosis.sportEvent}</li>
+                        </ul>
+                    </g:each>
+                </div>
+            </g:ifAnyGranted>
+        </div>
+    </div>
+</div>
+</body>
+</html>
