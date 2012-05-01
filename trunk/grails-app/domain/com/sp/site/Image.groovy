@@ -49,6 +49,24 @@ class Image extends AbstractDomain{
         }
         int height = Math.round(percentOfOriginal * height / 100)
         int width = Math.round(percentOfOriginal * width / 100)
+        return resizeImage(height, width)
+    }
+
+    public String toHtmlTagWithResize(int newWidth, int newHeight) {
+
+        int decreasePercent = width > newWidth ?
+            Math.round(newWidth / Math.round(width / 100)):
+            height > newHeight ?
+                Math.round(newHeight / Math.round(height / 100)):
+                100
+
+        int width = width <= newWidth ? width : Math.round(decreasePercent * width/100)
+        int height = height <= newHeight ? height : Math.round(decreasePercent * height/100)
+
+        return resizeImage(height, width)
+    }
+
+    private String resizeImage(int height, int width) {
         String QUOT = "\"";
         String LT = "<";
         String GT = ">";

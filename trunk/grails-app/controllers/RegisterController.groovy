@@ -3,6 +3,13 @@ import com.sp.auth.Role
 
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken as AuthToken
 import org.springframework.security.context.SecurityContextHolder as SCH
+import com.sp.site.Invite
+import com.sp.profiles.UserProfile
+import com.sp.enums.Language
+import com.sp.profiles.PayProfile
+import org.apache.commons.logging.LogFactory
+import com.sp.site.Image
+import com.sp.impl.ImageController
 
 /**
  * Registration controller.
@@ -44,6 +51,8 @@ class RegisterController {
 		def user = authenticateService.userDomain()
 		if (user) {
 			render view: 'show', model: [person: User.get(user.id)]
+            //UserProfile userProfile = UserProfile.findByUser(user)
+            //redirect(controller: "userProfile", action: "show", params: [id: userProfile.id])
 		}
 		else {
 			redirect action: index
@@ -154,6 +163,32 @@ class RegisterController {
 			return
 		}
 
+        def acceptInvite = null
+
+        if (!params.invite){
+            flash.message = 'Your invite is empty!'
+            render view: 'index', model: [person: person]
+            return
+        } else {
+            boolean isCorrectInvite = false
+            System.out.println("invite="+params.invite)
+            for (Invite invite: Invite.list()){
+                if (invite.key.equals(params.invite) && !invite.used){
+                    invite.used = true
+                    acceptInvite = invite
+                    isCorrectInvite = true
+                    break
+                }
+            }
+
+            if (!isCorrectInvite){
+                flash.message = 'Your invite is incorrect or used!'
+                render view: 'index', model: [person: person]
+                return
+            }
+        }
+
+
 		if (params.passwd != params.repasswd) {
 			person.passwd = ''
 			flash.message = 'The passwords you entered do not match.'
@@ -191,14 +226,57 @@ class RegisterController {
 
 			person.save(flush: true)
 
-			def auth = new AuthToken(person.username, params.passwd)
-			def authtoken = daoAuthenticationProvider.authenticate(auth)
-			SCH.context.authentication = authtoken
-			redirect uri: '/'
+            ImageController.realPath = servletContext.getRealPath("/")
+            ImageController.applicationName= grailsApplication.metadata['app.name']
+
+            def imageFile = request.getFile(SITE_IMAGE)
+            def imageInstance = createUserImage(person.username, imageFile)
+            if (imageInstance) imageInstance.save(flush: true)
+            if (acceptInvite) acceptInvite.save(flush: true)
+            createUserProfile(person)
 		}
 		else {
 			person.passwd = ''
 			render view: 'index', model: [person: person]
 		}
 	}
+
+    private static final String SITE_IMAGE = 'site_image'
+    private static final String AVATAR_DIR = File.separator + "avatars"
+    private static final log = LogFactory.getLog(this);
+
+    private def createUserImage(String name, def imageFile) {
+        Image imageInstance = new Image(params)
+
+        imageInstance.name = name
+        imageInstance.visible = true
+        imageInstance.path = AVATAR_DIR
+        imageInstance.description = name
+
+        if (!imageFile.empty){
+            def saveImageInstance = ImageController.saveFileAndFillEntity(imageFile, imageInstance)
+            return saveImageInstance
+        }
+    }
+
+    private def createUserProfile(User person) {
+        UserProfile userProfile = new UserProfile()
+        userProfile.language = Language.ENGLISH
+        userProfile.user = person
+        userProfile.payProfile = PayProfile.findByName("Default")
+        userProfile.userImage = Image.findByName(person.username)
+
+        def userProfileSave = userProfile.save(flush: true)
+        def auth = new AuthToken(person.username, params.passwd)
+        def authtoken = daoAuthenticationProvider.authenticate(auth)
+        SCH.context.authentication = authtoken
+
+        if (userProfileSave) {
+            redirect(controller: "userProfile", action: "show", params: [id: userProfile.id])
+        } else {
+            System.out.println("errors=" + userProfile.getErrors())
+            redirect uri: '/'
+        }
+
+    }
 }

@@ -7,6 +7,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 import javax.imageio.ImageIO
 import com.sp.site.Post
 import com.sp.site.Banner
+import org.springframework.web.multipart.MultipartHttpServletRequest
 
 class ImageController {
 
@@ -14,8 +15,14 @@ class ImageController {
     private static final String IMAGE_PATH = "/images"
     private static final log = LogFactory.getLog(this);
 
+    public static String realPath
+    public static String applicationName
+
     def save = {
         def imageInstance = new Image(params)
+
+        realPath = servletContext.getRealPath("/")
+        applicationName= grailsApplication.metadata['app.name']
 
         def imageFile = request.getFile(SITE_IMAGE)
         if (!imageFile.empty){
@@ -58,10 +65,10 @@ class ImageController {
         return [imageInstance: imageInstance]
     }
 
-    def saveFileAndFillEntity(def imageFile, def imageInstance) {
+    public static def saveFileAndFillEntity(def imageFile, def imageInstance) {
         log.debug("saveFileAndFillEntity:")
 
-        def webRootDir = servletContext.getRealPath("/")
+        def webRootDir = realPath
         def fullImagePath = IMAGE_PATH + (!StringUtils.isEmpty(imageInstance.path) ? imageInstance.path : "")
         def imageDir = new File(webRootDir, fullImagePath)
 
@@ -70,7 +77,7 @@ class ImageController {
         imageFile.transferTo(targetImageFile)
         imageInstance.absolutePath = targetImageFile.absolutePath
         imageInstance.fileName = imageFile.originalFilename
-        imageInstance.webRootDir = File.separator + grailsApplication.metadata['app.name'] + fullImagePath
+        imageInstance.webRootDir = File.separator + applicationName + fullImagePath
         log.debug("imageInstance.absolutePath="+imageInstance.absolutePath)
         log.debug("imageInstance.fileName="+imageInstance.fileName)
         log.debug("imageInstance.webRootDir="+imageInstance.webRootDir)
@@ -79,7 +86,9 @@ class ImageController {
         log.debug("width=" + image.getWidth() + "; height=" + image.getHeight());
         imageInstance.width = image.getWidth()
         imageInstance.height = image.getHeight()
-
+        
+        System.out.println("imageInstance="+imageInstance)
+        return imageInstance
     }
 
     def show = {

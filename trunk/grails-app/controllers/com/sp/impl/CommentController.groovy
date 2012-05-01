@@ -6,6 +6,8 @@ import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 import com.sp.site.Post
 import org.apache.commons.logging.LogFactory
 import org.apache.commons.lang.StringUtils
+import com.sp.profiles.UserProfile
+import com.sp.enums.Language
 
 @Secured(['ROLE_USER','ROLE_ADMIN','ROLE_PROGNOSTICATOR'])
 class CommentController {
@@ -29,24 +31,27 @@ class CommentController {
         def commentInstance = new Comment(params)
         commentInstance.author = userService.getUser()
         commentInstance.visible = true
+        def userProfile = UserProfile.findByUser(commentInstance.author)
+        commentInstance.language = userProfile? userProfile?.language : Language.ENGLISH
 
-        Post post = Post.findById(params.post)
+        Long postId = String.valueOf(params?.post).toLong()
+        Post post = Post.findById(postId)
         if (!post){
-            log.debug("save:params.post="+params.post)
+            log.debug("save:params.post="+ postId)
         }
         commentInstance.post.id = post.id
 
         if (params.description==null) commentInstance.description = ""
         if (params.name==null) commentInstance.name = commentInstance.author.username + "/" + new Date()
 
+
         if (!StringUtils.isEmpty(params.content)){
             commentInstance.save(flush: true)
-
             post.addToComments(commentInstance)
             post.save(flush: true)
-        }
 
-        redirect(controller: "site", action: "index", params: [post: params.post])
+        }
+        redirect(controller: "site", action: "index", params: [post: postId])
     }
 
     def show = {

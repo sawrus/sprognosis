@@ -62,7 +62,8 @@
 
         <div class='fheader'>Please Register..</div>
         <table>
-            <g:form action="save">
+            %{--<g:form action="save">--}%
+            <g:uploadForm action="save" method="post">
                 <tr>
                     <td><label for='username'>Login Name:</label></td>
                     <td><input type="text" name='username' value="${person?.username?.encodeAsHTML()}"/></td>
@@ -88,11 +89,19 @@
                     <td><input type="text" name='email' value="${person?.email?.encodeAsHTML()}"/></td>
                 </tr>
 
-                <td><label for='code'>Enter Code: </label></td>
-                <td>
-                    <input type="text" name="captcha" size="8"/>
-                    <img src="${createLink(controller:'captcha', action:'index')}" align="absmiddle"/>
-                </td>
+                <tr>
+                    <td><label for='code'>Enter Code: </label></td>
+                    <td>
+                        <input type="text" name="captcha" size="8"/>
+                        <img src="${createLink(controller:'captcha', action:'index')}" align="absmiddle"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><label for='code'>Enter Invite: </label></td>
+                    <td>
+                        <input type="password" name='invite'/>
+                    </td>
                 </tr>
 
                 <tr>
@@ -105,10 +114,16 @@
                     </td>
                 </tr>
 
+                <tr class="prop">
+                    <td valign="top" class="name">Image: </td>
+                    <td valign="top" class="value"><input type="file" id="site_image" name="site_image"/></td>
+                </tr>
+
                 <tr>
                     <td><g:submitButton name="create" class="button2" value="Register"/></td>
                 </tr>
-            </g:form>
+            %{--</g:form>--}%
+            </g:uploadForm>
         </table>
     </div>
 </div>
