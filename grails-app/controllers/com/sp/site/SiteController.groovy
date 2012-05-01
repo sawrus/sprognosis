@@ -17,38 +17,15 @@ class SiteController {
     private static final Language DEFAULT_LANGUAGE=Language.ENGLISH
 
     def index = {
-
-        Post postInstance = parsePost()
-
-        if (!postInstance) {
-            log.debug("index.params="+params)
-        }
-        else {
-
-            def userProfile = null
-            if (userService.authenticateService.isLoggedIn()){
-                userProfile = UserProfile.findByUser(userService.user)
-            }
-            [postInstance: postInstance,
-              userProfile: userProfile
-            ]
-        }
+        UserProfile userProfile = getUserProfile()
+        if (params.category) [categoryInstance: PostCategory.get(params.category), userProfile: userProfile]
+        else [postInstance: parsePost(),userProfile: userProfile]
     }
 
     def mobile = {
-
         Post postInstance = parsePost()
-
-        if (!postInstance) {
-            log.debug("index.params="+params)
-        }
-        else {
-
-            UserProfile userProfile = getUserProfile()
-            [postInstance: postInstance,
-                    userProfile: userProfile
-            ]
-        }
+        UserProfile userProfile = getUserProfile()
+        [postInstance: postInstance,userProfile: userProfile]
     }
 
     private UserProfile getUserProfile() {
@@ -67,8 +44,14 @@ class SiteController {
             UserProfile userProfile = getUserProfile()
             if (userProfile && userProfile.language)
                 postInstance = Post.findByNameAndLanguage(userProfile.language.homeName, userProfile.language)
-            else
-                postInstance = Post.findByNameAndLanguage(Language.ENGLISH.homeName, Language.ENGLISH)
+            else {
+                if (!StringUtils.isEmpty(params.language)){
+                    Language language = Language.valueOf(Language.class, params.language)
+                    postInstance = Post.findByNameAndLanguage(language.homeName, language)
+                } else {
+                    postInstance = Post.findByNameAndLanguage(Language.ENGLISH.homeName, Language.ENGLISH)
+                }
+            }
 
             def id = params.id
             if (id) {
@@ -83,18 +66,20 @@ class SiteController {
 
     def language = {
         Language language = DEFAULT_LANGUAGE
-        
+
         if (params.language && !StringUtils.isEmpty(params.language)) {
             language = Language.valueOf(Language.class, String.valueOf(params.language))
         }
 
         if (userService.authenticateService.isLoggedIn()){
             UserProfile userProfile = UserProfile.findByUser(userService.user)
-            userProfile.language = language
-            userProfile.save(flush: true)
+            if (userProfile){
+                userProfile.language = language
+                userProfile.save(flush: true)
+            }
         }
 
-        redirect(action: index)
+        redirect(action: index, params: [language: language.name()])
     }
 
     def create = {
@@ -130,6 +115,34 @@ class SiteController {
             purchasedPrognosisList = Prognosis.list()
         }
         [prognosisInstanceList: purchasedPrognosisList, prognosisInstanceTotal: purchasedPrognosisList.size()]
+    }
+
+    @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
+    def checked = {
+        def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userService.getUser(), Boolean.TRUE)
+        def testCondition = checkedPrognosis.size() > COUNT_PROGNOSTICATOR_TEST_PASSED
+        if (testCondition)
+            flash.message = "All tests pass!"
+        else
+            flash.message = "Sorry! " + checkedPrognosis.size() + " tests pass."
+        [prognosisInstanceList: checkedPrognosis, prognosisInstanceTotal: checkedPrognosis.size()]
+    }
+
+    @Secured(['ROLE_USER'])
+    def buy = {
+        Prognosis prognosis = Prognosis.findById(params.itemNumber)
+        if (prognosis)
+            payService.buyPrognosis(UserProfile.findByUser(userService.getUser()), prognosis)
+        else
+            flash.message = "Not found Prognosis #" + params.itemNumber
+        redirect(action: "purchased")
+    }
+
+    @Secured(['ROLE_USER'])
+    def actual =
+    {
+        def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
+        [prognosisInstanceList: actualPrognosisList, prognosisInstanceTotal: actualPrognosisList.size()]
     }
 
     private redirectToPage(String pageName) {

@@ -4,11 +4,13 @@ import com.sp.auth.User
 import com.sp.impl.PayService
 import com.sp.impl.Prognosis
 import com.sp.enums.Language
+import com.sp.site.Image
 
 class UserProfile
 {
     User user
     PayProfile payProfile
+    Image userImage
 
     static hasMany = [prognosisList: Prognosis]
 
@@ -19,6 +21,7 @@ class UserProfile
     static constraints = {
         user(nullable: false)
         payDate(nullable: true)
+        userImage(nullable: true)
     }
 
     @Override

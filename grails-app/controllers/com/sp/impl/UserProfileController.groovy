@@ -27,6 +27,7 @@ class UserProfileController
         }
         else
         {
+            System.out.println("access_deny")
             redirect uri: '/'
         }
     }

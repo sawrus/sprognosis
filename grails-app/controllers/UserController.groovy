@@ -1,6 +1,9 @@
 import com.sp.auth.User
 import com.sp.auth.Role
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.sp.profiles.UserProfile
+import com.sp.enums.Language
+import com.sp.profiles.PayProfile
 
 /**
  * User controller.
@@ -136,7 +139,7 @@ class UserController {
 		}
 	}
 
-	private void addRoles(person) {
+    private void addRoles(person) {
 		for (String key in params.keySet()) {
 			if (key.contains('ROLE') && 'on' == params.get(key)) {
 				Role.findByAuthority(key).addToPeople(person)

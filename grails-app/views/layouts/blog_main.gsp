@@ -51,18 +51,12 @@
     <g:isLoggedIn>
         <g:set var="user"><g:loggedInUsername/></g:set>
         <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
-        <g:set var="language" value="${userProfile != null ? userProfile.language : Language.ENGLISH}"/>
-        <g:if test="${language!=null}">
-            <title>${language.siteName} #${postInstance?.title}</title>
-        </g:if>
-        <g:else>
-            <title>${Language.ENGLISH.siteName} #${postInstance?.title}</title>
-        </g:else>
+        <g:set var="language" value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
     </g:isLoggedIn>
     <g:isNotLoggedIn>
-        <g:set var="language" value="${Language.ENGLISH}"/>
-        <title>${Language.ENGLISH.siteName} #${postInstance?.title}</title>
+        <g:set var="language" value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
     </g:isNotLoggedIn>
+    <title>${language.siteName} #${postInstance?.title}</title>
 
     <g:layoutHead/>
 
@@ -86,7 +80,6 @@
                     <g:isNotLoggedIn>
                         <g:link controller="login">Login</g:link> |
                         <g:link controller="site" action="register">Register</g:link>
-                        %{--<a href="${g.createLink(controller:'site',action:'register')}#anchor">Register</a>--}%
                     </g:isNotLoggedIn>
                     <g:isLoggedIn>
                         <g:link controller="logout" action="index">Logout</g:link>
@@ -107,7 +100,6 @@
     <nav>
         <ul class="sf-menu sf-js-enabled sf-shadow">
             <li class="active">
-                %{--<g:link controller="site" action="index">${language.homeName}</g:link>--}%
                 <a href="${g.createLink(controller:'site',action:'index')}#anchor">
                 ${language.homeName}
                 </a>
@@ -120,19 +112,24 @@
                             <a href="${g.createLink(controller:'site',action:'index',params: [post: category.firstPost()?.id])}#anchor">
                                 ${category?.name}
                             </a>
-                            %{--<g:link controller="site" action="index"--}%
-                                    %{--params="[post: category.firstPost()?.id]">${category?.name}</g:link>--}%
                     </g:if>
                     <g:else>
-                        <li><a href="#">${category?.name}</a>
+                        <li><a href="${g.createLink(controller: 'site', action: 'index', params: [category: category?.id])}#anchor">
+                        ${category?.name}
+                        </a>
                         <ul style="display: none; visibility: hidden">
                             <g:each in="${posts}" var="post">
                                 <li>
-                                    <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
-                                        ${post?.name}
-                                    </a>
-%{-->                                 <g:link controller="site" action="index"--}%
-                                            %{--params="[post: post?.id]">${post?.name}</g:link>--}%
+                                    <g:if test="${post.name=='As User'}">
+                                        <a href="${g.createLink(controller:'site',action:'prognosis')}">
+                                            ${post?.name}
+                                        </a>
+                                    </g:if>
+                                    <g:else>
+                                        <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
+                                            ${post?.name}
+                                        </a>
+                                    </g:else>
                                 </li>
                             </g:each>
                         </ul>
@@ -169,12 +166,18 @@
                         <ul class="list-1">
                             <g:each in="${Post.findAllByMainPageVisibleAndLanguage(true, language)}" var="post" status="i">
                                 <g:if test="${i == 0}">
-                                    <li class="active-2"><g:link controller="site" action="index"
-                                                                 params="[post: post?.id]">${post?.name}</g:link></li>
+                                    <li class="active-2">
+                                        <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
+                                            ${post?.name}
+                                        </a>
+                                    </li>
                                 </g:if>
                                 <g:else>
-                                    <li><g:link controller="site" action="index"
-                                                params="[post: post?.id]">${post?.name}</g:link></li>
+                                    <li>
+                                        <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
+                                            ${post?.name}
+                                        </a>
+                                    </li>
                                 </g:else>
                             </g:each>
                         </ul>

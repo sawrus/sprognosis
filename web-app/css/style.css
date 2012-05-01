@@ -600,20 +600,17 @@ nav {
 	color: #020202;
 }
 
-.comment {
-    padding-top: 10;
-    margin-top: 10;
-}
-
-input.comment {
-    padding: 0;
+.comments {
+    display: block;
     margin: 0;
-    background-color: #111;
+    outline: none;
+    box-shadow: none !important;
+    font: 14px/21px Arial, sans-serif;
+
+    color: #888887;
+    border: 1px solid #616161;
+    overflow: auto;
     width: 90%;
-    height: 100px;
-    vertical-align: top;
-    color: #f5f5f5;
-    border-color:#111;
 }
 
 img.my_style {
@@ -657,3 +654,23 @@ img {
     padding-right: 40;
     font: 600 18px/26px 'Open Sans', sans-serif;
 }
+
+.nameCountProperty2 {
+    background-color: #A7CC25;
+    color: #000000;
+    padding: 10px;
+
+    font: 600 14px/22px 'Open Sans', sans-serif;
+    width: 20%;
+
+}
+
+.valueCountProperty2 {
+    /*background-color: #f5f5dc;*/
+    color: #FFF;
+    padding: 10px;
+    font: 600 18px/26px 'Open Sans', sans-serif;
+    width: 80%;
+
+}
+
