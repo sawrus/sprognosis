@@ -15,6 +15,8 @@ class SiteController {
     UserService userService
     
     private static final Language DEFAULT_LANGUAGE=Language.ENGLISH
+    private static final COUNT_PROGNOSTICATOR_TEST_PASSED = 10;
+
 
     def index = {
         UserProfile userProfile = getUserProfile()
@@ -109,6 +111,9 @@ class SiteController {
         if (userProfile.payProfile.period==0)
         {
             purchasedPrognosisList = userProfile.prognosisList
+            if (purchasedPrognosisList == null || purchasedPrognosisList.isEmpty()){
+                redirect(action: "actual")
+            }
         }
         else
         {
@@ -135,7 +140,7 @@ class SiteController {
             payService.buyPrognosis(UserProfile.findByUser(userService.getUser()), prognosis)
         else
             flash.message = "Not found Prognosis #" + params.itemNumber
-        redirect(action: "purchased")
+        redirect(action: "prognosis")
     }
 
     @Secured(['ROLE_USER'])

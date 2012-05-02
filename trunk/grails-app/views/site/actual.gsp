@@ -24,20 +24,27 @@
         <div class="wrapper">
             <a href="#anchor" id="anchor"/>
             <div class="grid_8">
-                <g:if test="${'Default'.equals(userProfile.payProfile.name)}">
-                    <g:link controller="site" action="actual" class="button">Buy prognosis</g:link>
-                </g:if>
                 <g:each in="${prognosisInstanceList}" var="prognosis" status="i">
                     <h2 class="ident-bot-2">Prognosis #${i}</h2>
                     <table width="100%">
                         <tr><td class="nameCountProperty2">Actual date</td><td class="valueCountProperty2">${prognosis.actualDate}</td></tr>
                         <tr><td class="nameCountProperty2">Sport event</td><td class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
                         <tr><td class="nameCountProperty2">Category</td><td class="valueCountProperty2">${prognosis.category}</td></tr>
-                        %{--<tr><td class="nameCountProperty">Description</td><td class="valueCountProperty">${prognosis.description}</td></tr>--}%
                         <tr><td class="nameCountProperty2">Bets URL</td><td class="valueCountProperty2"><a href="${prognosis.betsUrl}">link</a></td></tr>
                         <tr><td class="nameCountProperty2">Commands</td><td class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
-                        <tr><td class="nameCountProperty2">Points</td><td class="valueCountProperty2">${prognosis.firstPoints} : ${prognosis.secondPoints}</td></tr>
-                        <tr><td class="nameCountProperty2">Coefficient</td><td class="valueCountProperty2">${prognosis.firstBetsCoefficient} / ${prognosis.secondBetsCoefficient}</td></tr>
+                        <tr><td class="nameCountProperty2">Action</td><td class="valueCountProperty2">
+                        <paypal:button
+                                    itemName="Prognosis #${prognosis.id}"
+                                    itemNumber="${prognosis.id}"
+                                    buyerId="${userProfile.user.id}"
+                                    amount="10.0"
+                                    discountAmount="0"
+                                    transactionId="${params?.transactionId}"
+                                    buttonAlt="Buy Prognosis #${prognosis.id}"
+                                    returnAction="buy" returnController="prognosis"
+                                    class="button"
+                        />
+                        </td></tr>
                     </table>
                 </g:each>
             </div>

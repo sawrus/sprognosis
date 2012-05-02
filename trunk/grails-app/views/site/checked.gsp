@@ -22,18 +22,23 @@
 <section id="content">
     <div class="container_12">
         <div class="wrapper">
+            <g:if test="${flash.message}">
+                <div class="message">${flash.message}</div>
+            </g:if>
+            <g:hasErrors bean="${person}">
+                <div class="errors">
+                    <g:renderErrors bean="${person}" as="list"/>
+                </div>
+            </g:hasErrors>
             <a href="#anchor" id="anchor"/>
             <div class="grid_8">
-                <g:if test="${'Default'.equals(userProfile.payProfile.name)}">
-                    <g:link controller="site" action="actual" class="button">Buy prognosis</g:link>
-                </g:if>
+                <g:link controller="prognosis" action="create" class="button">Create prognosis</g:link>
                 <g:each in="${prognosisInstanceList}" var="prognosis" status="i">
                     <h2 class="ident-bot-2">Prognosis #${i}</h2>
                     <table width="100%">
                         <tr><td class="nameCountProperty2">Actual date</td><td class="valueCountProperty2">${prognosis.actualDate}</td></tr>
                         <tr><td class="nameCountProperty2">Sport event</td><td class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
                         <tr><td class="nameCountProperty2">Category</td><td class="valueCountProperty2">${prognosis.category}</td></tr>
-                        %{--<tr><td class="nameCountProperty">Description</td><td class="valueCountProperty">${prognosis.description}</td></tr>--}%
                         <tr><td class="nameCountProperty2">Bets URL</td><td class="valueCountProperty2"><a href="${prognosis.betsUrl}">link</a></td></tr>
                         <tr><td class="nameCountProperty2">Commands</td><td class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
                         <tr><td class="nameCountProperty2">Points</td><td class="valueCountProperty2">${prognosis.firstPoints} : ${prognosis.secondPoints}</td></tr>

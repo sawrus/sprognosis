@@ -168,9 +168,9 @@
                         </thead>
 					<tbody>
 						<tr class="prop">
-							<td valign="top" class="value"><g:radio name="winner" value="0" checked="true"/></td>
+							<td valign="top" class="value"><g:radio name="winnerName" value="0" checked="true"/></td>
 							<td valign="top" class="value">
-								<richui:autoComplete name="firstName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3"/>
+								<richui:autoComplete name="firstName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3" value="${prognosisInstance?.first?.name}"/>
 							</td>
 							<td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'firstPoints', 'errors')}">
 								<g:textField name="firstPoints" value="${fieldValue(bean: prognosisInstance, field: 'firstPoints')}"/>
@@ -178,9 +178,9 @@
 							
 						</tr>
 						<tr class="prop">
-							<td valign="top" class="value"><g:radio name="winner" value="1"/></td>
+							<td valign="top" class="value"><g:radio name="winnerName" value="1"/></td>
 							<td valign="top" class="value">
-								<richui:autoComplete name="secondName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3"/>
+								<richui:autoComplete name="secondName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3" value="${prognosisInstance?.second?.name}"/>
 							</td>
 							<td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'secondPoints', 'errors')}">
 								<g:textField name="secondPoints" value="${fieldValue(bean: prognosisInstance, field: 'secondPoints')}"/>

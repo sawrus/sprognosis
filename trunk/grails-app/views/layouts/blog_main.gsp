@@ -125,11 +125,16 @@
                                             ${post?.name}
                                         </a>
                                     </g:if>
-                                    <g:else>
+                                    <g:if test="${post.name=='As Handicapper'}">
+                                        <a href="${g.createLink(controller:'site',action:'checked')}">
+                                            ${post?.name}
+                                        </a>
+                                    </g:if>
+                                    <g:if test="${post.name!='As Handicapper'&&post.name!='As User'}">
                                         <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
                                             ${post?.name}
                                         </a>
-                                    </g:else>
+                                    </g:if>
                                 </li>
                             </g:each>
                         </ul>
