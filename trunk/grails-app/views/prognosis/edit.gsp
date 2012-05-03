@@ -124,7 +124,7 @@
                         <label for="category"><g:message code="prognosis.category.label" default="Category"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'category', 'errors')}">
-						<richui:autoComplete name="categoryName" action="${createLinkTo('dir': 'category/searchAJAX')}" 
+						<richui:autoComplete name="categoryName" action="${createLinkTo('dir': 'category/searchAJAX')}" value="${prognosisInstance.category}"
 							minQueryLength="1"
 						/>		  
                     </td>
@@ -164,7 +164,14 @@
                         </thead>
 					<tbody>
 						<tr class="prop">
-							<td valign="top" class="value"><g:radio name="winnerName" value="0" checked="true"/></td>
+							<td valign="top" class="value">
+								<g:if test="${prognosisInstance?.winner==prognosisInstance?.first}">
+									<g:radio name="winnerName" value="0" checked="true"/>
+								</g:if>
+								<g:else>
+									<g:radio name="winnerName" value="0"/>
+								</g:else>
+							</td>
 							<td valign="top" class="value">
 								<richui:autoComplete name="firstName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3" value="${prognosisInstance?.first?.name}"/>
 							</td>
@@ -174,7 +181,14 @@
 							
 						</tr>
 						<tr class="prop">
-							<td valign="top" class="value"><g:radio name="winnerName" value="1"/></td>
+							<td valign="top" class="value">
+								<g:if test="${prognosisInstance?.winner==prognosisInstance?.second}">
+									<g:radio name="winnerName" value="1" checked="true"/>
+								</g:if>
+								<g:else>
+									<g:radio name="winnerName" value="1"/>
+								</g:else>
+							</td>
 							<td valign="top" class="value">
 								<richui:autoComplete name="secondName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3" value="${prognosisInstance?.second?.name}"/>
 							</td>
@@ -193,7 +207,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: prognosisInstance, field: 'betsUrl', 'errors')}">
-                        <g:textField name="betsUrl" value="${prognosisInstance?.betsUrl}"/>
+                        <g:textField name="betsUrl" value="${prognosisInstance?.betsUrl}" style="width: 480px"/>
                     </td>
                 </tr>
                 <tr class="prop">
