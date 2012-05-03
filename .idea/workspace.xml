@@ -63,19 +63,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="checked.gsp" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/site/checked.gsp">
+      <file leaf-file-name="blog_main.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="139" selection-start="5470" selection-end="5470" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="actual.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/site/actual.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="139" selection-start="6317" selection-end="6317" vertical-scroll-proportion="0.7619603">
+            <state line="109" column="74" selection-start="5633" selection-end="5633" vertical-scroll-proportion="0.6546091">
               <folding />
             </state>
           </provider>
@@ -107,11 +98,11 @@
         <option value="$PROJECT_DIR$/grails-app/domain/com/sp/site/Image.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/login/auth.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/LoginController.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/prognosis.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/checked.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/actual.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp" />
       </list>
     </option>
   </component>
@@ -176,6 +167,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="grails-app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -216,7 +239,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="site" />
+              <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -600,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="59" selection-start="3548" selection-end="3624" vertical-scroll-proportion="-0.4562427">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="161" column="139" selection-start="9780" selection-end="9780" vertical-scroll-proportion="0.7619603">
@@ -628,16 +644,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/site/checked.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/site/actual.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="139" selection-start="5470" selection-end="5470" vertical-scroll-proportion="0.0">
+        <state line="99" column="139" selection-start="6317" selection-end="6317" vertical-scroll-proportion="0.7619603">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/site/actual.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/site/checked.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="139" selection-start="6317" selection-end="6317" vertical-scroll-proportion="0.7619603">
+        <state line="78" column="139" selection-start="5470" selection-end="5470" vertical-scroll-proportion="0.7619603">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="74" selection-start="5633" selection-end="5633" vertical-scroll-proportion="0.6546091">
           <folding />
         </state>
       </provider>
