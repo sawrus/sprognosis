@@ -76,7 +76,7 @@
 
                         <div class="clear"></div>
                     </div>
-                    <g:link controller="userProfile" action="profile" class="button">${language.edit}</g:link>
+                    <g:isLoggedIn><g:link controller="userProfile" action="profile" class="button">${language.edit}</g:link></g:isLoggedIn>
                 </div>
             </div>
         </div>
