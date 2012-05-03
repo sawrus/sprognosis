@@ -62,7 +62,17 @@
     <favorites_list name="sPrognosis" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="blog_main.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="73" column="59" selection-start="3607" selection-end="3607" vertical-scroll-proportion="0.37689614">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -77,12 +87,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/views/site/prognosis.gsp" />
-        <option value="$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/paypal-0.6.4/grails-app/taglib/org/grails/paypal/PaypalTagLib.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/site/actual.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/domain/com/sp/enums/Language.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/services/com/sp/impl/EmailService.groovy" />
-        <option value="$PROJECT_DIR$/grails-app/views/site/admin.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/com/sp/site/SiteController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/post/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/post/edit.gsp" />
@@ -92,6 +96,12 @@
         <option value="$PROJECT_DIR$/grails-app/views/prognosis/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/main.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/prognosis/edit.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/site/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/domain/com/sp/site/Image.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/login/auth.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/LoginController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/site/actual.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/site/prognosis.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp" />
       </list>
     </option>
@@ -135,6 +145,70 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="sPrognosis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sPrognosis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grails-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -361,8 +435,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -376,7 +450,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19935863" sideWeight="0.6354515" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19935863" sideWeight="0.6354515" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5216" sideWeight="0.49025974" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -447,114 +521,114 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/web-app/js/tinymce/plugins/fullscreen/fullscreen.htm">
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_24/src.zip!/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="46" selection-start="297" selection-end="297" vertical-scroll-proportion="0.23287672">
+        <state line="166" column="31" selection-start="7270" selection-end="7270" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/src/groovy/de/andreasschmitt/richui/taglib/renderer/RichTextEditorRenderer.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/RegisterController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="79" selection-start="6335" selection-end="6335" vertical-scroll-proportion="-7.4">
+        <state line="16" column="6" selection-start="489" selection-end="489" vertical-scroll-proportion="-4.27931">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/post/create.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/UserProfileController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="154" selection-start="5104" selection-end="5104" vertical-scroll-proportion="0.8206897">
+        <state line="8" column="6" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/post/edit.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/register/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="87" column="154" selection-start="5357" selection-end="5357" vertical-scroll-proportion="0.3570595">
+        <state line="116" column="0" selection-start="4403" selection-end="4632" vertical-scroll-proportion="0.46441072">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/prognosis/show.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/show.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="15" selection-start="9521" selection-end="9521" vertical-scroll-proportion="0.62873566">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.0712644">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="47" selection-start="1621" selection-end="1621" vertical-scroll-proportion="0.31609195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/site/SiteController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="6" selection-start="329" selection-end="329" vertical-scroll-proportion="-1.7195402">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/sp/site/Image.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="40" selection-start="2315" selection-end="2315" vertical-scroll-proportion="0.41379312">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/ImageController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="58" selection-start="1138" selection-end="1138" vertical-scroll-proportion="0.5355893">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/LogoutController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="6" selection-start="46" selection-end="46" vertical-scroll-proportion="0.05862069">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/LoginController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="48" selection-start="1677" selection-end="1677" vertical-scroll-proportion="0.6068966">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/login/auth.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="32" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.5114943">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/site/actual.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="38" selection-start="6216" selection-end="6216" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/site/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="78" selection-start="3286" selection-end="3320" vertical-scroll-proportion="0.07934656">
+        <state line="163" column="39" selection-start="6527" selection-end="9793" vertical-scroll-proportion="1.3570595">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/site/checked.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/site/prognosis.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="36" selection-start="3149" selection-end="3149" vertical-scroll-proportion="0.1470245">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/comment/create.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="40" selection-start="2169" selection-end="2298" vertical-scroll-proportion="0.6448276">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/CommentController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="28" selection-start="1672" selection-end="1750" vertical-scroll-proportion="0.6091954">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/PrognosisController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="38" selection-start="4059" selection-end="4059" vertical-scroll-proportion="0.3873979">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/main.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="4" selection-start="881" selection-end="881" vertical-scroll-proportion="0.44942528">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/prognosis/create.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="29" selection-start="429" selection-end="429" vertical-scroll-proportion="0.1367816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/prognosis/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="103" selection-start="1042" selection-end="1042" vertical-scroll-proportion="0.39673278">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/site/admin.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="0" selection-start="2855" selection-end="3238" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/admin/UserProfileAdminController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="22" selection-start="154" selection-end="170" vertical-scroll-proportion="0.0">
+        <state line="49" column="50" selection-start="3314" selection-end="3314" vertical-scroll-proportion="0.97199535">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="24" selection-start="5022" selection-end="5022" vertical-scroll-proportion="0.23803967">
+        <state line="73" column="59" selection-start="3607" selection-end="3607" vertical-scroll-proportion="0.37689614">
           <folding />
         </state>
       </provider>

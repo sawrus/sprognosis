@@ -69,12 +69,9 @@
                 <div class="slogan fl-l">${language.siteName}</div>
             </div>
             <div class="block-2">
-                <div class="fl-l"><a href="#"><img src="images/icon-1.png" alt="" height="29" width="29"></a></div>
+
                 <div class="extra-wrap block-1">
-                    <p>Join us on <a href="#">Facebook</a> and keep the news</p>
-                </div>
-                <div class="extra-wrap block-1">
-                    <p>Manage your profile <g:isLoggedIn>(<g:loggedInUsername/>)</g:isLoggedIn>:
+                    <g:isLoggedIn><p><g:loggedInUsername/>: </g:isLoggedIn>
                     <g:isNotLoggedIn>
                         <g:link controller="login">Login</g:link> |
                         <g:link controller="site" action="register">Register</g:link>

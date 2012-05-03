@@ -36,7 +36,7 @@ class Image extends AbstractDomain{
     }
 
     private String toHtml(String QUOT, String LT, String GT) {
-        final String src = "src=${QUOT}${webRootDir + File.separator + fileName}${QUOT}"
+        final String src = "src=${QUOT}${webRootDir + getSeparator() + fileName}${QUOT}"
         final String style = StringUtils.isEmpty(style) ? "" : "style=${QUOT}${style}${QUOT}"
         final String title = StringUtils.isEmpty(name) ? "" : "title=${QUOT}$name${QUOT}"
         final String alt = StringUtils.isEmpty(description) ? "" : "alt=${QUOT}$name${QUOT}"
@@ -70,13 +70,17 @@ class Image extends AbstractDomain{
         String QUOT = "\"";
         String LT = "<";
         String GT = ">";
-        String src = "src=${QUOT}${webRootDir + File.separator + fileName}${QUOT}"
+        String src = "src=${QUOT}${webRootDir + getSeparator() + fileName}${QUOT}"
         String style = StringUtils.isEmpty(style) ? "" : "style=${QUOT}${style}${QUOT}"
         String title = StringUtils.isEmpty(name) ? "" : "title=${QUOT}$name${QUOT}"
         String alt = StringUtils.isEmpty(description) ? "" : "alt=${QUOT}$name${QUOT}"
         String heightProperty = "height=${QUOT}$height${QUOT}"
         String widthProperty = "width=${QUOT}$width${QUOT}"
         return LT + "img ${src} ${style} ${alt} ${title} ${heightProperty} ${widthProperty}/" + GT
+    }
+
+    private String getSeparator() {
+        return "/"
     }
 
     public String toPath(){
