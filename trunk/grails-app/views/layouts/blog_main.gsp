@@ -107,6 +107,7 @@
                         <li><g:link controller="image">Images</g:link></li>
                         <li><g:link controller="categoryAdmin">Sport categories</g:link></li>
                         <li><g:link controller="commandAdmin">Sport commands</g:link></li>
+                        <li><g:link controller="prognosis">Sport prognosis</g:link></li>
                     </ul>
                 </li>
             </g:ifAnyGranted>
