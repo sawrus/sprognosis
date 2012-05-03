@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<%--
 <div class="userBar">
     <g:isLoggedIn>
         <p>Welcome <g:link action="index" controller="register"><g:loggedInUsername/></g:link>!</p>
@@ -20,8 +21,7 @@
         <g:link controller="login">Login</g:link>
     </g:isNotLoggedIn>
 </div>
-
-
+--%>
 <g:layoutBody/>
 </body>
 </html>
