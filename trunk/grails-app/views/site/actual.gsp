@@ -50,6 +50,37 @@
             </div>
             <div class="grid_4">
                 <div class="block-3 ident-top-2">
+                    <g:ifAnyGranted role="ROLE_USER">
+                        <h3 class="ident-bot-2">Profile</h3>
+                        <g:if test="${userProfile?.userImage}">
+                            <div class="ident-bot-6">
+                                ${userProfile?.userImage?.toHtmlTagWithResize(150, 150)}
+                            </div>
+
+                            <div class="line ident-bot-5"></div>
+                        </g:if>
+
+                        <g:set var="payProfile"
+                               value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
+                        <div class="ident-bot-6">
+                            <table>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(0)}</td><td
+                                        class="valueProfileProperty">${payProfile?.name}</td></tr>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(1)}</td><td
+                                        class="valueProfileProperty">${payProfile.price}${payProfile.priceType}</td>
+                                </tr>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(2)}</td><td
+                                        class="valueProfileProperty">${payProfile.period}${payProfile.periodType}</td>
+                                </tr>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(3)}</td><td
+                                        class="valueProfileProperty">${payProfile.description}</td></tr>
+                            </table>
+
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="line ident-bot-5"></div>
+                    </g:ifAnyGranted>
                     <div class="ident-bot-4">
                         <table>
                             <tr><td class="nameCountProperty">${language.stateProfile.get(0)}</td><td
