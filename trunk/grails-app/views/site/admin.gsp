@@ -95,7 +95,9 @@
             <h1>Console</h1>
             <ul>
                 <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.shortName } }">
-                    <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.shortName}</g:link></li>
+                    <g:if test="${c.shortName.contains('AdminController')}">
+                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.shortName.replace('AdminController','') }</g:link></li>
+                    </g:if>
                 </g:each>
             </ul>
             <h1>Count</h1>

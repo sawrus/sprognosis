@@ -43,6 +43,18 @@
                         <tr><td class="nameCountProperty2">Commands</td><td class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
                         <tr><td class="nameCountProperty2">Points</td><td class="valueCountProperty2">${prognosis.firstPoints} : ${prognosis.secondPoints}</td></tr>
                         <tr><td class="nameCountProperty2">Coefficient</td><td class="valueCountProperty2">${prognosis.firstBetsCoefficient} / ${prognosis.secondBetsCoefficient}</td></tr>
+                        <g:if test="${!prognosis.isValid}">
+                            <tr><td class="nameCountProperty2">Actions</td><td class="valueCountProperty2">
+                            <g:form controller="prognosis" method="POST">
+                                <g:hiddenField name="id" value="${prognosis?.id}"/>
+                                <g:actionSubmit class="button" action="edit"
+                                                                     value="${message(code: 'default.button.edit.label', default: 'Edit')}"/>
+                                <g:actionSubmit class="button" action="delete"
+                                                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
+                            </g:form>
+                            </td></tr>
+                        </g:if>
                     </table>
                 </g:each>
             </div>

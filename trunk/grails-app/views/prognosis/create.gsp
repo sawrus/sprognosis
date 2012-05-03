@@ -9,16 +9,9 @@
 	<resource:autoComplete skin="default" />
 	<resource:dateChooser />
     <resource:richTextEditor type="full"/>
-
 </head>
 
 <body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <span class="menuButton"><g:link class="list" action="predicted"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-</div>
 
 <div class="body">
     <h1><g:message code="default.create.label" args="[entityName]"/></h1>
@@ -41,7 +34,12 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: prognosisInstance, field: 'description', 'errors')}">
-						<richui:richTextEditor name="description" value="${prognosisInstance?.description}"  width="640" height="360" />
+                        <!--[if IE]>
+                            <g:textArea name="description" cols="80" rows="20" style="width: 90%; height: 250px" value="${prognosisInstance?.description}" />
+                        <![endif]-->
+                        <!--[if !IE]>
+						    <richui:richTextEditor name="description" value="${prognosisInstance?.description}"  width="640" height="360" />
+                        <![endif]-->
                     </td>
                 </tr>
 				<tr class="prop">

@@ -15,6 +15,8 @@ class PrognosisController extends VoteSubscriptionController
 
     private static final COUNT_PROGNOSTICATOR_TEST_PASSED = 10;
 
+    /////////////////////////////////////////// Prognosis: custom actions
+
     @Secured(['ROLE_USER'])
     def buy = {
         Prognosis prognosis = Prognosis.findById(params.itemNumber)
@@ -99,6 +101,9 @@ class PrognosisController extends VoteSubscriptionController
         [prognosisInstanceList: checkedPrognosis, prognosisInstanceTotal: checkedPrognosis.size()]
     }
 
+    /////////////////////////////////////////// Prognosis: base actions
+
+
     @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
     def create = {
         [prognosisInstance: new Prognosis()]
@@ -114,7 +119,7 @@ class PrognosisController extends VoteSubscriptionController
         if (prognosis.save(flush: true))
 		{
 		    flash.message = "${message(code: 'default.created.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), prognosis.id])}"
-            redirect action: predicted, id: prognosis.id
+            list()
         }
 		else
 		{
@@ -150,7 +155,7 @@ class PrognosisController extends VoteSubscriptionController
         if (!prognosisInstance)
         {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
-            redirect(action: "list")
+            list()
         }
         else
         {
@@ -165,11 +170,7 @@ class PrognosisController extends VoteSubscriptionController
         if (!prognosisInstance)
         {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
-            if (userService.hasPrognosticator){
-                redirect(action: "checked")
-            } else {
-                redirect(action: "list")
-            }
+            list()
         }
         else
         {
@@ -199,7 +200,7 @@ class PrognosisController extends VoteSubscriptionController
             if (!prognosisInstance.hasErrors() && prognosisInstance.save(flush: true))
             {
                 flash.message = "${message(code: 'default.updated.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), prognosisInstance.id])}"
-                redirect(action: "show", id: prognosisInstance.id)
+                list()
             }
             else
             {
@@ -209,11 +210,7 @@ class PrognosisController extends VoteSubscriptionController
         else
         {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
-            if (userService.hasPrognosticator){
-                redirect(action: "checked")
-            } else {
-                redirect(action: "list")
-            }
+            list()
         }
     }
 
@@ -228,7 +225,7 @@ class PrognosisController extends VoteSubscriptionController
                 //prognosisInstance.delete(flush: true)
 				Prognosis.executeUpdate("delete Prognosis p where p.id=(:id)", [id: prognosisInstance.id])
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
-                redirect(action: "list")
+                list()
             }
             catch (org.springframework.dao.DataIntegrityViolationException e)
             {
@@ -239,9 +236,20 @@ class PrognosisController extends VoteSubscriptionController
         else
         {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
+            list()
+        }
+    }
+
+    private list() {
+        if (userService.hasPrognosticator) {
+            //redirect(action: "checked")
+            redirect(controller: "site", action: "checked")
+        } else {
             redirect(action: "list")
         }
     }
+
+
 
     protected String addVote(Integer voteValue)
     {

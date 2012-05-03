@@ -33,19 +33,17 @@
         });
     </script>
 
-
-    %{--<resource:richTextEditor />--}%
     <!--[if lt IE 8]>
     <div style='clear: both; text-align: center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
             <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
         </a>
     </div>
-            <![endif]-->
+    <![endif]-->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/html5.js"></script>
     <link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" />
-        <![endif]-->
+    <![endif]-->
 
 
     <g:isLoggedIn>
@@ -99,11 +97,29 @@
     <!-- menu -->
     <nav>
         <ul class="sf-menu sf-js-enabled sf-shadow">
-            <li class="active">
-                <a href="${g.createLink(controller:'site',action:'index')}#anchor">
-                ${language.homeName}
-                </a>
-            </li>
+            <g:ifAnyGranted role="ROLE_ADMIN">
+                <li class="active"><a href="#">Manage</a>
+                    <ul style="display: none; visibility: hidden">
+                        <li><g:link controller="userProfileAdmin">User profiles</g:link></li>
+                        <li><g:link controller="postCategoryAdmin">Post categories</g:link></li>
+                        <li><g:link controller="post">Posts</g:link></li>
+                        <li><g:link controller="commentAdmin">Comments</g:link></li>
+                        <li><g:link controller="tagAdmin">Tags</g:link></li>
+                        <li><g:link controller="bannerAdmin">Banners</g:link></li>
+                        <li><g:link controller="voteAdmin">Votes</g:link></li>
+                        <li><g:link controller="image">Images</g:link></li>
+                        <li><g:link controller="categoryAdmin">Sport categories</g:link></li>
+                        <li><g:link controller="commandAdmin">Sport commands</g:link></li>
+                    </ul>
+                </li>
+            </g:ifAnyGranted>
+            <g:ifNotGranted role="ROLE_ADMIN">
+                <li class="active">
+                    <a href="${g.createLink(controller:'site',action:'index')}#anchor">
+                    ${language.homeName}
+                    </a>
+                </li>
+            </g:ifNotGranted>
             <g:each in="${PostCategory.findAllByLanguage(language)}" var="category">
                 <g:if test="${category?.visible}">
                     <g:set var="posts" value="${Post.findAllByCategoryAndLanguage(category, language)}"/>

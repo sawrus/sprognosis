@@ -6,7 +6,7 @@ public enum Language {
             "Home",
             "Sport Prognosis",
             "READ MODE",
-            "Edit",
+            "Edit profile",
             Arrays.asList("Name","Price","Period","Description"),
             Arrays.asList("Commands","Categories","Prognosis","Posts","Active users")
     ),
@@ -15,7 +15,7 @@ public enum Language {
             "Главная",
             "Спортивные прогнозы",
             "Подробнее",
-            "Изменить",
+            "Изменить профиль",
             Arrays.asList("Имя","Цена","Период","Подробности"),
             Arrays.asList("Команд","Категорий","Прогнозов","Статей","Пользователей")
     )
