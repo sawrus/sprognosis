@@ -56,12 +56,7 @@
                                     <label for="content"><g:message code="post.content.label" default="Content" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: postInstance, field: 'content', 'errors')}">
-                                    <!--[if IE]>
-                                        <g:textArea name="content" cols="40" rows="5" value="${postInstance?.content}" style="width: 640px; height: 300px"/>
-                                    <![endif]-->
-                                    <!--[if !IE]>
-                                        <richui:richTextEditor name="content" id="content" value="${postInstance?.content}" width="640" height="480"/>
-                                    <![endif]-->
+                                    <richui:richTextEditor name="content" id="content" value="${postInstance?.content}" width="640" height="480"/>
                                 </td>
                             </tr>
 
@@ -70,12 +65,7 @@
                                     <label for="announcement"><g:message code="post.announcement.label" default="Announcement" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: postInstance, field: 'announcement', 'errors')}">
-                                    <!--[if IE]>
-                                        <g:textArea name="content" cols="40" rows="5" value="${postInstance?.announcement}" style="width: 640px; height: 200px"/>
-                                    <![endif]-->
-                                    <!--[if !IE]>
-                                        <richui:richTextEditor name="announcement" id="announcement" value="${postInstance?.announcement}" width="640" height="360"/>
-                                    <![endif]-->
+                                    <richui:richTextEditor name="announcement" id="announcement" value="${postInstance?.announcement}" width="640" height="360"/>
                                 </td>
                             </tr>
 
@@ -84,12 +74,7 @@
                                     <label for="description"><g:message code="post.description.label" default="Description" /></label>
                                 </td>
                                 <td valign="top" class="value ${hasErrors(bean: postInstance, field: 'description', 'errors')}">
-                                    <!--[if IE]>
-                                        <g:textArea name="content" cols="40" rows="5" value="${postInstance?.description}" style="width: 640px; height: 150px"/>
-                                    <![endif]-->
-                                    <!--[if !IE]>
-                                        <richui:richTextEditor name="description" id="description" value="${postInstance?.description}" width="640" height="240"/>
-                                    <![endif]-->
+                                    <richui:richTextEditor name="description" id="description" value="${postInstance?.description}" width="640" height="240"/>
                                 </td>
                             </tr>
                         
