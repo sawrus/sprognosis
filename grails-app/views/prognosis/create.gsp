@@ -34,12 +34,7 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: prognosisInstance, field: 'description', 'errors')}">
-                        <!--[if IE]>
-                            <g:textArea name="description" cols="80" rows="20" style="width: 90%; height: 250px" value="${prognosisInstance?.description}" />
-                        <![endif]-->
-                        <!--[if !IE]>
-						    <richui:richTextEditor name="description" value="${prognosisInstance?.description}"  width="640" height="360" />
-                        <![endif]-->
+						<richui:richTextEditor name="description" value="${prognosisInstance?.description}"  width="640" height="360" />
                     </td>
                 </tr>
 				<tr class="prop">
