@@ -92,20 +92,22 @@
                 </ul>
             </g:ifAnyGranted>
             <g:ifAnyGranted role="ROLE_ADMIN">
-            <h1>Console</h1>
-            <ul>
-                <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.shortName } }">
-                    <g:if test="${c.shortName.contains('AdminController')}">
-                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.shortName.replace('AdminController','') }</g:link></li>
-                    </g:if>
-                </g:each>
-            </ul>
-            <h1>Count</h1>
-            <ul>
-                <li>${Prognosis.count()} sports predictions</li>
-                <li>${Command.count()} sport commands</li>
-                <li>${Category.count()} sport categories</li>
-            </ul>
+                <h1>Console</h1>
+                <ul>
+                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.shortName } }">
+                        <g:if test="${c.shortName.contains('AdminController')}">
+                            <li class="controller"><g:link
+                                    controller="${c.logicalPropertyName}">${c.shortName.replace('AdminController', '')}</g:link></li>
+                        </g:if>
+                    </g:each>
+                </ul>
+
+                <h1>Count</h1>
+                <ul>
+                    <li>${Prognosis.count()} sports predictions</li>
+                    <li>${Command.count()} sport commands</li>
+                    <li>${Category.count()} sport categories</li>
+                </ul>
 
                 <h1>Application Status</h1>
                 <ul>

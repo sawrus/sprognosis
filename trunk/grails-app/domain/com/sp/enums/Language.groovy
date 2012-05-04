@@ -42,4 +42,16 @@ public enum Language {
     public String toString() {
         return name;
     }
+
+    public static Language parseLanguageByName(String name){
+        Language language = Language.ENGLISH
+
+        for (Language lang: Language.values()){
+            if (lang.name.equals(name)){
+                language = lang
+            }
+        }
+
+        return language
+    }
 }

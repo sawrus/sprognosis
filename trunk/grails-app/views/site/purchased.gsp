@@ -1,4 +1,5 @@
 <%@ page import="com.sp.enums.Language; com.sp.impl.Prognosis; com.sp.impl.Command; com.sp.site.Banner; com.sp.site.Image; com.sp.site.SiteController; com.sp.profiles.UserProfile; com.sp.auth.User; com.sp.profiles.PayProfile; com.sp.site.PostCategory; com.sp.site.Post; com.sp.site.Comment" contentType="text/html;charset=UTF-8" %>
+
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -20,18 +21,12 @@
 <section id="content">
     <div class="container_12">
         <div class="wrapper">
-            <g:if test="${flash.message}">
-                <div class="message">${flash.message}</div>
-            </g:if>
-            <g:hasErrors bean="${person}">
-                <div class="errors">
-                    <g:renderErrors bean="${person}" as="list"/>
-                </div>
-            </g:hasErrors>
             <a href="#h" id="h"/>
 
             <div class="grid_8">
-                <g:link controller="prognosis" action="create" class="button">Create prognosis</g:link>
+                <g:if test="${'Default'.equals(userProfile.payProfile.name)}">
+                    <g:link controller="site" action="sold" class="button">Buy prognosis</g:link>
+                </g:if>
                 <g:each in="${prognosisInstanceList}" var="prognosis" status="i">
                     <h2 class="ident-bot-2">Prognosis #${i}</h2>
                     <table width="100%">
@@ -41,6 +36,7 @@
                                 class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
                         <tr><td class="nameCountProperty2">Category</td><td
                                 class="valueCountProperty2">${prognosis.category}</td></tr>
+                        %{--<tr><td class="nameCountProperty">Description</td><td class="valueCountProperty">${prognosis.description}</td></tr>--}%
                         <tr><td class="nameCountProperty2">Bets URL</td><td class="valueCountProperty2"><a
                                 href="${prognosis.betsUrl}">link</a></td></tr>
                         <tr><td class="nameCountProperty2">Commands</td><td
@@ -51,24 +47,42 @@
                         <tr><td class="nameCountProperty2">Coefficient</td><td
                                 class="valueCountProperty2">${prognosis.firstBetsCoefficient} / ${prognosis.secondBetsCoefficient}</td>
                         </tr>
-                        <g:if test="${!prognosis.isValid}">
-                            <tr><td class="nameCountProperty2">Actions</td><td class="valueCountProperty2">
-                                <g:form controller="prognosis" method="POST">
-                                    <g:hiddenField name="id" value="${prognosis?.id}"/>
-                                    <g:actionSubmit class="button" action="edit"
-                                                    value="${message(code: 'default.button.edit.label', default: 'Edit')}"/>
-                                    <g:actionSubmit class="button" action="delete"
-                                                    value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                                    onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
-                                </g:form>
-                            </td></tr>
-                        </g:if>
                     </table>
                 </g:each>
             </div>
 
             <div class="grid_4">
                 <div class="block-3 ident-top-2">
+                    <g:ifAnyGranted role="ROLE_USER">
+                        <h3 class="ident-bot-2">Profile</h3>
+                        <g:if test="${userProfile?.userImage}">
+                            <div class="ident-bot-6">
+                                ${userProfile?.userImage?.toHtmlTagWithResize(150, 150)}
+                            </div>
+
+                            <div class="line ident-bot-5"></div>
+                        </g:if>
+                        <g:set var="payProfile"
+                               value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
+                        <div class="ident-bot-6">
+                            <table>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(0)}</td><td
+                                        class="valueProfileProperty">${payProfile?.name}</td></tr>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(1)}</td><td
+                                        class="valueProfileProperty">${payProfile.price}${payProfile.priceType}</td>
+                                </tr>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(2)}</td><td
+                                        class="valueProfileProperty">${payProfile.period}${payProfile.periodType}</td>
+                                </tr>
+                                <tr><td class="nameProfileProperty">${language.payProfile.get(3)}</td><td
+                                        class="valueProfileProperty">${payProfile.description}</td></tr>
+                            </table>
+
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="line ident-bot-5"></div>
+                    </g:ifAnyGranted>
                     <div class="ident-bot-4">
                         <table>
                             <tr><td class="nameCountProperty">${language.stateProfile.get(0)}</td><td

@@ -5,7 +5,6 @@
 </head>
 
 <body>
-
 <div data-role="content">
     <g:if test="${postInstance?.images == null || postInstance?.images.isEmpty()}">
         <g:each in="${Banner.findByVisible(true)}" var="banner" status="b">
@@ -21,6 +20,7 @@
         <h3>${postInstance.title}</h3>
         ${postInstance.content}
     </div>
+
     <div data-role="collapsible-set" data-theme="a">
         <g:each in="${postInstance?.comments}" var="comment">
             <g:if test="${comment?.visible}">

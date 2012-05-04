@@ -17,44 +17,6 @@ class PrognosisController extends VoteSubscriptionController
 
     /////////////////////////////////////////// Prognosis: custom actions
 
-    @Secured(['ROLE_USER'])
-    def buy = {
-        Prognosis prognosis = Prognosis.findById(params.itemNumber)
-        if (prognosis)
-            payService.buyPrognosis(UserProfile.findByUser(userService.getUser()), prognosis)
-        else
-            flash.message = "Not found Prognosis #" + params.itemNumber
-        redirect(action: "purchased")
-    }
-
-    @Secured(['ROLE_USER'])
-    def purchased =
-    {
-        def userProfile = UserProfile.findByUser(userService.getUser())
-        def purchasedPrognosisList = userProfile.prognosisList
-        [prognosisInstanceList: purchasedPrognosisList, prognosisInstanceTotal: purchasedPrognosisList.size()]
-    }
-
-    @Secured(['ROLE_ADMIN'])
-    def clear = {
-        for (Prognosis prognosis: Prognosis.list()){
-            for (UserProfile userProfile: UserProfile.list()){
-                userProfile.removeFromPrognosisList(prognosis)
-                userProfile.save()
-            }
-            prognosis.delete()
-        }
-
-        redirect(action: "list")
-    }
-
-    @Secured(['ROLE_USER'])
-    def actual =
-    {
-        def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
-        [prognosisInstanceList: actualPrognosisList, prognosisInstanceTotal: actualPrognosisList.size()]
-    }
-
 	@Secured(['ROLE_USER'])
 	def search = {
 		if (params.category)
@@ -82,24 +44,6 @@ class PrognosisController extends VoteSubscriptionController
 		}		
 
 	}
-
-    @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
-    def predicted =
-    {
-        def predictedList = Prognosis.findAllByPrognosticator(userService.getUser())
-        [prognosisInstanceList: predictedList, prognosisInstanceTotal: predictedList.size()]
-    }
-
-    @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
-    def checked = {
-        def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userService.getUser(), Boolean.TRUE)
-        def testCondition = checkedPrognosis.size() > COUNT_PROGNOSTICATOR_TEST_PASSED
-        if (testCondition)
-            flash.message = "All tests pass!"
-        else
-            flash.message = "Sorry! " + checkedPrognosis.size() + " tests pass."
-        [prognosisInstanceList: checkedPrognosis, prognosisInstanceTotal: checkedPrognosis.size()]
-    }
 
     /////////////////////////////////////////// Prognosis: base actions
 

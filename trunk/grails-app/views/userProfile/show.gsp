@@ -79,7 +79,7 @@
 
             <tr class="prop">
                 <td valign="top" class="name">Image</td>
-                <td valign="top" class="value">${userProfileInstance?.userImage?.toHtmlTagWithResize(200,200)}</td>
+                <td valign="top" class="value">${userProfileInstance?.userImage?.toHtmlTagWithResize(200, 200)}</td>
             </tr>
 
             </tbody>
