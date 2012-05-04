@@ -1,5 +1,4 @@
 <%@ page import="org.apache.commons.lang.StringUtils; com.sp.enums.Language; com.sp.impl.Prognosis; com.sp.impl.Command; com.sp.site.Banner; com.sp.site.Image; com.sp.site.SiteController; com.sp.profiles.UserProfile; com.sp.auth.User; com.sp.profiles.PayProfile; com.sp.site.PostCategory; com.sp.site.Post; com.sp.site.Comment" contentType="text/html;charset=UTF-8" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +12,6 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'jquery.lightbox-0.5.css')}"/>
-
     <g:javascript src="jquery-1.7.1.min.js"/>
     <g:javascript src="jquery.prettyPhoto.js"/>
     <g:javascript src="jquery.easing.1.3.js"/>
@@ -26,70 +24,65 @@
     <g:javascript src="tms-0.3.js"/>
     <g:javascript src="tms_presets.js"/>
     <g:javascript src="jquery.lightbox-0.5.js"/>
-
     <script type="text/javascript">
         $(function() {
             $('#gallery a').lightBox({fixedNavigation:true});
         });
     </script>
-
     <!--[if lt IE 8]>
     <div style='clear: both; text-align: center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-            <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-        </a>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+    <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+    </a>
     </div>
     <![endif]-->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="js/html5.js"></script>
     <link rel="stylesheet" type="text/css" href="css/ie.css" media="screen" />
     <![endif]-->
-
-
     <g:isLoggedIn>
         <g:set var="user"><g:loggedInUsername/></g:set>
         <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
-        <g:set var="language" value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
+        <g:set var="language"
+               value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
     </g:isLoggedIn>
     <g:isNotLoggedIn>
-        <g:set var="language" value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
+        <g:set var="language"
+               value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
     </g:isNotLoggedIn>
     <title>${language.siteName} #${postInstance?.title}</title>
-
     <g:layoutHead/>
-
 </head>
+
 <body id="page1">
 <div class="main">
     <!-- header -->
     <header>
         <div class="wrapper">
             <div class="fl-l ident-top-1 ident-bot-18">
-                %{--<h1 class="fl-l"><a href="#">sPrognosis</a></h1>--}%
                 <div class="slogan fl-l">${language.siteName}</div>
             </div>
-            <div class="block-2">
 
+            <div class="block-2">
                 <div class="extra-wrap block-1">
-                    <g:isLoggedIn><p><g:loggedInUsername/>: </g:isLoggedIn>
+                    <g:isLoggedIn><p><g:loggedInUsername/>:</g:isLoggedIn>
                     <g:isNotLoggedIn>
-                        <g:link controller="login">Login</g:link> |
-                        <g:link controller="site" action="register">Register</g:link>
+                    <g:link controller="login">Login</g:link> |
+                    <g:link controller="site" action="register">Register</g:link>
                     </g:isNotLoggedIn>
                     <g:isLoggedIn>
-                        <g:link controller="logout" action="index">Logout</g:link>
+                    <g:link controller="logout" action="index">Logout</g:link>
                     </g:isLoggedIn>
-                    </p>
-
+                </p>
                     <g:form controller="site" action="language">
                         <g:select name="language" from="${Language?.values()}"
-                            keys="${Language?.values()*.name()}" value="${language.name()}" onchange="submit()"
-                    />
+                                  keys="${Language?.values()*.name()}" value="${language.name()}" onchange="submit()"/>
                     </g:form>
                 </div>
             </div>
         </div>
     </header></div>
+
 <div class="main shadow extra-10">
     <!-- menu -->
     <nav>
@@ -113,8 +106,8 @@
             </g:ifAnyGranted>
             <g:ifNotGranted role="ROLE_ADMIN">
                 <li class="active">
-                    <a href="${g.createLink(controller:'site',action:'index')}#anchor">
-                    ${language.homeName}
+                    <a href="${g.createLink(controller: 'site', action: 'index')}#h">
+                        ${language.homeName}
                     </a>
                 </li>
             </g:ifNotGranted>
@@ -122,33 +115,13 @@
                 <g:if test="${category?.visible}">
                     <g:set var="posts" value="${Post.findAllByCategoryAndLanguage(category, language)}"/>
                     <g:if test="${posts.size() == 1}">
-                        <li>
-                            <a href="${g.createLink(controller:'site',action:'index',params: [post: category.firstPost()?.id])}#anchor">
-                                ${category?.name}
-                            </a>
+                        <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: category.firstPost()?.id])}#h">${category?.name}</a>
                     </g:if>
                     <g:else>
-                        <li><a href="${g.createLink(controller: 'site', action: 'index', params: [category: category?.id])}#anchor">
-                        ${category?.name}
-                        </a>
+                        <li><a href="${g.createLink(controller: 'site', action: 'index', params: [category: category?.id])}#h">${category?.name}</a>
                         <ul style="display: none; visibility: hidden">
                             <g:each in="${posts}" var="post">
-                                <li>
-                                    <g:if test="${post.name=='As User'}">
-                                        <a href="${g.createLink(controller:'site',action:'prognosis')}">
-                                            ${post?.name}
-                                        </a>
-                                    </g:if>
-                                    <g:if test="${post.name=='As Handicapper'}">
-                                        <a href="${g.createLink(controller:'site',action:'checked')}">
-                                            ${post?.name}
-                                        </a>
-                                    </g:if>
-                                    <g:if test="${post.name!='As Handicapper'&&post.name!='As User'}">
-                                        <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
-                                            ${post?.name}
-                                        </a>
-                                    </g:if>
+                                <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.name}</a>
                                 </li>
                             </g:each>
                         </ul>
@@ -157,6 +130,7 @@
                 </li>
             </g:each>
         </ul>
+
         <div class="clear"></div>
     </nav><!-- end menu -->
 <!-- end header -->
@@ -164,12 +138,8 @@
         <div class="slider">
             <ul class="items">
                 <g:each in="${Banner.findAllByVisibleAndLanguage(true, language)}" var="banner" status="b">
-                    <li>
-                    <g:if test="${banner?.image?.visible}">
-                        ${banner?.image.toHtmlTag()}
-                    </g:if>
-                        ${banner?.content}
-                    </li>
+                    <li><g:if
+                            test="${banner?.image?.visible}">${banner?.image.toHtmlTag()}</g:if>${banner?.content}</li>
                 </g:each>
             </ul>
         </div>
@@ -181,33 +151,32 @@
             <div class="wrapper">
                 <div class="grid_12">
                     <div class="line-2 ident-bot-3"></div>
+
                     <div class="fl-l">
                         <ul class="list-1">
-                            <g:each in="${Post.findAllByMainPageVisibleAndLanguage(true, language)}" var="post" status="i">
+                            <g:each in="${Post.findAllByMainPageVisibleAndLanguage(true, language)}" var="post"
+                                    status="i">
                                 <g:if test="${i == 0}">
-                                    <li class="active-2">
-                                        <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
-                                            ${post?.name}
-                                        </a>
+                                    <li class="active-2"><a
+                                            href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.name}</a>
                                     </li>
                                 </g:if>
                                 <g:else>
-                                    <li>
-                                        <a href="${g.createLink(controller:'site',action:'index',params: [post: post?.id])}#anchor">
-                                            ${post?.name}
-                                        </a>
+                                    <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.name}</a>
                                     </li>
                                 </g:else>
                             </g:each>
                         </ul>
                     </div>
+
                     <div class="fl-r policy">${language.siteName} © ${java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)}</div>
+
                     <div class="clear"></div>
+
                     <div class="fl-r"><!--{%FOOTER_LINK} --></div>
                 </div>
             </div>
         </div>
     </footer><!-- end footer -->
 </div>
-
 </body></html>

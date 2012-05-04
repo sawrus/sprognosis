@@ -17,12 +17,11 @@
 </head>
 
 <body id="page1">
-
 <!-- content -->
 <section id="content">
     <div class="container_12">
         <div class="wrapper">
-            <a href="#anchor" id="anchor"/>
+            <a href="#h" id="h"/>
             <g:if test="${postInstance == null && categoryInstance == null}">
                 <!-- default content -------------------------------------------->
                 <div class="grid_4">
@@ -35,7 +34,6 @@
             <g:else>
                 <g:if test="${postInstance != null}">
                     <div class="grid_8">
-
                         <!-- content-------------------------------------------->
                         <h2 class="ident-bot-2">${postInstance?.title}</h2>
                         <h4 class="ident-bot-3"><a href="#">${postInstance?.announcement}</a>
@@ -43,12 +41,11 @@
                         <g:each in="${postInstance?.images}" var="image">
                             <div style="float:inherit;" id="gallery">
                                 <a href="${image.webRootDir + File.separator + image.fileName}">
-                                    ${image.toHtmlTagWithResize(300,300)}
+                                    ${image.toHtmlTagWithResize(300, 300)}
                                 </a>
                             </div>
                         </g:each>
                         ${postInstance?.content}
-                    %{--<g:link controller="site" action="index" class="button" params="[post: postInstance?.id]">${language.readMore}</g:link>--}%
                         <g:if test="${postInstance?.allowComments}">
                             <g:isNotLoggedIn>
                                 <div class="comment">
@@ -89,7 +86,7 @@
                             <div class="grid_4">
                                 <h2 class="ident-bot-2">${post.name.toUpperCase()}</h2>
                                 <h4 class="ident-bot-3">
-                                    <a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#anchor">
+                                    <a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">
                                         ${post.title}
                                     </a>
                                 </h4>
@@ -102,7 +99,8 @@
                                     </div>
                                 </g:if>
                                 ${post.announcement}
-                                <a class="button" href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#anchor">
+                                <a class="button"
+                                   href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">
                                     ${language.readMore}
                                 </a>
                             </div>
@@ -121,7 +119,6 @@
 
                             <div class="line ident-bot-5"></div>
                         </g:if>
-
                         <g:set var="payProfile"
                                value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
                         <div class="ident-bot-6">
@@ -159,7 +156,8 @@
 
                         <div class="clear"></div>
                     </div>
-                    <g:isLoggedIn><g:link controller="userProfile" action="profile" class="button">${language.edit}</g:link></g:isLoggedIn>
+                    <g:isLoggedIn><g:link controller="userProfile" action="profile"
+                                          class="button">${language.edit}</g:link></g:isLoggedIn>
                 </div>
             </div>
         </div>

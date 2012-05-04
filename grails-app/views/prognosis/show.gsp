@@ -75,9 +75,9 @@
 
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="prognosis.description.label" default="Description"/></td>
-                
-				<td class="value"><g:textArea name="description">
-                        ${fieldValue(bean: prognosisInstance, field: "description")}</g:textArea></td>
+
+                <td class="value"><g:textArea name="description">
+                    ${fieldValue(bean: prognosisInstance, field: "description")}</g:textArea></td>
             </tr>
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="prognosis.vote.label" default="Vote"/></td>
@@ -95,16 +95,16 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="prognosis.first.label" default="First"/></td>
                 <td valign="top" class="value">${prognosisInstance?.first?.encodeAsHTML()}
-                    %{--<g:link controller="command" action="show"--}%
-                                                       %{--id="${prognosisInstance?.first?.id}">${prognosisInstance?.first?.encodeAsHTML()}</g:link>--}%
+                %{--<g:link controller="command" action="show"--}%
+                %{--id="${prognosisInstance?.first?.id}">${prognosisInstance?.first?.encodeAsHTML()}</g:link>--}%
                 </td>
             </tr>
 
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="prognosis.second.label" default="Second"/></td>
                 <td valign="top" class="value">${prognosisInstance?.second?.encodeAsHTML()}
-                    %{--<g:link controller="command" action="show"--}%
-                                                       %{--id="${prognosisInstance?.second?.id}">${prognosisInstance?.second?.encodeAsHTML()}</g:link>--}%
+                %{--<g:link controller="command" action="show"--}%
+                %{--id="${prognosisInstance?.second?.id}">${prognosisInstance?.second?.encodeAsHTML()}</g:link>--}%
                 </td>
             </tr>
 
@@ -135,7 +135,8 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="prognosis.betsUrl.label" default="Bets Url"/></td>
 
-                <td valign="top" class="value"><a href="${fieldValue(bean: prognosisInstance, field: "betsUrl")}">Link</a></td>
+                <td valign="top" class="value"><a
+                        href="${fieldValue(bean: prognosisInstance, field: "betsUrl")}">Link</a></td>
 
             </tr>
 
@@ -160,8 +161,8 @@
             <tr class="prop">
                 <td valign="top" class="name"><g:message code="prognosis.category.label" default="Category"/></td>
                 <td valign="top" class="value">${prognosisInstance?.category?.encodeAsHTML()}
-                    %{--<g:link controller="category" action="show"--}%
-                                                       %{--id="${prognosisInstance?.category?.id}">${prognosisInstance?.category?.encodeAsHTML()}</g:link>--}%
+                %{--<g:link controller="category" action="show"--}%
+                %{--id="${prognosisInstance?.category?.id}">${prognosisInstance?.category?.encodeAsHTML()}</g:link>--}%
                 </td>
             </tr>
 
@@ -170,8 +171,8 @@
                 <td valign="top" class="name"><g:message code="prognosis.winner.label" default="Winner"/></td>
 
                 <td valign="top" class="value">${prognosisInstance?.winner?.encodeAsHTML()}
-                    %{--<g:link controller="command" action="show"--}%
-                                                       %{--id="${prognosisInstance?.winner?.id}">${prognosisInstance?.winner?.encodeAsHTML()}</g:link>--}%
+                %{--<g:link controller="command" action="show"--}%
+                %{--id="${prognosisInstance?.winner?.id}">${prognosisInstance?.winner?.encodeAsHTML()}</g:link>--}%
                 </td>
 
             </tr>
@@ -180,18 +181,18 @@
         </table>
     </div>
 
-	<g:ifNotGranted role="ROLE_USER">
-    <div class="buttons">
-        <g:form>
-            <g:hiddenField name="id" value="${prognosisInstance?.id}"/>
-            <span class="button"><g:actionSubmit class="edit" action="edit"
-                                                 value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-            <span class="button"><g:actionSubmit class="delete" action="delete"
-                                                 value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                                 onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-        </g:form>
-    </div>
-	</g:ifNotGranted>
+    <g:ifNotGranted role="ROLE_USER">
+        <div class="buttons">
+            <g:form>
+                <g:hiddenField name="id" value="${prognosisInstance?.id}"/>
+                <span class="button"><g:actionSubmit class="edit" action="edit"
+                                                     value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
+                <span class="button"><g:actionSubmit class="delete" action="delete"
+                                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
+            </g:form>
+        </div>
+    </g:ifNotGranted>
 </div>
 </body>
 </html>

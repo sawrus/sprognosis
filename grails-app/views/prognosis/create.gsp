@@ -6,8 +6,8 @@
     <g:set var="entityName" value="${message(code: 'prognosis.label', default: 'Prognosis')}"/>
     <title><g:message code="default.create.label" args="[entityName]"/></title>
     <g:javascript src="sport_functions.js"/>
-	<resource:autoComplete skin="default" />
-	<resource:dateChooser />
+    <resource:autoComplete skin="default"/>
+    <resource:dateChooser/>
     <resource:richTextEditor type="full"/>
 </head>
 
@@ -34,10 +34,11 @@
                     </td>
                     <td valign="top"
                         class="value ${hasErrors(bean: prognosisInstance, field: 'description', 'errors')}">
-						<richui:richTextEditor name="description" value="${prognosisInstance?.description}"  width="640" height="360" />
+                        <richui:richTextEditor name="description" value="${prognosisInstance?.description}" width="640"
+                                               height="360"/>
                     </td>
                 </tr>
-				<tr class="prop">
+                <tr class="prop">
                     <td valign="top" class="name">
                         <label for="actualDate"><g:message code="prognosis.actualDate.label"
                                                            default="Actual Date"/></label>
@@ -45,7 +46,8 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: prognosisInstance, field: 'actualDate', 'errors')}">
                         %{--<g:datePicker name="actualDate" precision="day" value="${prognosisInstance?.actualDate}"/>--}%
-						<richui:dateChooser name="actualDate" format="dd.MM.yyyy" value="${prognosisInstance?.actualDate}"/>
+                        <richui:dateChooser name="actualDate" format="dd.MM.yyyy"
+                                            value="${prognosisInstance?.actualDate}"/>
                     </td>
                 </tr>
                 <tr class="prop">
@@ -67,13 +69,12 @@
                         <label for="category"><g:message code="prognosis.category.label" default="Category"/></label>
                     </td>
                     <td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'category', 'errors')}">
-						<richui:autoComplete name="categoryName" action="${createLinkTo('dir': 'category/searchAJAX')}" 
-							minQueryLength="1"
-						/>		  
+                        <richui:autoComplete name="categoryName" action="${createLinkTo('dir': 'category/searchAJAX')}"
+                                             minQueryLength="1"/>
                     </td>
                 </tr>
-				
-				<tr class="prop">
+
+                <tr class="prop">
                     <td valign="top" class="name">
                         <label for="type"><g:message code="prognosis.type.label" default="Type"/></label>
                     </td>
@@ -92,43 +93,51 @@
                     <td valign="top"
                         class="value ${hasErrors(bean: prognosisInstance, field: 'differentPoints', 'errors')}">
                         <g:textField name="differentPoints"
-                                  value="${fieldValue(bean: prognosisInstance, field: 'differentPoints')}"/>
+                                     value="${fieldValue(bean: prognosisInstance, field: 'differentPoints')}"/>
                     </td>
                 </tr>
 
-				
-				<tr class="prop">
-				    <td valign="top" class="name">Stage</td>
-				<td class="value"><table>
-					<thead>
-						<th>Winner</th>
-						<th>Name</th>
-						<th>Points</th>
-					</thead>
-					<tbody>
-						<tr class="prop">
-							<td valign="top" class="value"><g:radio name="winnerName" value="0" checked="true"/></td>
-							<td valign="top" class="value">
-								<richui:autoComplete name="firstName" id="firstName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3"/>
-							</td>
-							<td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'firstPoints', 'errors')}">
-								<g:textField name="firstPoints" value="${fieldValue(bean: prognosisInstance, field: 'firstPoints')}"/>
-							</td>
-							
-						</tr>
-						<tr class="prop">
-							<td valign="top" class="value"><g:radio name="winnerName" value="1"/></td>
-							<td valign="top" class="value">
-								<richui:autoComplete id="secondName" name="secondName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3"/>
-							</td>
-							<td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'secondPoints', 'errors')}">
-								<g:textField name="secondPoints" value="${fieldValue(bean: prognosisInstance, field: 'secondPoints')}"/>
-							</td>
-						</tr>
-					</tbody>
-				</table></td>
-				</tr>	
-				
+
+                <tr class="prop">
+                    <td valign="top" class="name">Stage</td>
+                    <td class="value"><table>
+                        <thead>
+                        <th>Winner</th>
+                        <th>Name</th>
+                        <th>Points</th>
+                        </thead>
+                        <tbody>
+                        <tr class="prop">
+                            <td valign="top" class="value"><g:radio name="winnerName" value="0" checked="true"/></td>
+                            <td valign="top" class="value">
+                                <richui:autoComplete name="firstName" id="firstName"
+                                                     action="${createLinkTo('dir': 'command/searchAJAX')}"
+                                                     style="width: 480px" minQueryLength="3"/>
+                            </td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: prognosisInstance, field: 'firstPoints', 'errors')}">
+                                <g:textField name="firstPoints"
+                                             value="${fieldValue(bean: prognosisInstance, field: 'firstPoints')}"/>
+                            </td>
+
+                        </tr>
+                        <tr class="prop">
+                            <td valign="top" class="value"><g:radio name="winnerName" value="1"/></td>
+                            <td valign="top" class="value">
+                                <richui:autoComplete id="secondName" name="secondName"
+                                                     action="${createLinkTo('dir': 'command/searchAJAX')}"
+                                                     style="width: 480px" minQueryLength="3"/>
+                            </td>
+                            <td valign="top"
+                                class="value ${hasErrors(bean: prognosisInstance, field: 'secondPoints', 'errors')}">
+                                <g:textField name="secondPoints"
+                                             value="${fieldValue(bean: prognosisInstance, field: 'secondPoints')}"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table></td>
+                </tr>
+
                 <!--Third block-->
                 <tr class="prop">
                     <td valign="top" class="name">

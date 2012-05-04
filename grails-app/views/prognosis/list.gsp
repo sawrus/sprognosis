@@ -39,7 +39,7 @@
                 <g:sortableColumn property="actual"
                                   title="${message(code: 'prognosis.actual.label', default: 'Actual')}"/>
                 <g:sortableColumn property="isValid"
-                                  title="${message(code: 'prognosis.isValid.label', default: 'Is valid')}"/>								  
+                                  title="${message(code: 'prognosis.isValid.label', default: 'Is valid')}"/>
 
             </tr>
             </thead>
@@ -60,7 +60,7 @@
                     <td>${fieldValue(bean: prognosisInstance, field: "vote")}</td>
 
                     <td><g:formatBoolean boolean="${prognosisInstance.actual}"/></td>
-					<td><g:formatBoolean boolean="${prognosisInstance.isValid}"/></td>
+                    <td><g:formatBoolean boolean="${prognosisInstance.isValid}"/></td>
 
                 </tr>
             </g:each>

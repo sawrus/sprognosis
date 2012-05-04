@@ -1,5 +1,4 @@
 <%@ page import="com.sp.enums.Language; com.sp.impl.Prognosis; com.sp.impl.Command; com.sp.site.Banner; com.sp.site.Image; com.sp.site.SiteController; com.sp.profiles.UserProfile; com.sp.auth.User; com.sp.profiles.PayProfile; com.sp.site.PostCategory; com.sp.site.Post; com.sp.site.Comment" contentType="text/html;charset=UTF-8" %>
-
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -17,23 +16,28 @@
 </head>
 
 <body id="page1">
-
 <!-- content -->
 <section id="content">
     <div class="container_12">
         <div class="wrapper">
-            <a href="#anchor" id="anchor"/>
+            <a href="#h" id="h"/>
+
             <div class="grid_8">
                 <g:each in="${prognosisInstanceList}" var="prognosis" status="i">
                     <h2 class="ident-bot-2">Prognosis #${i}</h2>
                     <table width="100%">
-                        <tr><td class="nameCountProperty2">Actual date</td><td class="valueCountProperty2">${prognosis.actualDate}</td></tr>
-                        <tr><td class="nameCountProperty2">Sport event</td><td class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
-                        <tr><td class="nameCountProperty2">Category</td><td class="valueCountProperty2">${prognosis.category}</td></tr>
-                        <tr><td class="nameCountProperty2">Bets URL</td><td class="valueCountProperty2"><a href="${prognosis.betsUrl}">link</a></td></tr>
-                        <tr><td class="nameCountProperty2">Commands</td><td class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
+                        <tr><td class="nameCountProperty2">Actual date</td><td
+                                class="valueCountProperty2">${prognosis.actualDate}</td></tr>
+                        <tr><td class="nameCountProperty2">Sport event</td><td
+                                class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
+                        <tr><td class="nameCountProperty2">Category</td><td
+                                class="valueCountProperty2">${prognosis.category}</td></tr>
+                        <tr><td class="nameCountProperty2">Bets URL</td><td class="valueCountProperty2"><a
+                                href="${prognosis.betsUrl}">link</a></td></tr>
+                        <tr><td class="nameCountProperty2">Commands</td><td
+                                class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
                         <tr><td class="nameCountProperty2">Action</td><td class="valueCountProperty2">
-                        <paypal:button
+                            <paypal:button
                                     itemName="Prognosis #${prognosis.id}"
                                     itemNumber="${prognosis.id}"
                                     buyerId="${userProfile.user.id}"
@@ -42,12 +46,12 @@
                                     transactionId="${params?.transactionId}"
                                     buttonAlt="Buy Prognosis #${prognosis.id}"
                                     returnAction="buy" returnController="prognosis"
-                                    class="button"
-                        />
+                                    class="button"/>
                         </td></tr>
                     </table>
                 </g:each>
             </div>
+
             <div class="grid_4">
                 <div class="block-3 ident-top-2">
                     <g:ifAnyGranted role="ROLE_USER">
@@ -59,7 +63,6 @@
 
                             <div class="line ident-bot-5"></div>
                         </g:if>
-
                         <g:set var="payProfile"
                                value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
                         <div class="ident-bot-6">
@@ -97,7 +100,8 @@
 
                         <div class="clear"></div>
                     </div>
-                    <g:isLoggedIn><g:link controller="userProfile" action="profile" class="button">${language.edit}</g:link></g:isLoggedIn>
+                    <g:isLoggedIn><g:link controller="userProfile" action="profile"
+                                          class="button">${language.edit}</g:link></g:isLoggedIn>
                 </div>
             </div>
         </div>

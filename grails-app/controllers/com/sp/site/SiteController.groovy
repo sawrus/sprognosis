@@ -1,13 +1,13 @@
 package com.sp.site
 
-import org.apache.commons.logging.LogFactory
-import org.codehaus.groovy.grails.plugins.springsecurity.Secured
-import com.sp.profiles.UserProfile
+import com.sp.enums.Language
+import com.sp.enums.SiteFunction
 import com.sp.impl.Prognosis
 import com.sp.impl.UserService
-import com.sp.enums.Language
+import com.sp.profiles.UserProfile
 import org.apache.commons.lang.StringUtils
-import com.sp.auth.User
+import org.apache.commons.logging.LogFactory
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 
 class SiteController {
 
@@ -24,8 +24,24 @@ class SiteController {
      */
     def index = {
         UserProfile userProfile = getUserProfile()
-        if (params.category) [categoryInstance: PostCategory.get(params.category), userProfile: userProfile]
-        else [postInstance: parsePost(), userProfile: userProfile]
+        if (params.category){
+            PostCategory categoryInstance = PostCategory.list().iterator().next()
+            Long categoryId = parseParameterAsId(params.category)
+            if (categoryId){
+                def get = PostCategory.get(categoryId)
+                if (get) categoryInstance = get
+            }
+            [categoryInstance: categoryInstance, userProfile: userProfile]
+        }
+        else {
+            Post postInstance = parsePost()
+            SiteFunction function = parseSiteFunction(postInstance)
+            if (function){
+                callAction(function)
+            } else {
+                [postInstance: postInstance, userProfile: userProfile]
+            }
+        }
     }
 
     /**
@@ -87,15 +103,17 @@ class SiteController {
     @Secured(['ROLE_ADMIN'])
     def admin = {}
 
+    def contact = {}
+
     /////////////////////////////////////////// Prognosis: user actions
-    @Secured(['ROLE_USER', 'ROLE_ADMIN'])
-    def prognosis = {
+	@Secured(['ROLE_USER', 'ROLE_ADMIN'])
+    def purchased = {
         def userProfile = UserProfile.findByUser(userService.getUser())
         def purchasedPrognosisList
         if (userProfile.payProfile.period == 0) {
             purchasedPrognosisList = userProfile.prognosisList
             if (purchasedPrognosisList == null || purchasedPrognosisList.isEmpty()) {
-                redirect(action: "actual")
+                redirect(action: "sold")
             }
         }
         else {
@@ -103,13 +121,12 @@ class SiteController {
         }
         [prognosisInstanceList: purchasedPrognosisList, prognosisInstanceTotal: purchasedPrognosisList.size()]
     }
-
     @Secured(['ROLE_USER'])
-    def actual =
-        {
-            def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
-            [prognosisInstanceList: actualPrognosisList, prognosisInstanceTotal: actualPrognosisList.size()]
-        }
+    def sold =
+    {
+        def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
+        [prognosisInstanceList: actualPrognosisList, prognosisInstanceTotal: actualPrognosisList.size()]
+    }
 
     @Secured(['ROLE_USER'])
     def buy = {
@@ -118,7 +135,7 @@ class SiteController {
             payService.buyPrognosis(UserProfile.findByUser(userService.getUser()), prognosis)
         else
             flash.message = "Not found Prognosis #" + params.itemNumber
-        redirect(action: "prognosis")
+        redirect(action: "purchased")
     }
 
     /////////////////////////////////////////// Prognosis: handicapper actions
@@ -152,30 +169,47 @@ class SiteController {
     }
 
     private Post parsePost() {
-        def postInstance
+        Post postInstance = Post.list().iterator().next()
         if (params.post) {
-            postInstance = Post.get(params.post)
+            Long postId = parseParameterAsId(params.post)
+            def get = Post.get(postId)
+            if (get) postInstance = get
         } else {
             UserProfile userProfile = getUserProfile()
             if (userProfile && userProfile.language)
                 postInstance = Post.findByNameAndLanguage(userProfile.language.homeName, userProfile.language)
             else {
-                if (!StringUtils.isEmpty(params.language)) {
-                    Language language = Language.valueOf(Language.class, params.language)
+                if (params.language) {
+                    Language language = Language.parseLanguageByName(params.language)
                     postInstance = Post.findByNameAndLanguage(language.homeName, language)
                 } else {
                     postInstance = Post.findByNameAndLanguage(Language.ENGLISH.homeName, Language.ENGLISH)
                 }
             }
 
-            def id = params.id
-            if (id) {
-                def post = Post.get(id)
-                if (post) {
-                    postInstance = post
-                }
+            if (params.id) {
+                Long postId = parseParameterAsId(params.id)
+                postInstance = Post.get(postId)
             }
         }
         return postInstance
+    }
+
+    private Long parseParameterAsId(Object parameter) {
+        Long result = null
+        try {
+            result = Long.parseLong(String.valueOf(parameter))
+        } catch (NumberFormatException e) {
+            log.debug("parseParameterAsId:parameter=" + parameter + "; e:" + e)
+        }
+        return result
+    }
+
+    private SiteFunction parseSiteFunction(Post post) {
+        return post && post.name ? SiteFunction.parseByName(post.name) : null
+    }
+
+    private callAction(SiteFunction function) {
+        redirect(action: function.action, controller: function.controller)
     }
 }

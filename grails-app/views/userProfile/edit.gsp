@@ -58,8 +58,7 @@
                                 returnAction="buy"
                                 returnController="userProfile"
                                 buttonSrc="https://www.paypal.com/en_US/i/btn/btn_subscribe_LG.gif"
-                                buttonAlt="Subscribe to ${payProfile.name}"
-                        />
+                                buttonAlt="Subscribe to ${payProfile.name}"/>
                     </td>
                 </tr>
             </g:each>

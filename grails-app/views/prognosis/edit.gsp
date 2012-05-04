@@ -5,21 +5,21 @@
     <meta name="layout" content="main"/>
     <g:set var="entityName" value="${message(code: 'prognosis.label', default: 'Prognosis')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
-	<resource:autoComplete skin="default" />
-	<resource:dateChooser />
+    <resource:autoComplete skin="default"/>
+    <resource:dateChooser/>
     <resource:richTextEditor type="full"/>
 
-	<g:javascript src="sport_functions.js"/>
+    <g:javascript src="sport_functions.js"/>
 </head>
 
 <body>
 <g:ifAnyGranted role="ROLE_ADMIN">
-<div class="nav">
-    <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                           args="[entityName]"/></g:link></span>
-    <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
+    <div class="nav">
+        <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
                                                                                args="[entityName]"/></g:link></span>
-</div>
+        <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
+                                                                                   args="[entityName]"/></g:link></span>
+    </div>
 </g:ifAnyGranted>
 
 <div class="body">
@@ -85,153 +85,162 @@
                 </td>
             </tr>
         </g:ifAnyGranted>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="description"><g:message code="prognosis.description.label"
-                                                            default="Description"/></label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'description', 'errors')}">
-                        <richui:richTextEditor name="description" value="${prognosisInstance?.description}"  width="640" height="360" />
-                    </td>
-                </tr>
-				<tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="actualDate"><g:message code="prognosis.actualDate.label"
-                                                           default="Actual Date"/></label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'actualDate', 'errors')}">
-						<richui:dateChooser name="actualDate" format="dd.MM.yyyy" value="${prognosisInstance?.actualDate}"/>
-                    </td>
-                </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="sportEvent"><g:message code="prognosis.sportEvent.label"
-                                                           default="Sport Event"/></label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'sportEvent', 'errors')}">
-                        <g:select name="sportEvent" from="${SportEvent?.values()}"
-                                  keys="${SportEvent?.values()*.name()}"
-                                  value="${prognosisInstance?.sportEvent?.name()}"/>
-                    </td>
-                </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="description"><g:message code="prognosis.description.label"
+                                                    default="Description"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'description', 'errors')}">
+                <richui:richTextEditor name="description" value="${prognosisInstance?.description}" width="640"
+                                       height="360"/>
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="actualDate"><g:message code="prognosis.actualDate.label"
+                                                   default="Actual Date"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'actualDate', 'errors')}">
+                <richui:dateChooser name="actualDate" format="dd.MM.yyyy" value="${prognosisInstance?.actualDate}"/>
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="sportEvent"><g:message code="prognosis.sportEvent.label"
+                                                   default="Sport Event"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'sportEvent', 'errors')}">
+                <g:select name="sportEvent" from="${SportEvent?.values()}"
+                          keys="${SportEvent?.values()*.name()}"
+                          value="${prognosisInstance?.sportEvent?.name()}"/>
+            </td>
+        </tr>
 
-                <!--First block-->
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="category"><g:message code="prognosis.category.label" default="Category"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'category', 'errors')}">
-						<richui:autoComplete name="categoryName" action="${createLinkTo('dir': 'category/searchAJAX')}" value="${prognosisInstance.category}"
-							minQueryLength="1"
-						/>		  
-                    </td>
-                </tr>
-				
-				<tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="type"><g:message code="prognosis.type.label" default="Type"/></label>
-                    </td>
-                    <td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'type', 'errors')}">
-                        <g:select name="type" from="${PrognosisType?.values()}"
-                                  keys="${PrognosisType?.values()*.name()}"
-                                  value="${prognosisInstance?.type?.name()}" onchange="updateSubTypeDiv()"/>
-                    </td>
-                </tr>
+        <!--First block-->
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="category"><g:message code="prognosis.category.label" default="Category"/></label>
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'category', 'errors')}">
+                <richui:autoComplete name="categoryName" action="${createLinkTo('dir': 'category/searchAJAX')}"
+                                     value="${prognosisInstance.category}"
+                                     minQueryLength="1"/>
+            </td>
+        </tr>
 
-                <tr class="prop" id="differentPoints">
-                    <td valign="top" class="name">
-                        <label for="differentPoints"><g:message code="prognosis.differentPoints.label"
-                                                                default="Different Points"/></label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'differentPoints', 'errors')}">
-                        <g:textField name="differentPoints"
-                                  value="${fieldValue(bean: prognosisInstance, field: 'differentPoints')}"/>
-                    </td>
-                </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="type"><g:message code="prognosis.type.label" default="Type"/></label>
+            </td>
+            <td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'type', 'errors')}">
+                <g:select name="type" from="${PrognosisType?.values()}"
+                          keys="${PrognosisType?.values()*.name()}"
+                          value="${prognosisInstance?.type?.name()}" onchange="updateSubTypeDiv()"/>
+            </td>
+        </tr>
+
+        <tr class="prop" id="differentPoints">
+            <td valign="top" class="name">
+                <label for="differentPoints"><g:message code="prognosis.differentPoints.label"
+                                                        default="Different Points"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'differentPoints', 'errors')}">
+                <g:textField name="differentPoints"
+                             value="${fieldValue(bean: prognosisInstance, field: 'differentPoints')}"/>
+            </td>
+        </tr>
 
 
+        <tr class="prop">
+            <td valign="top" class="name">Stage</td>
+            <td class="value"><table>
+                <thead>
+                <th>Winner</th>
+                <th>Name</th>
+                <th>Points</th>
+                </thead>
+                <tbody>
                 <tr class="prop">
-                    <td valign="top" class="name">Stage</td>
-                    <td class="value"><table>
-                        <thead>
-                        <th>Winner</th>
-                        <th>Name</th>
-                        <th>Points</th>
-                        </thead>
-					<tbody>
-						<tr class="prop">
-							<td valign="top" class="value">
-								<g:if test="${prognosisInstance?.winner==prognosisInstance?.first}">
-									<g:radio name="winnerName" value="0" checked="true"/>
-								</g:if>
-								<g:else>
-									<g:radio name="winnerName" value="0"/>
-								</g:else>
-							</td>
-							<td valign="top" class="value">
-								<richui:autoComplete name="firstName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3" value="${prognosisInstance?.first?.name}"/>
-							</td>
-							<td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'firstPoints', 'errors')}">
-								<g:textField name="firstPoints" value="${fieldValue(bean: prognosisInstance, field: 'firstPoints')}"/>
-							</td>
-							
-						</tr>
-						<tr class="prop">
-							<td valign="top" class="value">
-								<g:if test="${prognosisInstance?.winner==prognosisInstance?.second}">
-									<g:radio name="winnerName" value="1" checked="true"/>
-								</g:if>
-								<g:else>
-									<g:radio name="winnerName" value="1"/>
-								</g:else>
-							</td>
-							<td valign="top" class="value">
-								<richui:autoComplete name="secondName" action="${createLinkTo('dir': 'command/searchAJAX')}" style="width: 480px" minQueryLength="3" value="${prognosisInstance?.second?.name}"/>
-							</td>
-							<td valign="top" class="value ${hasErrors(bean: prognosisInstance, field: 'secondPoints', 'errors')}">
-								<g:textField name="secondPoints" value="${fieldValue(bean: prognosisInstance, field: 'secondPoints')}"/>
-							</td>
-						</tr>
-					</tbody>
-				</table></td>
-				</tr>	
-				
-                <!--Third block-->
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="betsUrl"><g:message code="prognosis.betsUrl.label" default="Bets Url"/></label>
+                    <td valign="top" class="value">
+                        <g:if test="${prognosisInstance?.winner==prognosisInstance?.first}">
+                            <g:radio name="winnerName" value="0" checked="true"/>
+                        </g:if>
+                        <g:else>
+                            <g:radio name="winnerName" value="0"/>
+                        </g:else>
+                    </td>
+                    <td valign="top" class="value">
+                        <richui:autoComplete name="firstName" action="${createLinkTo('dir': 'command/searchAJAX')}"
+                                             style="width: 480px" minQueryLength="3"
+                                             value="${prognosisInstance?.first?.name}"/>
                     </td>
                     <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'betsUrl', 'errors')}">
-                        <g:textField name="betsUrl" value="${prognosisInstance?.betsUrl}" style="width: 480px"/>
+                        class="value ${hasErrors(bean: prognosisInstance, field: 'firstPoints', 'errors')}">
+                        <g:textField name="firstPoints"
+                                     value="${fieldValue(bean: prognosisInstance, field: 'firstPoints')}"/>
                     </td>
+
                 </tr>
                 <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="firstBetsCoefficient"><g:message code="prognosis.firstBetsCoefficient.label"
-                                                                     default="First Bets Coefficient"/></label>
+                    <td valign="top" class="value">
+                        <g:if test="${prognosisInstance?.winner==prognosisInstance?.second}">
+                            <g:radio name="winnerName" value="1" checked="true"/>
+                        </g:if>
+                        <g:else>
+                            <g:radio name="winnerName" value="1"/>
+                        </g:else>
+                    </td>
+                    <td valign="top" class="value">
+                        <richui:autoComplete name="secondName" action="${createLinkTo('dir': 'command/searchAJAX')}"
+                                             style="width: 480px" minQueryLength="3"
+                                             value="${prognosisInstance?.second?.name}"/>
                     </td>
                     <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'firstBetsCoefficient', 'errors')}">
-                        <g:textField name="firstBetsCoefficient"
-                                     value="${fieldValue(bean: prognosisInstance, field: 'firstBetsCoefficient')}"/>
+                        class="value ${hasErrors(bean: prognosisInstance, field: 'secondPoints', 'errors')}">
+                        <g:textField name="secondPoints"
+                                     value="${fieldValue(bean: prognosisInstance, field: 'secondPoints')}"/>
                     </td>
                 </tr>
-                <tr class="prop">
-                    <td valign="top" class="name">
-                        <label for="secondBetsCoefficient"><g:message code="prognosis.secondBetsCoefficient.label"
-                                                                      default="Second Bets Coefficient"/></label>
-                    </td>
-                    <td valign="top"
-                        class="value ${hasErrors(bean: prognosisInstance, field: 'secondBetsCoefficient', 'errors')}">
-                        <g:textField name="secondBetsCoefficient"
-                                     value="${fieldValue(bean: prognosisInstance, field: 'secondBetsCoefficient')}"/>
-                    </td>
-                </tr>
+                </tbody>
+            </table></td>
+        </tr>
+
+        <!--Third block-->
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="betsUrl"><g:message code="prognosis.betsUrl.label" default="Bets Url"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'betsUrl', 'errors')}">
+                <g:textField name="betsUrl" value="${prognosisInstance?.betsUrl}" style="width: 480px"/>
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="firstBetsCoefficient"><g:message code="prognosis.firstBetsCoefficient.label"
+                                                             default="First Bets Coefficient"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'firstBetsCoefficient', 'errors')}">
+                <g:textField name="firstBetsCoefficient"
+                             value="${fieldValue(bean: prognosisInstance, field: 'firstBetsCoefficient')}"/>
+            </td>
+        </tr>
+        <tr class="prop">
+            <td valign="top" class="name">
+                <label for="secondBetsCoefficient"><g:message code="prognosis.secondBetsCoefficient.label"
+                                                              default="Second Bets Coefficient"/></label>
+            </td>
+            <td valign="top"
+                class="value ${hasErrors(bean: prognosisInstance, field: 'secondBetsCoefficient', 'errors')}">
+                <g:textField name="secondBetsCoefficient"
+                             value="${fieldValue(bean: prognosisInstance, field: 'secondBetsCoefficient')}"/>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
