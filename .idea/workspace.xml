@@ -77,21 +77,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="edit.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp">
+      <file leaf-file-name="error.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="126" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.5178792">
-              <folding>
-                <marker date="1336216682411" expanded="true" signature="2033:2064" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-app/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="629" column="12" selection-start="12082" selection-end="12082" vertical-scroll-proportion="0.0">
+            <state line="30" column="11" selection-start="582" selection-end="582" vertical-scroll-proportion="0.3175915">
               <folding />
             </state>
           </provider>
@@ -112,8 +101,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web-app/css/grid.css" />
-        <option value="$PROJECT_DIR$/grails-app/controllers/com/sp/impl/PrognosisController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/site/checked.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/contact.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/index.gsp" />
@@ -128,6 +115,8 @@
         <option value="$PROJECT_DIR$/grails-app/views/login/denied.gsp" />
         <option value="$PROJECT_DIR$/web-app/css/style.css" />
         <option value="$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/controllers/com/sp/impl/PrognosisController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/error.gsp" />
       </list>
     </option>
   </component>
@@ -530,37 +519,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/site/SiteController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="44" selection-start="1210" selection-end="1210" vertical-scroll-proportion="-11.826087">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/paypal-0.6.4/grails-app/controllers/org/grails/paypal/PaypalController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="178" column="59" selection-start="6463" selection-end="6463" vertical-scroll-proportion="-20.695652">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/login/auth.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.7536408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/site/index.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="14" selection-start="0" selection-end="4563" vertical-scroll-proportion="0.37731197">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="44" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.76269186">
           <folding />
         </state>
       </provider>
@@ -638,12 +599,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/prognosis/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-4.446602">
+          <folding>
+            <marker date="1336133934373" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1336133934373" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1336133934373" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="126" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.5178792">
           <folding>
-            <marker date="1336216682411" expanded="true" signature="2033:2064" placeholder="{...}" />
+            <marker date="1336216682411" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/site/index.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="18" selection-start="0" selection-end="4563" vertical-scroll-proportion="-3.4693878">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/PrognosisController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="131" column="33" selection-start="4354" selection-end="4354" vertical-scroll-proportion="1.60454">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="11" selection-start="582" selection-end="582" vertical-scroll-proportion="0.3175915">
+          <folding />
         </state>
       </provider>
     </entry>
