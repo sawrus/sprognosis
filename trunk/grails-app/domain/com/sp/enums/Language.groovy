@@ -7,6 +7,7 @@ public enum Language {
             "Sport Prognosis",
             "READ MODE",
             "Edit profile",
+            "Edit pay profile",
             Arrays.asList("Name","Price","Period","Description"),
             Arrays.asList("Commands","Categories","Prognosis","Posts","Active users")
     ),
@@ -16,6 +17,7 @@ public enum Language {
             "Спортивные прогнозы",
             "Подробнее",
             "Изменить профиль",
+            "Изменить профиль оплаты",
             Arrays.asList("Имя","Цена","Период","Подробности"),
             Arrays.asList("Команд","Категорий","Прогнозов","Статей","Пользователей")
     )
@@ -25,15 +27,17 @@ public enum Language {
     String siteName
     String readMore
     String edit
+    String editPay
     List<String> payProfile
     List<String> stateProfile
     
-    Language(String name, String homeName, String siteName, String readMore, String edit, List<String> payProfile, List<String> stateProfile) {
+    Language(String name, String homeName, String siteName, String readMore, String edit, String editPay, List<String> payProfile, List<String> stateProfile) {
         this.name = name
         this.homeName = homeName
         this.siteName = siteName
         this.readMore = readMore
         this.edit = edit
+        this.editPay = editPay
         this.payProfile = payProfile
         this.stateProfile = stateProfile
     }

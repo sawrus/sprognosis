@@ -45,6 +45,16 @@ class PrognosisController extends VoteSubscriptionController
 
 	}
 
+    @Secured(['ROLE_USER'])
+    def buy = {
+        Prognosis prognosis = Prognosis.findById(params.itemNumber)
+        if (prognosis)
+            payService.buyPrognosis(UserProfile.findByUser(userService.getUser()), prognosis)
+        else
+            flash.message = "Not found Prognosis #" + params.itemNumber
+        redirect(action: "purchased", controller: "site")
+    }
+
     /////////////////////////////////////////// Prognosis: base actions
 
 
