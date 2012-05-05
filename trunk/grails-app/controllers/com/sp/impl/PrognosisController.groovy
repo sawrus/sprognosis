@@ -1,9 +1,8 @@
 package com.sp.impl
 
 import com.sp.profiles.UserProfile
-import org.codehaus.groovy.grails.plugins.springsecurity.Secured
-import org.codehaus.groovy.grails.web.servlet.FlashScope
 import org.apache.commons.logging.LogFactory
+import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 
 class PrognosisController extends VoteSubscriptionController
 {
@@ -105,7 +104,7 @@ class PrognosisController extends VoteSubscriptionController
     @Secured(['ROLE_USER','ROLE_ADMIN','ROLE_PROGNOSTICATOR'])
     def show = {
         def prognosisInstance = Prognosis.get(params.id)
-		checkPrognosticatorAccess(prognosisInstance, flash, predicted)
+		checkPrognosticatorAccess(prognosisInstance)
         if (!prognosisInstance)
         {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
@@ -120,7 +119,7 @@ class PrognosisController extends VoteSubscriptionController
     @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
     def edit = {
         def prognosisInstance = Prognosis.get(params.id)
-        checkPrognosticatorAccess(prognosisInstance, flash, predicted)
+        checkPrognosticatorAccess(prognosisInstance)
         if (!prognosisInstance)
         {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'prognosis.label', default: 'Prognosis'), params.id])}"
@@ -135,7 +134,7 @@ class PrognosisController extends VoteSubscriptionController
     @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
     def update = {
         def prognosisInstance = Prognosis.get(params.id)
-        checkPrognosticatorAccess(prognosisInstance, flash, predicted)
+        checkPrognosticatorAccess(prognosisInstance)
         if (prognosisInstance)
         {
             if (params.version)
@@ -171,7 +170,7 @@ class PrognosisController extends VoteSubscriptionController
     @Secured(['ROLE_PROGNOSTICATOR','ROLE_ADMIN'])
     def delete = {
         def prognosisInstance = Prognosis.get(params.id)
-        checkPrognosticatorAccess(prognosisInstance, flash, predicted)
+        checkPrognosticatorAccess(prognosisInstance)
         if (prognosisInstance)
         {
             try
@@ -217,15 +216,12 @@ class PrognosisController extends VoteSubscriptionController
         return String.valueOf(domain.vote)
     }
 
-    private def checkPrognosticatorAccess(Prognosis prognosisInstance, FlashScope flash, Closure predicted)
+    def checkPrognosticatorAccess(Prognosis prognosisInstance)
     {
-        if (!userService.hasUser && !userService.hasAdmin)
-        {
-            if (userService.hasPrognosticator && prognosisInstance && !userService.getUser().equals(prognosisInstance.prognosticator))
-            {
+        if (!userService.hasUser && !userService.hasAdmin){
+            if (userService.hasPrognosticator && prognosisInstance && !userService.getUser().equals(prognosisInstance.prognosticator)){
                 log.debug("access_denied:prognosisInstance="+prognosisInstance)
-                flash.message = "Access denied"
-                redirect action: predicted
+                list()
             }
         }
     }
