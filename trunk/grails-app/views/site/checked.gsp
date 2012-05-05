@@ -27,35 +27,35 @@
         </g:each>
         ${postInstance?.content}
     </g:if>
-    <g:link controller="prognosis" action="create" class="button">Create prognosis</g:link>
+    <g:link controller="prognosis" action="create" class="button">${language.createPrognosis}</g:link>
     <g:each in="${prognosisInstanceList}" var="prognosis" status="i">
         <g:hasErrors bean="${prognosis}"><h2 class="ident-bot-2"><g:renderErrors bean="${prognosis}" as="list"/></h2></g:hasErrors>
-        <h2 class="ident-bot-2">Prognosis #${i}</h2>
+        <h2 class="ident-bot-2">${language.prognosis} #${i}</h2>
         <table width="100%">
-            <tr><td class="nameCountProperty2">Actual date</td><td
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(0)}</td><td
                     class="valueCountProperty2">${prognosis.actualDate}</td></tr>
-            <tr><td class="nameCountProperty2">Sport event</td><td
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(1)}</td><td
                     class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
-            <tr><td class="nameCountProperty2">Category</td><td
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(2)}</td><td
                     class="valueCountProperty2">${prognosis.category}</td></tr>
-            <tr><td class="nameCountProperty2">Bets URL</td><td class="valueCountProperty2"><a
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(3)}</td><td class="valueCountProperty2"><a
                     href="${prognosis.betsUrl}">link</a></td></tr>
-            <tr><td class="nameCountProperty2">Commands</td><td
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(4)}</td><td
                     class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
-            <tr><td class="nameCountProperty2">Points</td><td
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(5)}</td><td
                     class="valueCountProperty2">${prognosis.firstPoints} : ${prognosis.secondPoints}</td>
             </tr>
-            <tr><td class="nameCountProperty2">Coefficient</td><td
+            <tr><td class="nameCountProperty2">${language.prognosisFields.get(6)}</td><td
                     class="valueCountProperty2">${prognosis.firstBetsCoefficient} / ${prognosis.secondBetsCoefficient}</td>
             </tr>
             <g:if test="${!prognosis.isValid}">
-                <tr><td class="nameCountProperty2">Actions</td><td class="valueCountProperty2">
+                <tr><td class="nameCountProperty2">${language.prognosisFields.get(7)}</td><td class="valueCountProperty2">
                     <g:form controller="prognosis" method="POST">
                         <g:hiddenField name="id" value="${prognosis?.id}"/>
                         <g:actionSubmit class="button" action="edit"
-                                        value="${message(code: 'default.button.edit.label', default: 'Edit')}"/>
+                                        value="${language.editCommand}"/>
                         <g:actionSubmit class="button" action="delete"
-                                        value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                        value="${language.deleteCommand}"
                                         onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/>
                     </g:form>
                 </td></tr>

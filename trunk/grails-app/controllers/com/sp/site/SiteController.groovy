@@ -22,8 +22,6 @@ class SiteController {
      * index page
      */
     def index = {
-        System.out.println("index.params="+params)
-
         UserProfile userProfile = getUserProfile()
         if (params.category){
             PostCategory categoryInstance = PostCategory.list().iterator().next()
@@ -71,8 +69,6 @@ class SiteController {
                 userProfile.save(flush: true)
             }
         }
-
-        System.out.println("language.params="+params + "; language="+language)
         redirect(action: index, params: [language: language.name()])
     }
 
@@ -126,7 +122,7 @@ class SiteController {
 
         [prognosisInstanceList: purchasedPrognosisList,
                 prognosisInstanceTotal: purchasedPrognosisList.size(),
-                postInstance: Post.findByName(SiteFunction.AS_USER.name), userProfile: userProfile
+                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_USER.name, userProfile.language), userProfile: userProfile
         ]
     }
     @Secured(['ROLE_USER'])
@@ -136,7 +132,7 @@ class SiteController {
         def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
         [prognosisInstanceList: actualPrognosisList,
                 prognosisInstanceTotal: actualPrognosisList.size(),
-                postInstance: Post.findByName(SiteFunction.AS_USER.name), userProfile: userProfile
+                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_USER.name, userProfile.language), userProfile: userProfile
         ]
     }
 
@@ -154,7 +150,7 @@ class SiteController {
             flash.message = checkedPrognosis.size() + " tests passed out of " + COUNT_PROGNOSTICATOR_TEST_PASSED
         [prognosisInstanceList: predictedList,
                 prognosisInstanceTotal: predictedList.size(),
-                postInstance: Post.findByName(SiteFunction.AS_HANDICAPPER.name), userProfile: userProfile
+                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_HANDICAPPER.name, userProfile.language), userProfile: userProfile
         ]
     }
 

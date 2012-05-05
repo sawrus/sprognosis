@@ -3,6 +3,13 @@
 <html lang="en">
 <head>
     <meta name="layout" content="blog_main"/>
+    <g:isLoggedIn>
+    <g:set var="user"><g:loggedInUsername/></g:set>
+    <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
+    <g:set var="language" value="${userProfile != null ? userProfile.language : (params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH)}"/>
+    </g:isLoggedIn>
+    <g:isNotLoggedIn><g:set var="language" value="${params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH}"/>
+    </g:isNotLoggedIn>
 </head>
 
 <body id="page1">
@@ -24,18 +31,18 @@
         <g:if test="${postInstance?.allowComments}">
             <g:isNotLoggedIn>
                 <div class="comment">
-                    <b>Please authorize your user to leave a comment</b>
+                    <b>${language.authComment}</b>
                 </div>
             </g:isNotLoggedIn>
             <g:isLoggedIn>
                 <div class="confirm">
-                    Please, send your comment:
+                    ${language.makeComment}
                     <g:form controller="comment" action="save">
                         <g:textArea name="content" rows="10" cols="80%"
                                     class="comments">${commentInstance?.content}</g:textArea>
                         <g:hiddenField name="id" value="${commentInstance?.id}"/>
                         <g:hiddenField name="post" value="${postInstance?.id}"/>
-                        <g:submitButton name="create" class="button" value="CREATE"/>
+                        <g:submitButton name="create" class="button" value="${language.createComment}"/>
                     </g:form>
                 </div>
             </g:isLoggedIn>

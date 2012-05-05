@@ -171,7 +171,6 @@ class RegisterController {
             return
         } else {
             boolean isCorrectInvite = false
-            System.out.println("invite="+params.invite)
             for (Invite invite: Invite.list()){
                 if (invite.key.equals(params.invite) && !invite.used){
                     invite.used = true
@@ -274,7 +273,6 @@ class RegisterController {
         if (userProfileSave) {
             redirect(controller: "userProfile", action: "show", params: [id: userProfile.id])
         } else {
-            System.out.println("errors=" + userProfile.getErrors())
             redirect uri: '/'
         }
 

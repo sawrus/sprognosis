@@ -1,13 +1,11 @@
 package com.sp.impl
 
-import org.apache.commons.lang.StringUtils
 import com.sp.site.Image
+import com.sp.site.Post
+import javax.imageio.ImageIO
+import org.apache.commons.lang.StringUtils
 import org.apache.commons.logging.LogFactory
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
-import javax.imageio.ImageIO
-import com.sp.site.Post
-import com.sp.site.Banner
-import org.springframework.web.multipart.MultipartHttpServletRequest
 
 class ImageController {
 
@@ -87,7 +85,6 @@ class ImageController {
         imageInstance.width = image.getWidth()
         imageInstance.height = image.getHeight()
         
-        System.out.println("imageInstance="+imageInstance)
         return imageInstance
     }
 
