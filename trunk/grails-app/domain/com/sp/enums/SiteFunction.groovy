@@ -6,7 +6,7 @@ package com.sp.enums
 public enum SiteFunction {
     AS_USER("As User","purchased"),
     AS_HANDICAPPER("As Handicapper","checked"),
-    //CONTACT_US("Contact us","contact")
+    CONTACT_US("Contact us","contact")
 
     private String name
     private String controller = "site"

@@ -1,104 +1,52 @@
-<%@ page import="com.sp.profiles.UserProfile" %>
-<html>
+<%@ page import="com.sp.enums.Language; com.sp.impl.Prognosis; com.sp.impl.Command; com.sp.site.Banner; com.sp.site.Image; com.sp.site.SiteController; com.sp.profiles.UserProfile; com.sp.auth.User; com.sp.profiles.PayProfile; com.sp.site.PostCategory; com.sp.site.Post; com.sp.site.Comment" contentType="text/html;charset=UTF-8" %>
+
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="layout" content="main"/>
-    <g:set var="entityName" value="${message(code: 'userProfile.label', default: 'UserProfile')}"/>
-    <title><g:message code="default.show.label" args="[entityName]"/></title>
-    <resource:dateChooser/>
+    <meta name="layout" content="blog_main"/>
+    <g:isLoggedIn>
+        <g:set var="user"><g:loggedInUsername/></g:set>
+        <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
+        <g:set var="language"
+               value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
+    </g:isLoggedIn>
+    <g:isNotLoggedIn>
+        <g:set var="language"
+               value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
+    </g:isNotLoggedIn>
 </head>
 
-<body>
-<div class="nav">
-    <span class="menuButton"><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a>
-    </span>
-    <g:ifAnyGranted role="ROLE_ADMIN">
-
-        <span class="menuButton"><g:link class="list" action="list"><g:message code="default.list.label"
-                                                                               args="[entityName]"/></g:link></span>
-        <span class="menuButton"><g:link class="create" action="create"><g:message code="default.new.label"
-                                                                                   args="[entityName]"/></g:link></span>
-    </g:ifAnyGranted>
-</div>
-
-<div class="body">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message">${flash.message}</div>
-    </g:if>
-    <div class="dialog">
-        <table>
-            <tbody>
-
-            <g:ifAnyGranted role="ROLE_ADMIN">
-
-                <tr class="prop">
-                    <td valign="top" class="name"><g:message code="userProfile.id.label" default="Id"/></td>
-
-                    <td valign="top" class="value">${fieldValue(bean: userProfileInstance, field: "id")}</td>
-
-                </tr>
-            </g:ifAnyGranted>
-
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="userProfile.user.label" default="User"/></td>
-                <td valign="top" class="value">
-                    <g:link controller="register"
-                            action="show"
-                            id="${userProfileInstance?.user?.id}">${userProfileInstance?.user?.encodeAsHTML()}
-                    </g:link>
-                </td>
+<body id="page1">
+<g:if test="${userProfileInstance != null}">
+    <div class="grid_8">
+        <h2 class="ident-bot-2">Profile (${userProfileInstance.user?.userRealName})</h2>
+        <table width="100%">
+            <tr><td class="nameCountProperty2">Site language</td><td
+                    class="valueCountProperty2">${userProfileInstance.language}</td></tr>
+            <tr><td class="nameCountProperty2">Email</td><td
+                    class="valueCountProperty2">${userProfileInstance.user?.email ? userProfileInstance.user?.email : 'None'}</td>
             </tr>
-
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="userProfile.payProfile.label"
-                                                         default="Profile"/></td>
-                <td valign="top" class="value">${userProfileInstance?.payProfile?.encodeAsHTML()}
-                </td>
+            <tr><td class="nameCountProperty2">Pay profile</td><td
+                    class="valueCountProperty2">${userProfileInstance?.payProfile?.encodeAsHTML()}</td></tr>
+            <tr><td class="nameCountProperty2">Price</td><td
+                    class="valueCountProperty2">${userProfileInstance?.payProfile?.price} ${userProfileInstance?.payProfile?.priceType}</td>
             </tr>
-
-
-            <tr class="prop">
-                <td valign="top" class="name"><g:message code="userProfile.payProfile.label"
-                                                         default="Price"/></td>
-                <td valign="top" class="value">
-                    ${userProfileInstance?.payProfile?.price} ${userProfileInstance?.payProfile?.priceType}
-                </td>
-            </tr>
-
-            <tr class="prop">
-                <td valign="top" class="name">Period</td>
-                <td valign="top" class="value">
-                    from <richui:dateChooser name="startPay" format="dd.MM.yyyy"
-                                             value="${userProfileInstance?.payDate}"/>
-                    <br>
-                    to <richui:dateChooser name="endPay" format="dd.MM.yyyy"
-                                           value="${userProfileInstance?.payDate?.plus(userProfileInstance?.payProfile?.period)}"/>
-                </td>
-            </tr>
-
-            <tr class="prop">
-                <td valign="top" class="name">Image</td>
-                <td valign="top" class="value">${userProfileInstance?.userImage?.toHtmlTagWithResize(200, 200)}</td>
-            </tr>
-
-            </tbody>
+            <tr><td class="nameCountProperty2">Period</td><td
+                    class="valueCountProperty2">from <richui:dateChooser name="startPay" format="dd.MM.yyyy"
+                                                                         value="${userProfileInstance?.payDate}"/><br>
+                to <richui:dateChooser name="endPay" format="dd.MM.yyyy"
+                                       value="${userProfileInstance?.payDate?.plus(userProfileInstance?.payProfile?.period)}"/>
+            </td></tr>
+            <tr><td class="nameCountProperty2">User image</td><td
+                    class="valueCountProperty2">${userProfileInstance?.userImage?.toHtmlTagWithResize(200, 200)}
+                <g:uploadForm action="changeImage" method="post" controller="userProfile">
+                    <input type="file" id="site_image" name="site_image"/>
+                    <g:hiddenField name="id" value="${userProfile?.id}"/>
+                </g:uploadForm>
+            </td>
+            <tr><td class="nameCountProperty2">Actions</td><td
+                    class="valueCountProperty2"><g:link controller="userProfile"
+                                                        action="edit">Edit pay profile</g:link></td></tr>
         </table>
     </div>
-
-    <div class="buttons">
-        <g:form>
-            <g:hiddenField name="id" value="${userProfileInstance?.id}"/>
-            <span class="button"><g:actionSubmit class="edit" action="edit"
-                                                 value="${message(code: 'default.button.edit.label', default: 'Edit')}"/></span>
-            <g:ifAnyGranted role="ROLE_ADMIN">
-
-                <span class="button"><g:actionSubmit class="delete" action="delete"
-                                                     value="${message(code: 'default.button.delete.label', default: 'Delete')}"
-                                                     onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');"/></span>
-            </g:ifAnyGranted>
-        </g:form>
-    </div>
-</div>
-</body>
-</html>
+</g:if>
+</body></html>
