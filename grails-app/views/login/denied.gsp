@@ -16,7 +16,7 @@
 </head>
 
 <body id="page1">
-<div class="grid_8" style="height: 400px">
+<div class="grid_8" style="height: 600px">
     <h4 class="ident-bot-3">Sorry, you're not authorized to view this page.</h4>
 </div>
 </body></html>
