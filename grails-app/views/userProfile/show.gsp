@@ -15,7 +15,6 @@
 <body id="page1">
 <g:if test="${userProfileInstance != null}">
     <div class="grid_8">
-        <h2 class="ident-bot-2">Profile (${userProfileInstance.user?.userRealName})</h2>
         <table width="100%">
             <tr><td class="nameCountProperty2">Site language</td><td
                     class="valueCountProperty2">${userProfileInstance.language}</td></tr>

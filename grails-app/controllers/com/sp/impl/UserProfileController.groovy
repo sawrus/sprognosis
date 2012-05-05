@@ -24,7 +24,6 @@ class UserProfileController {
             render(view: "show", model: [userProfileInstance: userProfileInstance])
         }
         else {
-            System.out.println("access_deny")
             redirect uri: '/'
         }
     }

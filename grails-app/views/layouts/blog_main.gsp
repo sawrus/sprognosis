@@ -59,7 +59,7 @@
                 <g:link controller="site" action="register">Register</g:link></g:isNotLoggedIn><g:isLoggedIn>
                 <g:link controller="logout" action="index">Logout</g:link></g:isLoggedIn></p>
                 <g:form controller="site" action="language">
-                    <g:select name="language" from="${Language?.values()}" keys="${Language?.values()*.name}" value="${language.name}" onchange="submit()"/>
+                    <g:select name="language" from="${Language?.values()}" keys="${Language?.values()*.name()}" value="${language.name()}" onchange="submit()"/>
                 </g:form>
                 </div>
             </div>
@@ -87,11 +87,11 @@
             <li class="active"><a href="${g.createLink(controller: 'site', action: 'index')}#h">${language.homeName}</a></li>
             </g:ifNotGranted>
             <g:each in="${PostCategory.findAllByLanguage(language)}" var="category"><g:if test="${category?.visible}"><g:set var="posts" value="${Post.findAllByCategoryAndLanguage(category, language)}"/><g:if test="${posts.size() == 1}">
-            <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: category.firstPost()?.id])}#h">${category?.name}</a></g:if><g:else>
-            <li><a href="${g.createLink(controller: 'site', action: 'index', params: [category: category?.id])}#h">${category?.name}</a>
+            <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: category.firstPost()?.id], language: language.name())}#h">${category?.name}</a></g:if><g:else>
+            <li><a href="${g.createLink(controller: 'site', action: 'index', params: [category: category?.id, language: language.name()])}#h">${category?.name}</a>
                 <ul style="display: none; visibility: hidden">
                     <g:each in="${posts}" var="post">
-                    <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.name}</a></li>
+                    <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id, language: language.name()])}#h">${post?.title}</a></li>
                     </g:each>
                 </ul>
             </g:else></g:if></li></g:each>
@@ -114,7 +114,7 @@
                 <g:layoutBody/>
                 <div class="grid_4">
                     <div class="block-3 ident-top-2"><g:ifAnyGranted role="ROLE_USER">
-                        <h3 class="ident-bot-2">Profile</h3><g:if test="${userProfile?.userImage}">
+                        <h3 class="ident-bot-2">${language.profile}</h3><g:if test="${userProfile?.userImage}">
                         <div class="ident-bot-6">${userProfile?.userImage?.toHtmlTagWithResize(150, 150)}</div>
                         <div class="line ident-bot-5"></div></g:if><g:set var="payProfile"
                            value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
@@ -166,8 +166,8 @@
                         <ul class="list-1">
                             <g:each in="${Post.findAllByMainPageVisibleAndLanguage(true, language)}" var="post"
                                     status="i"><g:if test="${i == 0}">
-                            <li class="active-2"><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.name}</a></li></g:if><g:else>
-                            <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.name}</a></li></g:else></g:each>
+                            <li class="active-2"><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.title}</a></li></g:if><g:else>
+                            <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">${post?.title}</a></li></g:else></g:each>
                         </ul>
                     </div>
                     <div class="fl-r policy">${language.siteName} © ${java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)}</div>

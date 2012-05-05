@@ -11,16 +11,11 @@
     <g:isNotLoggedIn>
         <g:set var="language" value="${params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH}"/>
     </g:isNotLoggedIn>
-    <%
-        System.out.println("params.language="+params.language)
-        System.out.println("language="+language)
-    %>
 </head>
 
 <body id="page1">
 <g:if test="${postInstance != null}">
     <div class="grid_8">
-        <g:if test="${flash.message}"><h2 class="ident-bot-2">${flash.message}</h2></g:if>
         <g:hasErrors bean="${postInstance}"><h2 class="ident-bot-2"><g:renderErrors bean="${postInstance}" as="list"/></h2></g:hasErrors>
         <h2 class="ident-bot-2">${postInstance?.title}</h2>
         <h4 class="ident-bot-3"><a href="#">${postInstance?.announcement}</a>
@@ -35,19 +30,17 @@
         ${postInstance?.content}
         <g:if test="${postInstance?.allowComments}">
             <g:isNotLoggedIn>
-                <div class="comment">
-                    <b>Please authorize your user to leave a comment</b>
-                </div>
+                <div class="comment"><b>${language.authComment}</b></div>
             </g:isNotLoggedIn>
             <g:isLoggedIn>
                 <div class="confirm">
-                    Please, send your comment:
+                    ${language.makeComment}
                     <g:form controller="comment" action="save">
                         <g:textArea name="content" rows="5" cols="80%"
                                     class="comments">${commentInstance?.content}</g:textArea>
                         <g:hiddenField name="id" value="${commentInstance?.id}"/>
                         <g:hiddenField name="post" value="${postInstance?.id}"/>
-                        <g:submitButton name="create" class="button" value="CREATE"/>
+                        <g:submitButton name="create" class="button" value="${language.createComment}"/>
                     </g:form>
                 </div>
             </g:isLoggedIn>
@@ -70,7 +63,7 @@
     <g:each in="${categoryInstance.posts}" var="post" status="i">
         <g:if test="${i < 2}">
             <div class="grid_4">
-                <h2 class="ident-bot-2">${post.name.toUpperCase()}</h2>
+                <h2 class="ident-bot-2">${post.title.toUpperCase()}</h2>
                 <h4 class="ident-bot-3">
                     <a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">
                         ${post.title}
