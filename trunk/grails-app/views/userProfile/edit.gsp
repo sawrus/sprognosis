@@ -19,7 +19,7 @@
 <div class="grid_8">
     <h2 class="ident-bot-2">Choose your profile below:</h2>
     <g:each in="${PayProfile.list()}" var="payProfile">
-        <table width="100%">
+        <table width="50%">
             <tr><td class="nameProfileProperty">Name</td><td
                     class="valueProfileProperty">${payProfile.name}</td></tr>
             <tr><td class="nameProfileProperty">Period</td><td
@@ -30,17 +30,22 @@
                     class="valueProfileProperty">${payProfile.description}</td></tr>
             <tr><td class="nameProfileProperty">Action</td><td
                     class="valueProfileProperty">
-                <paypal:button
-                        itemName="${payProfile.name}"
-                        itemNumber="${payProfile.id}"
-                        buyerId="${userProfileInstance.id}"
-                        amount="${(payProfile.price<=0?0.01:payProfile.price)}"
-                        discountAmount="0"
-                        transactionId="${params?.transactionId}"
-                        returnAction="buy"
-                        returnController="userProfile"
-                        buttonSrc="https://www.paypal.com/en_US/i/btn/btn_subscribe_LG.gif"
-                        buttonAlt="Subscribe to ${payProfile.name}"/>
+                <g:if test="${payProfile.period==0}">
+                    <g:link controller="userProfile" action="buy" style="color:green; font-weight: bold;">[ Reset to default ]</g:link>
+                </g:if>
+                <g:else>
+                    <paypal:button
+                            itemName="${payProfile.name}"
+                            itemNumber="${payProfile.id}"
+                            buyerId="${userProfileInstance.id}"
+                            amount="${(payProfile.price<=0?0.01:payProfile.price)}"
+                            discountAmount="0"
+                            transactionId="${params?.transactionId}"
+                            returnAction="buy"
+                            returnController="userProfile"
+                            buttonSrc="https://www.paypal.com/en_US/i/btn/btn_subscribe_LG.gif"
+                            buttonAlt="Subscribe to ${payProfile.name}"/>
+                </g:else>
             </td></tr>
         </table><br>
     </g:each>

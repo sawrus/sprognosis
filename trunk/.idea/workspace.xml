@@ -77,10 +77,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="show.gsp" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/show.gsp">
+      <file leaf-file-name="edit.gsp" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="92" selection-start="2832" selection-end="2832" vertical-scroll-proportion="0.72503084">
+            <state line="33" column="126" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.5178792">
+              <folding>
+                <marker date="1336216682411" expanded="true" signature="2033:2064" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-app/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="629" column="12" selection-start="12082" selection-end="12082" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -101,9 +112,7 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grails-app/domain/com/sp/enums/SiteFunction.groovy" />
         <option value="$PROJECT_DIR$/web-app/css/grid.css" />
-        <option value="$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/com/sp/impl/PrognosisController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/site/checked.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/site/contact.gsp" />
@@ -113,10 +122,12 @@
         <option value="$PROJECT_DIR$/grails-app/views/site/purchased.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/com/sp/site/SiteController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/login/denied.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/com/sp/enums/Language.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/userProfile/show.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/com/sp/impl/UserProfileController.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/login/denied.gsp" />
+        <option value="$PROJECT_DIR$/web-app/css/style.css" />
+        <option value="$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp" />
       </list>
     </option>
   </component>
@@ -519,16 +530,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/com/sp/enums/SiteFunction.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="12" selection-start="66" selection-end="66" vertical-scroll-proportion="0.10240964">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/site/SiteController.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="44" selection-start="1210" selection-end="1210" vertical-scroll-proportion="-11.826087">
@@ -557,13 +558,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/login/denied.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="79" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.39827374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/error.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="44" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.76269186">
@@ -586,13 +580,6 @@
       </provider>
       <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="48" selection-start="2094" selection-end="2094" vertical-scroll-proportion="0.62268806">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/layouts/blog_main.gsp">
@@ -623,17 +610,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/UserProfileController.groovy">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/show.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="26" selection-start="3414" selection-end="3414" vertical-scroll-proportion="0.48">
+        <state line="41" column="92" selection-start="2832" selection-end="2832" vertical-scroll-proportion="0.8594328">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/show.gsp">
+    <entry file="file://$PROJECT_DIR$/grails-app/views/login/denied.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="92" selection-start="2832" selection-end="2832" vertical-scroll-proportion="0.72503084">
+        <state line="18" column="37" selection-start="1040" selection-end="1040" vertical-scroll-proportion="0.37731197">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/com/sp/impl/UserProfileController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="8" selection-start="2155" selection-end="2155" vertical-scroll-proportion="0.9023529">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-app/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="629" column="12" selection-start="12082" selection-end="12082" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/userProfile/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="126" selection-start="2086" selection-end="2086" vertical-scroll-proportion="0.5178792">
+          <folding>
+            <marker date="1336216682411" expanded="true" signature="2033:2064" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
