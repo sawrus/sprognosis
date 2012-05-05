@@ -103,10 +103,12 @@ class SiteController {
     @Secured(['ROLE_ADMIN'])
     def admin = {}
 
-    def contact = {}
+    def contact = {
+        [postInstance: Post.findByName(SiteFunction.CONTACT_US.name), userProfile: userProfile]
+    }
 
     /////////////////////////////////////////// Prognosis: user actions
-	@Secured(['ROLE_USER', 'ROLE_ADMIN'])
+	@Secured(['ROLE_USER'])
     def purchased = {
         def userProfile = UserProfile.findByUser(userService.getUser())
         def purchasedPrognosisList
@@ -119,13 +121,21 @@ class SiteController {
         else {
             purchasedPrognosisList = Prognosis.list()
         }
-        [prognosisInstanceList: purchasedPrognosisList, prognosisInstanceTotal: purchasedPrognosisList.size()]
+
+        [prognosisInstanceList: purchasedPrognosisList,
+                prognosisInstanceTotal: purchasedPrognosisList.size(),
+                postInstance: Post.findByName(SiteFunction.AS_USER.name), userProfile: userProfile
+        ]
     }
     @Secured(['ROLE_USER'])
     def sold =
     {
+        def userProfile = UserProfile.findByUser(userService.getUser())
         def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
-        [prognosisInstanceList: actualPrognosisList, prognosisInstanceTotal: actualPrognosisList.size()]
+        [prognosisInstanceList: actualPrognosisList,
+                prognosisInstanceTotal: actualPrognosisList.size(),
+                postInstance: Post.findByName(SiteFunction.AS_USER.name), userProfile: userProfile
+        ]
     }
 
     @Secured(['ROLE_USER'])
@@ -141,15 +151,19 @@ class SiteController {
     /////////////////////////////////////////// Prognosis: handicapper actions
     @Secured(['ROLE_PROGNOSTICATOR', 'ROLE_ADMIN'])
     def checked = {
+        def userProfile = UserProfile.findByUser(userService.getUser())
         def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userService.getUser(), Boolean.TRUE)
         def predictedList = Prognosis.findAllByPrognosticator(userService.getUser())
 
         def testCondition = checkedPrognosis.size() > COUNT_PROGNOSTICATOR_TEST_PASSED
         if (testCondition)
-            flash.message = "All tests pass!"
+            flash.message = "All tests run"
         else
-            flash.message = checkedPrognosis.size() + " tests pass from " + COUNT_PROGNOSTICATOR_TEST_PASSED
-        [prognosisInstanceList: predictedList, prognosisInstanceTotal: predictedList.size()]
+            flash.message = checkedPrognosis.size() + " tests passed out of " + COUNT_PROGNOSTICATOR_TEST_PASSED
+        [prognosisInstanceList: predictedList,
+                prognosisInstanceTotal: predictedList.size(),
+                postInstance: Post.findByName(SiteFunction.AS_HANDICAPPER.name), userProfile: userProfile
+        ]
     }
 
     /////////////////////////////////////////// other functions

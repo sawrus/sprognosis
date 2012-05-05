@@ -87,4 +87,7 @@ class UserProfileController
         return !(profile && userService.authenticateService.isLoggedIn() && userService.getUser().id.equals(profile.user.id))
     }
 
+    def changeImage = {
+        redirect(action: "profile", controller: "site")
+    }
 }

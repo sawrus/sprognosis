@@ -2,79 +2,42 @@
 
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="layout" content="blog_main"/>
-    <g:isLoggedIn>
-        <g:set var="user"><g:loggedInUsername/></g:set>
-        <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
-        <g:set var="language"
-               value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
-    </g:isLoggedIn>
-    <g:isNotLoggedIn>
-        <g:set var="language"
-               value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
-    </g:isNotLoggedIn>
 </head>
 
 <body id="page1">
-<!-- content -->
-<section id="content">
-    <div class="container_12">
-        <div class="wrapper">
-            <a href="#h" id="h"/>
-            <div class="grid_4">
-                <div class="block-3 ident-top-2">
-                    <g:ifAnyGranted role="ROLE_USER">
-                        <h3 class="ident-bot-2">Profile</h3>
-                        <g:if test="${userProfile?.userImage}">
-                            <div class="ident-bot-6">
-                                ${userProfile?.userImage?.toHtmlTagWithResize(150, 150)}
-                            </div>
-
-                            <div class="line ident-bot-5"></div>
-                        </g:if>
-                        <g:set var="payProfile"
-                               value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
-                        <div class="ident-bot-6">
-                            <table>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(0)}</td><td
-                                        class="valueProfileProperty">${payProfile?.name}</td></tr>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(1)}</td><td
-                                        class="valueProfileProperty">${payProfile.price}${payProfile.priceType}</td>
-                                </tr>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(2)}</td><td
-                                        class="valueProfileProperty">${payProfile.period}${payProfile.periodType}</td>
-                                </tr>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(3)}</td><td
-                                        class="valueProfileProperty">${payProfile.description}</td></tr>
-                            </table>
-
-                            <div class="clear"></div>
-                        </div>
-
-                        <div class="line ident-bot-5"></div>
-                    </g:ifAnyGranted>
-                    <div class="ident-bot-4">
-                        <table>
-                            <tr><td class="nameCountProperty">${language.stateProfile.get(0)}</td><td
-                                    class="valueCountProperty">${Command.count()}</td></tr>
-                            <tr><td class="nameCountProperty">${language.stateProfile.get(1)}</td><td
-                                    class="valueCountProperty">${com.sp.impl.Category.count()}</td></tr>
-                            <tr><td class="nameCountProperty">${language.stateProfile.get(2)}</td><td
-                                    class="valueCountProperty">${Prognosis.count()}</td></tr>
-                            <tr><td class="nameCountProperty">${language.stateProfile.get(3)}</td><td
-                                    class="valueCountProperty">${Post.count()}</td></tr>
-                            <tr><td class="nameCountProperty">${language.stateProfile.get(4)}</td><td
-                                    class="valueCountProperty">${User.count()}</td></tr>
-                        </table>
-
-                        <div class="clear"></div>
-                    </div>
-                    <g:isLoggedIn><g:link controller="userProfile" action="profile"
-                                          class="button">${language.edit}</g:link></g:isLoggedIn>
-                </div>
+<g:if test="${postInstance != null}">
+    <div class="grid_8">
+        <h2 class="ident-bot-2">${postInstance?.title}</h2>
+        <h4 class="ident-bot-3"><a href="#">${postInstance?.announcement}</a>
+        </h4>
+        <g:each in="${postInstance?.images}" var="image">
+            <div style="float:inherit;" id="gallery">
+                <a href="${image.webRootDir + File.separator + image.fileName}">
+                    ${image.toHtmlTagWithResize(300, 300)}
+                </a>
             </div>
-        </div>
+        </g:each>
+        ${postInstance?.content}
+        <g:if test="${postInstance?.allowComments}">
+            <g:isNotLoggedIn>
+                <div class="comment">
+                    <b>Please authorize your user to leave a comment</b>
+                </div>
+            </g:isNotLoggedIn>
+            <g:isLoggedIn>
+                <div class="confirm">
+                    Please, send your comment:
+                    <g:form controller="comment" action="save">
+                        <g:textArea name="content" rows="10" cols="80%"
+                                    class="comments">${commentInstance?.content}</g:textArea>
+                        <g:hiddenField name="id" value="${commentInstance?.id}"/>
+                        <g:hiddenField name="post" value="${postInstance?.id}"/>
+                        <g:submitButton name="create" class="button" value="CREATE"/>
+                    </g:form>
+                </div>
+            </g:isLoggedIn>
+        </g:if>
     </div>
-</section><!-- end content -->
+</g:if>
 </body></html>
