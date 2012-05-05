@@ -39,13 +39,13 @@
             <tr><td class="nameCountProperty2">User image</td><td
                     class="valueCountProperty2">${userProfileInstance?.userImage?.toHtmlTagWithResize(200, 200)}
                 <g:uploadForm action="changeImage" method="post" controller="userProfile">
-                    <input type="file" id="site_image" name="site_image"/>
+                    <input type="file" id="site_image" name="site_image" onchange="submit()"/>
                     <g:hiddenField name="id" value="${userProfile?.id}"/>
                 </g:uploadForm>
             </td>
             <tr><td class="nameCountProperty2">Actions</td><td
-                    class="valueCountProperty2"><g:link controller="userProfile"
-                                                        action="edit">Edit pay profile</g:link></td></tr>
+                    class="valueCountProperty2"><a href="${g.createLink(controller: 'userProfile', action: 'edit')}#h" class="button">${language.editPay}</a>
+            </td></tr>
         </table>
     </div>
 </g:if>

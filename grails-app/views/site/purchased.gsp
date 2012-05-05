@@ -17,6 +17,7 @@
 
 <body id="page1">
 <div class="grid_8">
+    <g:if test="${flash.message}"><h2 class="ident-bot-2">${flash.message}</h2></g:if>
     <g:if test="${postInstance != null}">
         <h2 class="ident-bot-2">${postInstance?.title}</h2>
         <h4 class="ident-bot-3"><a href="#">${postInstance?.announcement}</a>
@@ -34,6 +35,7 @@
         <g:link controller="site" action="sold" class="button">Buy prognosis</g:link>
     </g:if>
     <g:each in="${prognosisInstanceList}" var="prognosis" status="i">
+        <g:hasErrors bean="${prognosis}"><h2 class="ident-bot-2"><g:renderErrors bean="${prognosis}" as="list"/></h2></g:hasErrors>
         <h2 class="ident-bot-2">Prognosis #${i}</h2>
         <table width="100%">
             <tr><td class="nameCountProperty2">Actual date</td><td

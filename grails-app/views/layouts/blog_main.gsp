@@ -152,8 +152,9 @@
                             </table>
                             <div class="clear"></div>
                         </div>
-                        <g:isLoggedIn><g:link controller="userProfile" action="profile"
-                                              class="button">${language.edit}</g:link></g:isLoggedIn>
+                        <g:isLoggedIn>
+                        <a href="${g.createLink(controller: 'userProfile', action: 'profile')}#h" class="button">${language.edit}</a>
+                        </g:isLoggedIn>
                     </div>
                 </div>
             </div>

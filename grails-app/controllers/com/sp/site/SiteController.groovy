@@ -5,7 +5,6 @@ import com.sp.enums.SiteFunction
 import com.sp.impl.Prognosis
 import com.sp.impl.UserService
 import com.sp.profiles.UserProfile
-import org.apache.commons.lang.StringUtils
 import org.apache.commons.logging.LogFactory
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 
@@ -59,8 +58,8 @@ class SiteController {
     def language = {
         Language language = DEFAULT_LANGUAGE
 
-        if (params.language && !StringUtils.isEmpty(params.language)) {
-            language = Language.valueOf(Language.class, String.valueOf(params.language))
+        if (params.language) {
+            language = Language.parseLanguageByName(params.language)
         }
 
         if (userService.authenticateService.isLoggedIn()) {
@@ -136,16 +135,6 @@ class SiteController {
                 prognosisInstanceTotal: actualPrognosisList.size(),
                 postInstance: Post.findByName(SiteFunction.AS_USER.name), userProfile: userProfile
         ]
-    }
-
-    @Secured(['ROLE_USER'])
-    def buy = {
-        Prognosis prognosis = Prognosis.findById(params.itemNumber)
-        if (prognosis)
-            payService.buyPrognosis(UserProfile.findByUser(userService.getUser()), prognosis)
-        else
-            flash.message = "Not found Prognosis #" + params.itemNumber
-        redirect(action: "purchased")
     }
 
     /////////////////////////////////////////// Prognosis: handicapper actions
