@@ -22,6 +22,8 @@ class SiteController {
      * index page
      */
     def index = {
+        System.out.println("index.params="+params)
+
         UserProfile userProfile = getUserProfile()
         if (params.category){
             PostCategory categoryInstance = PostCategory.list().iterator().next()
@@ -70,6 +72,7 @@ class SiteController {
             }
         }
 
+        System.out.println("language.params="+params + "; language="+language)
         redirect(action: index, params: [language: language.name()])
     }
 

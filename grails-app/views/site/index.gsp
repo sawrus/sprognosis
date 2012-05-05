@@ -6,13 +6,15 @@
     <g:isLoggedIn>
         <g:set var="user"><g:loggedInUsername/></g:set>
         <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
-        <g:set var="language"
-               value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
+        <g:set var="language" value="${userProfile != null ? userProfile.language : (params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH)}"/>
     </g:isLoggedIn>
     <g:isNotLoggedIn>
-        <g:set var="language"
-               value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
+        <g:set var="language" value="${params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH}"/>
     </g:isNotLoggedIn>
+    <%
+        System.out.println("params.language="+params.language)
+        System.out.println("language="+language)
+    %>
 </head>
 
 <body id="page1">
