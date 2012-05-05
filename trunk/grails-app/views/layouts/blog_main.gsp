@@ -42,12 +42,9 @@
     <g:isLoggedIn>
     <g:set var="user"><g:loggedInUsername/></g:set>
     <g:set var="userProfile" value="${UserProfile.findByUser(User.findByUsername(user))}"/>
-    <g:set var="language"
-           value="${userProfile != null ? userProfile.language : (params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH)}"/>
+    <g:set var="language" value="${userProfile != null ? userProfile.language : (params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH)}"/>
     </g:isLoggedIn>
-    <g:isNotLoggedIn>
-    <g:set var="language"
-           value="${params.language ? Language.valueOf(Language.class, params.language) : Language.ENGLISH}"/>
+    <g:isNotLoggedIn><g:set var="language" value="${params.language ? Language.parseLanguageByName(params.language) : Language.ENGLISH}"/>
     </g:isNotLoggedIn>
     <title>${language.siteName} #${postInstance?.title}</title>
 </head>
@@ -62,7 +59,7 @@
                 <g:link controller="site" action="register">Register</g:link></g:isNotLoggedIn><g:isLoggedIn>
                 <g:link controller="logout" action="index">Logout</g:link></g:isLoggedIn></p>
                 <g:form controller="site" action="language">
-                    <g:select name="language" from="${Language?.values()}" keys="${Language?.values()*.name()}" value="${language.name()}" onchange="submit()"/>
+                    <g:select name="language" from="${Language?.values()}" keys="${Language?.values()*.name}" value="${language.name}" onchange="submit()"/>
                 </g:form>
                 </div>
             </div>
