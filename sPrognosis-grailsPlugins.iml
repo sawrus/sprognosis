@@ -6,11 +6,10 @@
         <webroots>
           <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/grails-app/views" relative="/" />
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/web-app" relative="/" />
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/paypal-0.6.4/grails-app/views" relative="/" />
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/mail-0.9/grails-app/views" relative="/" />
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/web-app" relative="/" />
           <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/jquery-1.7.1/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/web-app" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/mail-0.9/grails-app/views" relative="/" />
+          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/paypal-0.6.4/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -29,19 +28,11 @@
       <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/acegi-0.5.3.2/web-app/plugins" />
     </content>
     <content url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2">
-      <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/grails-app/domain" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/grails-app/taglib" isTestSource="false" />
       <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/target/classes" />
       <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/target/test-classes" />
       <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/countries-0.2/web-app/plugins" />
-    </content>
-    <content url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2">
-      <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/grails-app/services" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/grails-app/taglib" isTestSource="false" />
-      <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/target/classes" />
-      <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/target/test-classes" />
-      <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/web-app/plugins" />
     </content>
     <content url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/hibernate-1.3.6">
       <excludeFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/hibernate-1.3.6/target/classes" />
@@ -75,7 +66,6 @@
     </content>
     <content url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8">
       <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/src/groovy" isTestSource="false" />
-      <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/grails-app/i18n" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/grails-app/controllers" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/grails-app/services" isTestSource="false" />
       <sourceFolder url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/grails-app/taglib" isTestSource="false" />
@@ -96,16 +86,15 @@
     <orderEntry type="module-library" exported="">
       <library name="Grails User Library (sPrognosis-grailsPlugins)">
         <CLASSES>
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/tomcat-1.3.6/lib" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.13.jar!/" />
           <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/lib" />
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/acegi-0.5.3.2/lib" />
           <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/mail-0.9/lib" />
-          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/tomcat-1.3.6/lib" />
+          <root url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/acegi-0.5.3.2/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
         <jarDirectory url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/acegi-0.5.3.2/lib" recursive="false" />
-        <jarDirectory url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/facebook-connect-0.2/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/mail-0.9/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/richui-0.8/lib" recursive="false" />
         <jarDirectory url="file://$USER_HOME$/.grails/1.3.6/projects/sPrognosis/plugins/tomcat-1.3.6/lib" recursive="false" />

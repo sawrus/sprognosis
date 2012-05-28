@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/sPrognosis.iml" filepath="$PROJECT_DIR$/sPrognosis.iml" />
       <module fileurl="file://$PROJECT_DIR$/sPrognosis-grailsPlugins.iml" filepath="$PROJECT_DIR$/sPrognosis-grailsPlugins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sPrognosis-grailsPlugins.iml" filepath="$PROJECT_DIR$/sPrognosis-grailsPlugins.iml" />
     </modules>
   </component>
 </project>
