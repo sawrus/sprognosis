@@ -24,7 +24,8 @@ class SiteController {
     def index = {
         UserProfile userProfile = getUserProfile()
         if (params.category){
-            PostCategory categoryInstance = PostCategory.list().iterator().next()
+            def postCategories = PostCategory.list()
+            PostCategory categoryInstance = postCategories!=null && !postCategories.isEmpty() ? postCategories.iterator().next() : null
             Long categoryId = parseParameterAsId(params.category)
             if (categoryId){
                 def get = PostCategory.get(categoryId)
@@ -171,7 +172,8 @@ class SiteController {
     }
 
     private Post parsePost() {
-        Post postInstance = Post.list().iterator().next()
+        def listOfPosts = Post.list()
+        Post postInstance = listOfPosts!=null && !listOfPosts.isEmpty() ? listOfPosts.iterator().next() : null
         if (params.post) {
             Long postId = parseParameterAsId(params.post)
             def get = Post.get(postId)
