@@ -62,8 +62,8 @@ class SportService
         {
             command = Command.findByName(clubName)
         }
-        command.name = !String.valueOf(clubName).isEmpty() ? clubName : System.err.println("Name is empty")
-        command.category = category != null ? category : System.err.println("PostCategory is empty!")
+        command.name = !String.valueOf(clubName).isEmpty() ? clubName : log.debug("Name is empty")
+        command.category = category != null ? category : log.debug("PostCategory is empty!")
         command.description = category.name + " category"
         command.country = findCountryByName(countryName)
 
@@ -76,7 +76,6 @@ class SportService
                 Command.withTransaction() {
                     if (!command.save(flush: true))
                     {
-                        System.err.println("This command wasn't saved!")
                         command.errors.each {
                             log.error(it)
                         }
@@ -87,7 +86,6 @@ class SportService
         catch (e)
         {
             log.debug("saveClub:clubName="+clubName+"; countryName="+countryName + "e:"+e)
-            System.err.println("saveClub:" + e.getMessage())
         }
     }
 
@@ -103,7 +101,6 @@ class SportService
         catch (e)
         {
             log.debug("urlPostfix="+urlPostfix + "e:"+e)
-            System.err.println("getClubHrefs: " + urlPostfix + e.getMessage())
         }
         return result
     }
@@ -121,7 +118,6 @@ class SportService
         catch (e)
         {
             log.debug("urlPostfix="+urlPostfix+"e:"+e)
-            System.err.println("getClubHrefs: " + urlPostfix + e.getMessage())
         }
         return result
     }
