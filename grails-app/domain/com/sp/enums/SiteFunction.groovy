@@ -4,8 +4,9 @@ package com.sp.enums
  * @author Evgeny Isaev
  */
 public enum SiteFunction {
-    AS_USER("As User","purchased"),
-    AS_HANDICAPPER("As Handicapper","checked"),
+    AS_USER("My Account","purchased"),
+    AS_HANDICAPPER("My Tips","checked"),
+    PAYMENT_INFORMATION("Payment Information","payment"),
     CONTACT_US("Contact us","contact")
 
     private String name
