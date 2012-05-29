@@ -17,21 +17,14 @@
     <div class="grid_8">
         <table width="100%">
             <tr><td class="prognosisp">Site language</td><td
-                    class="prognosisv">${userProfileInstance.language}</td></tr>
+                    class="prognosisv">
+            <g:form controller="site" action="language">
+            <g:select name="language" from="${Language?.values()}" keys="${Language?.values()*.name()}" value="${language.name()}" onchange="submit()"/>
+            </g:form>
+            </td></tr>
             <tr><td class="prognosisp">Email</td><td
                     class="prognosisv">${userProfileInstance.user?.email ? userProfileInstance.user?.email : 'None'}</td>
             </tr>
-            <tr><td class="prognosisp">Pay profile</td><td
-                    class="prognosisv">${userProfileInstance?.payProfile?.encodeAsHTML()}</td></tr>
-            <tr><td class="prognosisp">Price</td><td
-                    class="prognosisv">${userProfileInstance?.payProfile?.price} ${userProfileInstance?.payProfile?.priceType}</td>
-            </tr>
-            <tr><td class="prognosisp">Period</td><td
-                    class="prognosisv">from <richui:dateChooser name="startPay" format="dd.MM.yyyy"
-                                                                         value="${userProfileInstance?.payDate}"/><br>
-                to <richui:dateChooser name="endPay" format="dd.MM.yyyy"
-                                       value="${userProfileInstance?.payDate?.plus(userProfileInstance?.payProfile?.period)}"/>
-            </td></tr>
             <tr><td class="prognosisp">User image</td><td
                     class="prognosisv">${userProfileInstance?.userImage?.toHtmlTagWithResize(200, 200)}
                 <g:uploadForm action="changeImage" method="post" controller="userProfile">
@@ -39,9 +32,22 @@
                     <g:hiddenField name="id" value="${userProfile?.id}"/>
                 </g:uploadForm>
             </td>
+            <g:ifAnyGranted role="ROLE_USER">
+            <tr><td class="prognosisp">Period</td><td
+                    class="prognosisv">from <richui:dateChooser name="startPay" format="dd.MM.yyyy"
+                                                                         value="${userProfileInstance?.payDate}"/><br>
+                to <richui:dateChooser name="endPay" format="dd.MM.yyyy"
+                                       value="${userProfileInstance?.payDate?.plus(userProfileInstance?.payProfile?.period)}"/>
+            </td></tr>
+            <tr><td class="prognosisp">Pay profile</td><td
+                    class="prognosisv">${userProfileInstance?.payProfile?.encodeAsHTML()}</td></tr>
+            <tr><td class="prognosisp">Price</td><td
+                    class="prognosisv">${userProfileInstance?.payProfile?.price} ${userProfileInstance?.payProfile?.priceType}</td>
+            </tr>
             <tr><td class="prognosisp">Actions</td><td
                     class="prognosisv"><a href="${g.createLink(controller: 'userProfile', action: 'edit')}#h" class="button">${language.editPay}</a>
             </td></tr>
+            </g:ifAnyGranted>
         </table>
     </div>
 </g:if>
