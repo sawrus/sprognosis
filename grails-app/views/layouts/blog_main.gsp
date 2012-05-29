@@ -149,9 +149,9 @@
                             </table>
                             <div class="clear"></div>
                         </div>
-                        <g:isLoggedIn>
+                        <g:isLoggedIn><g:ifNotGranted role="ROLE_ADMIN">
                         <a href="${g.createLink(controller: 'userProfile', action: 'profile')}#h" class="button">${language.edit}</a>
-                        </g:isLoggedIn>
+                        </g:ifNotGranted></g:isLoggedIn>
                     </div>
                 </div>
             </div>
