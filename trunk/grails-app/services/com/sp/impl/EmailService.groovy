@@ -23,7 +23,6 @@ class EmailService {
             }
         } catch (Exception e) {
             log.debug("sendEmail:"+e)
-            System.err.println("sendEmail:"+e)
         }
     }
 }

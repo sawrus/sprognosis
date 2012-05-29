@@ -106,6 +106,10 @@ class SiteController {
         [postInstance: Post.findByName(SiteFunction.CONTACT_US.name), userProfile: userProfile]
     }
 
+    def payment = {
+        [postInstance: Post.findByName(SiteFunction.PAYMENT_INFORMATION.name), userProfile: userProfile]
+    }
+
     /////////////////////////////////////////// Prognosis: user actions
 	@Secured(['ROLE_USER'])
     def purchased = {

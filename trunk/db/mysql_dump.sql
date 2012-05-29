@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.24, for Win64 (x86)
+-- MySQL dump 10.13  Distrib 5.1.62, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: public
+-- Host: localhost    Database: sprognosis
 -- ------------------------------------------------------
--- Server version	5.5.24
+-- Server version	5.1.62-0ubuntu0.11.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `banner`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `banner` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
-  `CONTENT` varchar(255) NOT NULL,
+  `CONTENT` varchar(1000) NOT NULL,
   `IMAGE_ID` bigint(20) DEFAULT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   `REF_AT_CONTENT_ID` bigint(20) DEFAULT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE `banner` (
   KEY `SYS_IDX_225` (`REF_AT_CONTENT_ID`),
   CONSTRAINT `FKACC57F2C61CCE5B7` FOREIGN KEY (`REF_AT_CONTENT_ID`) REFERENCES `content` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKACC57F2CB94A24D7` FOREIGN KEY (`IMAGE_ID`) REFERENCES `image` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -45,7 +45,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (1,4,'<span class=\"banner\">\r\n    <span class=\"banner-inner-1\">Improve your</span>\r\n    <span class=\"banner-inner-2\">GOALKEEPER SKILLS <a class=\"banner-button\" href=\"#\"></a></span>\r\n</span>',26,1,NULL,'ENGLISH'),(2,4,'<span class=\"banner\">\r\n    <span class=\"banner-inner-1\">Play like a</span>\r\n    <span class=\"banner-inner-2\">CHAMPION TODAY <a class=\"banner-button\" href=\"#\"></a></span>\r\n</span>',25,1,NULL,'ENGLISH'),(3,3,'<span class=\"banner\">\r\n    <span class=\"banner-inner-1\">Only the Best is</span>\r\n    <span class=\"banner-inner-2\">GOOD PROGNOSIS <a class=\"banner-button\" href=\"#\"></a></span>\r\n</span>',24,1,NULL,'ENGLISH'),(4,0,'<span class=\"banner\"> <span class=\"banner-inner-1\">–ò–¥–∏ –∫ —Å–≤–æ–µ–π –º–µ—á—Ç–µ</span> <span class=\"banner-inner-2\">–í–ü–ï–†–Å–î! <a class=\"banner-button\" href=\"#\"></a></span> </span>',24,1,NULL,'RUSSIAN');
+INSERT INTO `banner` VALUES (5,1,'As Soon As Possible',8,1,NULL,'ENGLISH');
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `buy_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `buy_profile` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AMOUNT` varchar(255) NOT NULL,
   `CARD_END_MONTH` varchar(255) NOT NULL,
@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `buyer_information`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `buyer_information` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `ADDRESS_CONFIRMED` tinyint(1) NOT NULL,
   `CITY` varchar(255) DEFAULT NULL,
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `category` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
@@ -151,7 +151,7 @@ CREATE TABLE `category` (
   UNIQUE KEY `SYS_IDX_46` (`ID`),
   KEY `SYS_IDX_48` (`PARENT_ID`),
   CONSTRAINT `FK302BCFE9F739CF8` FOREIGN KEY (`PARENT_ID`) REFERENCES `category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ DROP TABLE IF EXISTS `command`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `command` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `CATEGORY_ID` bigint(20) DEFAULT NULL,
   `COUNTRY_ID` bigint(20) NOT NULL,
@@ -187,7 +187,7 @@ CREATE TABLE `command` (
   KEY `SYS_IDX_52` (`CATEGORY_ID`),
   CONSTRAINT `FK38A5DF4B7FB59824` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK38A5DF4B47DA33FE` FOREIGN KEY (`COUNTRY_ID`) REFERENCES `country` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12434 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `comment` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AUTHOR_ID` bigint(20) NOT NULL,
   `COMMENT_ID` bigint(20) DEFAULT NULL,
@@ -225,9 +225,11 @@ CREATE TABLE `comment` (
   KEY `SYS_IDX_138` (`AUTHOR_ID`),
   KEY `SYS_IDX_140` (`COMMENT_ID`),
   KEY `SYS_IDX_217` (`POST_ID`),
+  KEY `FK38A5EE5FE1A08B17` (`COMMENT_ID`),
+  CONSTRAINT `FK38A5EE5FE1A08B17` FOREIGN KEY (`COMMENT_ID`) REFERENCES `comment` (`ID`),
+  CONSTRAINT `FK38A5EE5F62DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK38A5EE5F6BC15BAF` FOREIGN KEY (`COMMENT_ID`) REFERENCES `comment` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK38A5EE5F7CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK38A5EE5F62DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK38A5EE5F7CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -248,7 +250,7 @@ DROP TABLE IF EXISTS `content`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `content` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AUTHOR_ID` bigint(20) NOT NULL,
   `CONTENT` longtext NOT NULL,
@@ -300,7 +302,7 @@ DROP TABLE IF EXISTS `content_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `content_category` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AUTHOR_ID` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -315,7 +317,7 @@ CREATE TABLE `content_category` (
   KEY `SYS_IDX_146` (`PARENT_ID`),
   CONSTRAINT `FKF41B204A40F1A24` FOREIGN KEY (`PARENT_ID`) REFERENCES `content_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKF41B20462DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -336,7 +338,7 @@ DROP TABLE IF EXISTS `content_property`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `content_property` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NULL DEFAULT NULL,
   `DESCRIPTION` varchar(1000) DEFAULT NULL,
@@ -348,7 +350,7 @@ CREATE TABLE `content_property` (
   UNIQUE KEY `SYS_IDX_159` (`ID`),
   KEY `SYS_IDX_161` (`POST_ID`),
   CONSTRAINT `FKD10CD2DB8140DB85` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -369,13 +371,13 @@ DROP TABLE IF EXISTS `continent`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `continent` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `KEY` varchar(3) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_54` (`ID`),
   UNIQUE KEY `SYS_IDX_SYS_CT_50_56` (`KEY`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -396,7 +398,7 @@ DROP TABLE IF EXISTS `country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `country` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `CAPITAL` varchar(50) DEFAULT NULL,
   `CONTINENT_ID` bigint(20) NOT NULL,
@@ -411,7 +413,7 @@ CREATE TABLE `country` (
   UNIQUE KEY `SYS_IDX_SYS_CT_56_61` (`SHORT_KEY`),
   KEY `SYS_IDX_62` (`CONTINENT_ID`),
   CONSTRAINT `FK39175796B17BA63E` FOREIGN KEY (`CONTINENT_ID`) REFERENCES `continent` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=247 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -432,7 +434,7 @@ DROP TABLE IF EXISTS `image`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `image` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
@@ -454,7 +456,7 @@ CREATE TABLE `image` (
   `WIDTH` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_148` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -463,7 +465,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (24,1,'2012-03-12 17:05:46','','2012-03-12 17:05:46','',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/images/1.jpg','1.jpg','/Test/images','ENGLISH',1,0,NULL,NULL,'',433,990),(25,1,'2012-03-12 17:06:09','','2012-03-12 17:06:09','',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/images/11.jpg','11.jpg','/Test/images','ENGLISH',1,0,NULL,NULL,'',433,990),(26,1,'2012-03-12 17:06:27','','2012-03-12 17:06:27','',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/images/3.jpg','3.jpg','/Test/images','ENGLISH',1,0,NULL,NULL,'',433,990),(27,1,'2012-03-12 17:06:43','','2012-03-12 17:06:43','',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/images/12knicks-pic-sfSpan.jpg','12knicks-pic-sfSpan.jpg','/Test/images','ENGLISH',1,0,NULL,NULL,'',262,395),(28,0,'2012-04-03 21:11:05','–ì—É–±–µ—Ä–Ω–∞—Ç–æ—Ä','2012-04-03 21:11:05','–ì—É–±–µ—Ä–Ω–∞—Ç–æ—Ä,',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/images/gub.jpg','gub.jpg','/Test/images','ENGLISH',1,0,NULL,NULL,'',819,475),(29,2,'2012-04-24 19:07:42','TEST','2012-04-24 19:09:12','TEST,TEST',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/images/Image0168.jpg','Image0168.jpg','/Test/images','ENGLISH',0,0,NULL,NULL,'',1600,1200),(30,0,'2012-04-24 19:44:27','wqwqqwqwq','2012-04-24 19:44:27','wqwqqwqwq',NULL,NULL,NULL,'/media/data/projects/groovy/sPrognosis/web-app/imagesavatars/Image0168.jpg','Image0168.jpg','/Test/imagesavatars','ENGLISH',1,0,NULL,NULL,'avatars',1600,1200),(31,0,'2012-05-05 11:00:53','user','2012-05-05 11:00:53','user',NULL,NULL,NULL,'D:\\projects\\Self\\groovy\\sPrognosis\\web-app\\images\\avatars\\1page_img1.jpg','1page_img1.jpg','\\Test/images\\avatars','ENGLISH',1,0,NULL,NULL,'\\avatars',146,290);
+INSERT INTO `image` VALUES (8,0,'2012-05-28 17:33:18','','2012-05-28 17:33:18','Banner',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/1.jpg','1.jpg','/images/site','ENGLISH',1,0,NULL,NULL,'',433,990);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -475,13 +477,13 @@ DROP TABLE IF EXISTS `invite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `invite` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
-  `KEY` varchar(255) NOT NULL,
-  `USED` tinyint(1) NOT NULL,
+  `INVITE_KEY` varchar(255) NOT NULL,
+  `INVITE_USED` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_207` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -490,7 +492,7 @@ CREATE TABLE `invite` (
 
 LOCK TABLES `invite` WRITE;
 /*!40000 ALTER TABLE `invite` DISABLE KEYS */;
-INSERT INTO `invite` VALUES (1,1,'PXUNGE',1),(2,1,'PAGEOO',1),(3,1,'HAZPVM',1),(4,1,'ATSAFU',1),(5,1,'LDHPAP',1),(6,1,'WTBWNZ',1),(7,1,'FNRISI',1),(8,1,'FEIKKW',1),(9,1,'SJDEKH',1),(10,1,'VDLUPI',1),(11,1,'LWXWCB',1),(12,1,'QNFEOC',1),(13,1,'FZODXR',1),(14,1,'INCVTJ',1),(15,1,'IVZGCJ',1),(16,1,'XUWLLE',1),(17,1,'PDHCDC',1),(18,1,'NNIWOX',1),(19,1,'KGLYJB',1),(20,1,'MZZZOG',1),(21,0,'UBWTQQ',0),(22,0,'XXYTLU',0),(23,0,'TAODLR',0),(24,0,'BZMYNL',0),(25,0,'EUHULF',0),(26,0,'KIQRXX',0),(27,0,'EHLVIT',0),(28,0,'FHXRAB',0),(29,0,'KXXRHE',0),(30,1,'XJRHCJ',1);
+INSERT INTO `invite` VALUES (1,3,'TEST_INVITE',1);
 /*!40000 ALTER TABLE `invite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,7 +504,7 @@ DROP TABLE IF EXISTS `pay_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pay_profile` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `PERIOD` int(11) NOT NULL,
   `PERIOD_TYPE` varchar(255) NOT NULL,
@@ -516,7 +518,7 @@ CREATE TABLE `pay_profile` (
   `LANGUAGE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_101` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -530,6 +532,38 @@ INSERT INTO `pay_profile` VALUES (2,2,14,'days',50,'USD',NULL,'Two Week',1,NULL,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `payment`
+--
+
+DROP TABLE IF EXISTS `payment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `buyer_id` bigint(20) NOT NULL,
+  `buyer_information_id` bigint(20) DEFAULT NULL,
+  `currency` varchar(255) NOT NULL,
+  `discount_cart_amount` decimal(19,2) NOT NULL,
+  `paypal_transaction_id` varchar(255) DEFAULT NULL,
+  `status` varchar(9) NOT NULL,
+  `tax` double NOT NULL,
+  `transaction_id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKD11C32064DF7D5C4` (`buyer_information_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment`
+--
+
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `payment_details`
 --
 
@@ -537,7 +571,7 @@ DROP TABLE IF EXISTS `payment_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `payment_details` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AMOUNT` varchar(255) NOT NULL,
   `CARD_END_MONTH` varchar(255) NOT NULL,
@@ -574,6 +608,37 @@ LOCK TABLES `payment_details` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `payment_item`
+--
+
+DROP TABLE IF EXISTS `payment_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment_item` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `amount` decimal(19,2) NOT NULL,
+  `discount_amount` decimal(19,2) NOT NULL,
+  `item_name` varchar(255) NOT NULL,
+  `item_number` varchar(255) NOT NULL,
+  `payment_id` bigint(20) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `payment_items_idx` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKE25C55AC2990F5A9` (`payment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment_item`
+--
+
+LOCK TABLES `payment_item` WRITE;
+/*!40000 ALTER TABLE `payment_item` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `post`
 --
 
@@ -581,16 +646,16 @@ DROP TABLE IF EXISTS `post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `post` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
-  `ANNOUNCEMENT` longtext,
+  `ANNOUNCEMENT` text,
   `AUTHOR_ID` bigint(20) NOT NULL,
   `CATEGORY_ID` bigint(20) NOT NULL,
-  `CONTENT` varchar(255) NOT NULL,
+  `CONTENT` longtext NOT NULL,
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(15) NOT NULL,
+  `NAME` varchar(150) NOT NULL,
   `TITLE` varchar(255) NOT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   `RSSVISIBLE` tinyint(1) DEFAULT NULL,
@@ -606,7 +671,7 @@ CREATE TABLE `post` (
   KEY `SYS_IDX_219` (`CATEGORY_ID`),
   CONSTRAINT `FK3498A03ACAAA1D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `post_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK3498A062DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -615,6 +680,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,11,'<p><span style=\"font-family: verdana, arial, helvetica, sans-serif; font-size: 11px; line-height: 12px; text-align: left; white-space: nowrap;\">Home Announcement</span></p>',1,6,'<p><span style=\"font-family: verdana, arial, helvetica, sans-serif; font-size: 11px; line-height: 12px; text-align: left; white-space: nowrap;\">Home</span><span style=\"font-family: verdana, arial, helvetica, sans-serif; font-size: 11px; line-height: 12px; text-align: left; white-space: nowrap;\">&nbsp;</span>Content</p>','2012-05-28 16:56:45','','2012-05-28 18:47:49','Home','Home Title',1,1,0,1,1,1,1,'ENGLISH'),(2,1,NULL,1,11,'<p>My Account</p>','2012-05-28 18:43:20','','2012-05-28 18:48:00','My Account','My Account',0,0,0,1,0,0,0,'ENGLISH'),(3,1,NULL,1,11,'<p>My Tips</p>','2012-05-28 18:44:24','','2012-05-28 18:48:11','My Tips','My Tips',0,0,0,1,0,0,0,'ENGLISH'),(4,1,NULL,1,11,'<p>Payment Information</p>','2012-05-28 18:46:07','','2012-05-28 18:48:20','Payment Information','Payment Information',0,0,0,1,0,0,0,'ENGLISH');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +692,7 @@ DROP TABLE IF EXISTS `post_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `post_category` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AUTHOR_ID` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -642,7 +708,7 @@ CREATE TABLE `post_category` (
   KEY `SYS_IDX_174` (`PARENT_ID`),
   CONSTRAINT `FK4BC509BD5A88AEF1` FOREIGN KEY (`PARENT_ID`) REFERENCES `post_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK4BC509BD62DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -736,7 +802,7 @@ CREATE TABLE `post_image` (
 
 LOCK TABLES `post_image` WRITE;
 /*!40000 ALTER TABLE `post_image` DISABLE KEYS */;
-INSERT INTO `post_image` VALUES (NULL,27,16),(NULL,28,30),(NULL,27,19),(NULL,26,20);
+INSERT INTO `post_image` VALUES (NULL,8,1);
 /*!40000 ALTER TABLE `post_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -801,7 +867,7 @@ DROP TABLE IF EXISTS `pp_billing`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pp_billing` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AMOUNT` double NOT NULL,
   `CURRENCY_CODE` varchar(255) NOT NULL,
@@ -839,7 +905,7 @@ DROP TABLE IF EXISTS `pp_billing_history`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pp_billing_history` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `ACTION` varchar(255) NOT NULL,
   `AMOUNT` double DEFAULT NULL,
@@ -873,7 +939,7 @@ DROP TABLE IF EXISTS `pp_payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pp_payment` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AMOUNT` double NOT NULL,
   `CURRENCY_CODE` varchar(255) NOT NULL,
@@ -904,7 +970,7 @@ DROP TABLE IF EXISTS `prognosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `prognosis` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `ACTUAL` tinyint(1) NOT NULL,
   `ACTUAL_DATE` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -945,7 +1011,7 @@ CREATE TABLE `prognosis` (
   CONSTRAINT `FKC60FB062CE9D83EB` FOREIGN KEY (`FIRST_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB0626B4B1D4` FOREIGN KEY (`REAL_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB062D888D8FB` FOREIGN KEY (`PROGNOSTICATOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -954,7 +1020,6 @@ CREATE TABLE `prognosis` (
 
 LOCK TABLES `prognosis` WRITE;
 /*!40000 ALTER TABLE `prognosis` DISABLE KEYS */;
-INSERT INTO `prognosis` VALUES (6,3,1,'2012-03-12 20:00:00','2012-03-11 20:03:52','<p><strong>Prognosis</strong></p>','2012-05-02 14:49:13',3,NULL,0,NULL,'¨Ì\0sr\0java.net.URLñ%76\Z¸‰r\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xpˇˇˇˇ\0\0êt\0localhost:8080t\0/Test/prognosis/createt\0	localhostt\0httppx',2,1.5,0,NULL,NULL,6917,1.5,0,2,'COUNT',104,'INVITATIONALS',0,0,1),(7,0,0,'2012-03-12 20:00:00','2012-03-11 20:14:57','<p>Prognosis 2</p>','2012-03-11 20:14:57',1,NULL,0,NULL,'¨Ì\0sr\0java.net.URLñ%76\Z¸‰r\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xpˇˇˇˇ\0\0êt\0localhost:8080t\0/Test/prognosis/createt\0	localhostt\0httppx',2,1.5,0,NULL,NULL,6573,1.5,0,2,'COUNT',104,'INVITATIONALS',0,0,0),(10,0,0,'2012-05-15 20:00:00','2012-05-03 11:33:12','FFFFFFFFFFFFFFFFF','2012-05-03 11:33:12',3,NULL,0,NULL,'¨Ì\0sr\0java.net.URLñ%76\Z¸‰r\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xpˇˇˇˇ\0\0êt\0localhost:8080t\0/Test/prognosis/createt\0	localhostt\0httppx',2,1.5,0,NULL,NULL,7228,1.5,0,2,'RANGE',104,'REGIONAL_CHAMPIONSHIPS',5,0,0);
 /*!40000 ALTER TABLE `prognosis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -966,7 +1031,7 @@ DROP TABLE IF EXISTS `property`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `property` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
@@ -975,7 +1040,7 @@ CREATE TABLE `property` (
   `NAME` varchar(15) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_157` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -996,7 +1061,7 @@ DROP TABLE IF EXISTS `request_map`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `request_map` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `CONFIG_ATTRIBUTE` varchar(255) NOT NULL,
   `URL` varchar(255) NOT NULL,
@@ -1023,14 +1088,14 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `AUTHORITY` varchar(255) NOT NULL,
   `DESCRIPTION` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_79` (`ID`),
   UNIQUE KEY `SYS_IDX_SYS_CT_68_81` (`AUTHORITY`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1039,7 +1104,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,4,'ROLE_ADMIN',''),(2,39,'ROLE_USER',''),(3,5,'ROLE_PROGNOSTICATOR','');
+INSERT INTO `role` VALUES (1,5,'ROLE_ADMIN',''),(2,64,'ROLE_USER',''),(3,10,'ROLE_PROGNOSTICATOR','');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1068,7 +1133,7 @@ CREATE TABLE `role_people` (
 
 LOCK TABLES `role_people` WRITE;
 /*!40000 ALTER TABLE `role_people` DISABLE KEYS */;
-INSERT INTO `role_people` VALUES (1,1),(2,2),(3,3),(2,16),(2,17),(2,18),(2,19),(2,20),(2,21),(2,22),(2,23),(2,24),(2,25),(2,26),(2,27),(2,28),(2,29),(2,30),(2,31),(2,32),(2,33),(2,34),(2,35),(2,36),(2,37);
+INSERT INTO `role_people` VALUES (1,1),(3,38);
 /*!40000 ALTER TABLE `role_people` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1080,7 +1145,7 @@ DROP TABLE IF EXISTS `stage`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `stage` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `FIRST_ID` bigint(20) NOT NULL,
   `FIRST_POINTS` int(11) NOT NULL,
@@ -1121,7 +1186,7 @@ DROP TABLE IF EXISTS `tag`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tag` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `DATE_CREATED` timestamp NULL DEFAULT NULL,
   `DESCRIPTION` varchar(1000) DEFAULT NULL,
@@ -1130,7 +1195,7 @@ CREATE TABLE `tag` (
   `LANGUAGE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_179` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1151,7 +1216,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `DESCRIPTION` varchar(255) NOT NULL,
   `EMAIL` varchar(255) NOT NULL,
@@ -1164,7 +1229,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_96` (`ID`),
   UNIQUE KEY `SYS_IDX_SYS_CT_76_98` (`USERNAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1173,7 +1238,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,4,'','',0,1,'d033e22ae348aeb5660fc2140aec35850c4da997','admin','admin',NULL),(2,1,'','',0,1,'12dea96fec20593566ab75692c9949596833adc9','user','user',NULL),(3,1,'prog','',0,1,'725da0b646267f9da639e7aa998492df05a64b65','prog','prog',NULL),(16,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','Evgeny Isaev','isaev',NULL),(17,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','test','test',NULL),(18,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','Offof','Alex',NULL),(19,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','asaasas','dddd',NULL),(20,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','erereere','fdfdddfd',NULL),(21,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','rtrtrtrt','fgfgffgf',NULL),(22,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','asdasasa','rtrtrttrrtr',NULL),(23,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','qwqwqqwqw','reerere',NULL),(24,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','qwqwqwqqw','rtrtrtrt',NULL),(25,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','sdsdssds','sdsdsdsds',NULL),(26,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','sdsdsssd','fgfgg',NULL),(27,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','gfgddgddgd','ereer',NULL),(28,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','fdfddfdf','asasaas',NULL),(29,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','asasaas','dfdfdfd',NULL),(30,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','asasas','sdssd',NULL),(31,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','asasaas','wewewe',NULL),(32,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','ewewewwe','fdfdfdf',NULL),(33,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','asaas','ererer',NULL),(34,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','yuyyuyu','sdreeerer',NULL),(35,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','fddffffff','erererr',NULL),(36,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','rrrrrr','ggttgtg',NULL),(37,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','frrfrfr','wqwqqwqwq',NULL);
+INSERT INTO `user` VALUES (1,5,'','',0,1,'321fa970b38a682966be01e155998750591ec53d','sprognosis_admin','sprognosis_admin',NULL),(38,5,'test handicapper','',0,1,'c1493cb72318e0df063b5ed58258dee576c9e3ed','Neo','sprognosis_prognosticator',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1185,7 +1250,7 @@ DROP TABLE IF EXISTS `user_profile`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_profile` (
-  `ID` bigint(20) NOT NULL,
+  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `VERSION` bigint(20) NOT NULL,
   `PAY_PROFILE_ID` bigint(20) NOT NULL,
   `USER_ID` bigint(20) NOT NULL,
@@ -1200,7 +1265,7 @@ CREATE TABLE `user_profile` (
   CONSTRAINT `FK487E2135BC4D7ECB` FOREIGN KEY (`USER_IMAGE_ID`) REFERENCES `image` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK487E2135CCF16DE9` FOREIGN KEY (`PAY_PROFILE_ID`) REFERENCES `pay_profile` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK487E2135221A77C` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1209,6 +1274,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
+INSERT INTO `user_profile` VALUES (1,0,13,38,NULL,'ENGLISH',NULL);
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1237,6 +1303,31 @@ LOCK TABLES `user_profile_prognosis` WRITE;
 /*!40000 ALTER TABLE `user_profile_prognosis` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_profile_prognosis` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `vote`
+--
+
+DROP TABLE IF EXISTS `vote`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vote` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `entity_id` decimal(19,2) NOT NULL,
+  `user_id` decimal(19,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vote`
+--
+
+LOCK TABLES `vote` WRITE;
+/*!40000 ALTER TABLE `vote` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vote` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1247,4 +1338,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-05-28 15:03:35
+-- Dump completed on 2012-05-28 23:02:31

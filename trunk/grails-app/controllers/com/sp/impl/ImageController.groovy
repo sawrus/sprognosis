@@ -10,7 +10,7 @@ import org.codehaus.groovy.grails.plugins.springsecurity.Secured
 class ImageController {
 
     private static final String SITE_IMAGE = 'site_image'
-    private static final String IMAGE_PATH = "/images"
+    private static final String IMAGE_PATH = "images/site"
     private static final log = LogFactory.getLog(this);
 
     public static String realPath
@@ -20,7 +20,7 @@ class ImageController {
         def imageInstance = new Image(params)
 
         realPath = servletContext.getRealPath("/")
-        applicationName= grailsApplication.metadata['app.name']
+        applicationName= grailsApplication.metadata['app.context']
 
         def imageFile = request.getFile(SITE_IMAGE)
         if (!imageFile.empty){
@@ -31,19 +31,40 @@ class ImageController {
         }
 
         def DEFAULT_EMPTY_SYMBOL = ","
-        def isNameEmpty = StringUtils.isEmpty(imageInstance.name) || DEFAULT_EMPTY_SYMBOL.equals(imageInstance.name)
+        imageInstance.name = imageInstance.name.replaceFirst(DEFAULT_EMPTY_SYMBOL,"");
         if (imageInstance.save(flush: true)) {
             flash.message = "${message(code: 'default.created.message', args: [message(code: 'image.label', default: 'Image'), imageInstance.id])}"
-            if (isNameEmpty){
-                imageInstance.name = ""
-                imageInstance.save(flush: true)
-            }
             log.debug("imageInstance.name="+imageInstance.name)
             redirect(action: "show", id: imageInstance.id)
         }
         else {
             render(view: "create", model: [imageInstance: imageInstance])
         }
+    }
+
+    public static def saveFileAndFillEntity(def imageFile, def imageInstance) {
+        log.debug("saveFileAndFillEntity:")
+
+        def webRootDir = realPath
+        def fullImagePath = IMAGE_PATH + (!StringUtils.isEmpty(imageInstance.path) ? imageInstance.path : "")
+        def imageDir = new File(webRootDir, fullImagePath)
+
+        imageDir.mkdirs()
+        File targetImageFile = new File(imageDir, imageFile.originalFilename)
+        imageFile.transferTo(targetImageFile)
+        imageInstance.absolutePath = targetImageFile.absolutePath
+        imageInstance.fileName = imageFile.originalFilename
+        imageInstance.webRootDir = applicationName + fullImagePath
+        log.debug("imageInstance.absolutePath="+imageInstance.absolutePath)
+        log.debug("imageInstance.fileName="+imageInstance.fileName)
+        log.debug("imageInstance.webRootDir="+imageInstance.webRootDir)
+
+        def image = ImageIO.read(targetImageFile)
+        log.debug("width=" + image.getWidth() + "; height=" + image.getHeight());
+        imageInstance.width = image.getWidth()
+        imageInstance.height = image.getHeight()
+
+        return imageInstance
     }
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -61,31 +82,6 @@ class ImageController {
         def imageInstance = new Image()
         imageInstance.properties = params
         return [imageInstance: imageInstance]
-    }
-
-    public static def saveFileAndFillEntity(def imageFile, def imageInstance) {
-        log.debug("saveFileAndFillEntity:")
-
-        def webRootDir = realPath
-        def fullImagePath = IMAGE_PATH + (!StringUtils.isEmpty(imageInstance.path) ? imageInstance.path : "")
-        def imageDir = new File(webRootDir, fullImagePath)
-
-        imageDir.mkdirs()
-        File targetImageFile = new File(imageDir, imageFile.originalFilename)
-        imageFile.transferTo(targetImageFile)
-        imageInstance.absolutePath = targetImageFile.absolutePath
-        imageInstance.fileName = imageFile.originalFilename
-        imageInstance.webRootDir = File.separator + applicationName + fullImagePath
-        log.debug("imageInstance.absolutePath="+imageInstance.absolutePath)
-        log.debug("imageInstance.fileName="+imageInstance.fileName)
-        log.debug("imageInstance.webRootDir="+imageInstance.webRootDir)
-
-        def image = ImageIO.read(targetImageFile)
-        log.debug("width=" + image.getWidth() + "; height=" + image.getHeight());
-        imageInstance.width = image.getWidth()
-        imageInstance.height = image.getHeight()
-        
-        return imageInstance
     }
 
     def show = {

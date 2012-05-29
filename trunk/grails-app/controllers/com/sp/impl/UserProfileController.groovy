@@ -81,7 +81,7 @@ class UserProfileController {
 
     def changeImage = {
         ImageController.realPath = servletContext.getRealPath("/")
-        ImageController.applicationName= grailsApplication.metadata['app.name']
+        ImageController.applicationName= grailsApplication.metadata['app.context']
 
         def userProfileInstance = UserProfile.findByUser(userService.getUser())
         def imageFile = request.getFile(SITE_IMAGE)

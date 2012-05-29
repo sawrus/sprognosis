@@ -59,7 +59,6 @@ class PayService {
                 if (!profile.save(flash: true)) {
                     profile.errors.each {
                         log.debug(it)
-                        System.err.println(it)
                     }
                 }
             }

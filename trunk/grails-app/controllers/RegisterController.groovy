@@ -172,8 +172,8 @@ class RegisterController {
         } else {
             boolean isCorrectInvite = false
             for (Invite invite: Invite.list()){
-                if (invite.key.equals(params.invite) && !invite.used){
-                    invite.used = true
+                if (invite.invite_key.equals(params.invite) && !invite.invite_used){
+                    invite.invite_used = true
                     acceptInvite = invite
                     isCorrectInvite = true
                     break
@@ -226,7 +226,7 @@ class RegisterController {
 			person.save(flush: true)
 
             ImageController.realPath = servletContext.getRealPath("/")
-            ImageController.applicationName= grailsApplication.metadata['app.name']
+            ImageController.applicationName= grailsApplication.metadata['app.context']
 
             def imageFile = request.getFile(SITE_IMAGE)
             def imageInstance = createUserImage(person.username, imageFile)
