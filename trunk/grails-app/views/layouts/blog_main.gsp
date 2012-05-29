@@ -53,18 +53,9 @@
     <header>
         <div class="wrapper">
             <div class="fl-l ident-top-1 ident-bot-18"><div class="slogan fl-l">${language.siteName}</div></div>
-            <div class="block-2">
-                <div class="extra-wrap block-1"><g:isLoggedIn><p><g:loggedInUsername/>:</g:isLoggedIn><g:isNotLoggedIn>
-                <g:link controller="login">Login</g:link> |
-                <g:link controller="site" action="register">Register</g:link></g:isNotLoggedIn><g:isLoggedIn>
-                <g:link controller="logout" action="index">Logout</g:link></g:isLoggedIn></p>
-                <g:form controller="site" action="language">
-                    <g:select name="language" from="${Language?.values()}" keys="${Language?.values()*.name()}" value="${language.name()}" onchange="submit()"/>
-                </g:form>
-                </div>
-            </div>
         </div>
-    </header></div>
+    </header>
+</div>
 <div class="main shadow extra-10">
     <nav>
         <ul class="sf-menu sf-js-enabled sf-shadow">
@@ -93,6 +84,15 @@
                     <g:each in="${posts}" var="post">
                     <li><a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id, language: language.name()])}#h">${post?.title}</a></li>
                     </g:each>
+                    <g:if test="${category.name=='Participate'}">
+                        <g:isNotLoggedIn>
+                            <li><g:link controller="login">Login</g:link></li>
+                            <li><g:link controller="site" action="register">Register</g:link></li>
+                        </g:isNotLoggedIn>
+                        <g:isLoggedIn>
+                            <li><g:link controller="logout" action="index">Logout</g:link></li>
+                        </g:isLoggedIn>
+                    </g:if>
                 </ul>
             </g:else></g:if></li></g:each>
         </ul>
