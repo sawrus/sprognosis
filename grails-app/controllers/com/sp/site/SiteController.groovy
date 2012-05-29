@@ -90,10 +90,22 @@ class SiteController {
     }
 
     /**
-     * redirect to register form
+     * 1. check invite
+     * 2. redirect to register form
      */
     def register = {
-        redirect(controller: "register", action: "index")
+        if (userService.authenticateService.isLoggedIn()){
+            redirect(controller: "register", action: "index")
+        } else {
+            if (params.invite){
+                if (!checkInvite(params.invite)){
+                    flash.message = 'Ooops, Sorry, you have not invite to our club'
+                    render view: 'register'
+                } else {
+                    redirect(controller: "register", action: "index")
+                }
+            }
+        }
     }
 
     /**
@@ -219,5 +231,18 @@ class SiteController {
 
     private callAction(SiteFunction function) {
         redirect(action: function.action, controller: function.controller)
+    }
+
+    private boolean checkInvite(String inviteKey) {
+        boolean isCorrectInvite = false
+        for (Invite invite: Invite.list()) {
+            if (invite.invite_key.equals(inviteKey) && !invite.invite_used) {
+                invite.invite_used = true
+                invite.save(flash: true);
+                isCorrectInvite = true
+                break
+            }
+        }
+        return isCorrectInvite
     }
 }

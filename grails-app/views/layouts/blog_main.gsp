@@ -120,32 +120,32 @@
                            value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
                         <div class="ident-bot-6">
                             <table>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(0)}</td><td
-                                        class="valueProfileProperty">${payProfile?.name}</td></tr>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(1)}</td><td
-                                        class="valueProfileProperty">${payProfile.price}${payProfile.priceType}</td>
+                                <tr><td class="profilep">${language.payProfile.get(0)}</td><td
+                                        class="profilev">${payProfile?.name}</td></tr>
+                                <tr><td class="profilep">${language.payProfile.get(1)}</td><td
+                                        class="profilev">${payProfile.price}${payProfile.priceType}</td>
                                 </tr>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(2)}</td><td
-                                        class="valueProfileProperty">${payProfile.period}${payProfile.periodType}</td>
+                                <tr><td class="profilep">${language.payProfile.get(2)}</td><td
+                                        class="profilev">${payProfile.period}${payProfile.periodType}</td>
                                 </tr>
-                                <tr><td class="nameProfileProperty">${language.payProfile.get(3)}</td><td
-                                        class="valueProfileProperty">${payProfile.description}</td></tr>
+                                <tr><td class="profilep">${language.payProfile.get(3)}</td><td
+                                        class="profilev">${payProfile.description}</td></tr>
                             </table>
                             <div class="clear"></div>
                         </div>
                         <div class="line ident-bot-5"></div></g:ifAnyGranted>
                         <div class="ident-bot-4">
                             <table>
-                                <tr><td class="nameCountProperty">${language.stateProfile.get(0)}</td><td
-                                        class="valueCountProperty">${Command.count()}</td></tr>
-                                <tr><td class="nameCountProperty">${language.stateProfile.get(1)}</td><td
-                                        class="valueCountProperty">${com.sp.impl.Category.count()}</td></tr>
-                                <tr><td class="nameCountProperty">${language.stateProfile.get(2)}</td><td
-                                        class="valueCountProperty">${Prognosis.count()}</td></tr>
-                                <tr><td class="nameCountProperty">${language.stateProfile.get(3)}</td><td
-                                        class="valueCountProperty">${Post.count()}</td></tr>
-                                <tr><td class="nameCountProperty">${language.stateProfile.get(4)}</td><td
-                                        class="valueCountProperty">${User.count()}</td></tr>
+                                <tr><td class="spanelp">${language.stateProfile.get(0)}</td><td
+                                        class="spanelv">${Command.count()}</td></tr>
+                                <tr><td class="spanelp">${language.stateProfile.get(1)}</td><td
+                                        class="spanelv">${com.sp.impl.Category.count()}</td></tr>
+                                <tr><td class="spanelp">${language.stateProfile.get(2)}</td><td
+                                        class="spanelv">${Prognosis.count()}</td></tr>
+                                <tr><td class="spanelp">${language.stateProfile.get(3)}</td><td
+                                        class="spanelv">${Post.count()}</td></tr>
+                                <tr><td class="spanelp">${language.stateProfile.get(4)}</td><td
+                                        class="spanelv">${User.count()}</td></tr>
                             </table>
                             <div class="clear"></div>
                         </div>

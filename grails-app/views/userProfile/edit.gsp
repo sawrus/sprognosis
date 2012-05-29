@@ -17,16 +17,16 @@
     <h2 class="ident-bot-2">Choose your profile below:</h2>
     <g:each in="${PayProfile.list()}" var="payProfile">
         <table width="50%">
-            <tr><td class="nameProfileProperty">Name</td><td
-                    class="valueProfileProperty">${payProfile.name}</td></tr>
-            <tr><td class="nameProfileProperty">Period</td><td
-                    class="valueProfileProperty">${payProfile.period} ${payProfile.periodType}</td></tr>
-            <tr><td class="nameProfileProperty">Price</td><td
-                    class="valueProfileProperty">${payProfile.price} ${payProfile.priceType}</td></tr>
-            <tr><td class="nameProfileProperty">Description</td><td
-                    class="valueProfileProperty">${payProfile.description}</td></tr>
-            <tr><td class="nameProfileProperty">Action</td><td
-                    class="valueProfileProperty">
+            <tr><td class="profilep">Name</td><td
+                    class="profilev">${payProfile.name}</td></tr>
+            <tr><td class="profilep">Period</td><td
+                    class="profilev">${payProfile.period} ${payProfile.periodType}</td></tr>
+            <tr><td class="profilep">Price</td><td
+                    class="profilev">${payProfile.price} ${payProfile.priceType}</td></tr>
+            <tr><td class="profilep">Description</td><td
+                    class="profilev">${payProfile.description}</td></tr>
+            <tr><td class="profilep">Action</td><td
+                    class="profilev">
                 <g:if test="${payProfile.period==0}">
                     <g:link controller="userProfile" action="buy" style="color:green; font-weight: bold;">[ Reset to default ]</g:link>
                 </g:if>
