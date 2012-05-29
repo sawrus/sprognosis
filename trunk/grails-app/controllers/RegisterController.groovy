@@ -1,15 +1,14 @@
-import com.sp.auth.User
-import com.sp.auth.Role
-
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken as AuthToken
 import org.springframework.security.context.SecurityContextHolder as SCH
-import com.sp.site.Invite
-import com.sp.profiles.UserProfile
+
+import com.sp.auth.Role
+import com.sp.auth.User
 import com.sp.enums.Language
-import com.sp.profiles.PayProfile
-import org.apache.commons.logging.LogFactory
-import com.sp.site.Image
 import com.sp.impl.ImageController
+import com.sp.profiles.PayProfile
+import com.sp.profiles.UserProfile
+import com.sp.site.Image
+import org.apache.commons.logging.LogFactory
 
 /**
  * Registration controller.
@@ -162,31 +161,6 @@ class RegisterController {
 			render view: 'index', model: [person: person]
 			return
 		}
-
-        def acceptInvite = null
-
-        if (!params.invite){
-            flash.message = 'Your invite is empty!'
-            render view: 'index', model: [person: person]
-            return
-        } else {
-            boolean isCorrectInvite = false
-            for (Invite invite: Invite.list()){
-                if (invite.invite_key.equals(params.invite) && !invite.invite_used){
-                    invite.invite_used = true
-                    acceptInvite = invite
-                    isCorrectInvite = true
-                    break
-                }
-            }
-
-            if (!isCorrectInvite){
-                flash.message = 'Your invite is incorrect or used!'
-                render view: 'index', model: [person: person]
-                return
-            }
-        }
-
 
 		if (params.passwd != params.repasswd) {
 			person.passwd = ''

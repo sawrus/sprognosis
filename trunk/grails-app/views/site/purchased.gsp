@@ -35,21 +35,21 @@
         <g:hasErrors bean="${prognosis}"><h2 class="ident-bot-2"><g:renderErrors bean="${prognosis}" as="list"/></h2></g:hasErrors>
         <h2 class="ident-bot-2">${language.prognosis} #${i}</h2>
         <table width="100%">
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(0)}</td><td
-                    class="valueCountProperty2">${prognosis.actualDate}</td></tr>
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(1)}</td><td
-                    class="valueCountProperty2">${prognosis.sportEvent}</td></tr>
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(2)}</td><td
-                    class="valueCountProperty2">${prognosis.category}</td></tr>
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(3)}</td><td class="valueCountProperty2"><a
+            <tr><td class="prognosisp">${language.prognosisFields.get(0)}</td><td
+                    class="prognosisv">${prognosis.actualDate}</td></tr>
+            <tr><td class="prognosisp">${language.prognosisFields.get(1)}</td><td
+                    class="prognosisv">${prognosis.sportEvent}</td></tr>
+            <tr><td class="prognosisp">${language.prognosisFields.get(2)}</td><td
+                    class="prognosisv">${prognosis.category}</td></tr>
+            <tr><td class="prognosisp">${language.prognosisFields.get(3)}</td><td class="prognosisv"><a
                     href="${prognosis.betsUrl}">link</a></td></tr>
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(4)}</td><td
-                    class="valueCountProperty2">${prognosis.first} - ${prognosis.second}</td></tr>
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(5)}</td><td
-                    class="valueCountProperty2">${prognosis.firstPoints} : ${prognosis.secondPoints}</td>
+            <tr><td class="prognosisp">${language.prognosisFields.get(4)}</td><td
+                    class="prognosisv">${prognosis.first} - ${prognosis.second}</td></tr>
+            <tr><td class="prognosisp">${language.prognosisFields.get(5)}</td><td
+                    class="prognosisv">${prognosis.firstPoints} : ${prognosis.secondPoints}</td>
             </tr>
-            <tr><td class="nameCountProperty2">${language.prognosisFields.get(6)}</td><td
-                    class="valueCountProperty2">${prognosis.firstBetsCoefficient} / ${prognosis.secondBetsCoefficient}</td>
+            <tr><td class="prognosisp">${language.prognosisFields.get(6)}</td><td
+                    class="prognosisv">${prognosis.firstBetsCoefficient} / ${prognosis.secondBetsCoefficient}</td>
             </tr>
         </table>
     </g:each>

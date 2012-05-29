@@ -17,6 +17,8 @@ public enum Language {
             "Edit",
             "Delete",
             "Buy prognosis",
+            "Enter your invite code",
+            "Be with us!",
             Arrays.asList("Name","Price","Period","Description"),
             Arrays.asList("Commands","Categories","Prognosis","Posts","Active users"),
             Arrays.asList("Actual date","Sport event","Category","Bets URL","Commands","Points","Coefficient","Actions")
@@ -37,6 +39,8 @@ public enum Language {
             "Изменить",
             "Удалить",
             "Купить прогноз",
+            "Введите код приглашения",
+            "Будьте с нами!",
             Arrays.asList("Имя","Цена","Период","Подробности"),
             Arrays.asList("Команд","Категорий","Прогнозов","Статей","Пользователей"),
             Arrays.asList("Дата события","Тип события","Категория","Ссылка на сервер","Команды","Очки","Коэффициенты","Действия")
@@ -57,6 +61,8 @@ public enum Language {
     String editCommand
     String deleteCommand
     String buyPrognosis
+    String inviteMessage
+    String inviteButton
     List<String> payProfile
     List<String> stateProfile
     List<String> prognosisFields
@@ -76,6 +82,8 @@ public enum Language {
              , String editCommand
              , String deleteCommand
              , String buyPrognosis
+             , String inviteMessage
+             , String inviteButton
              , List<String> payProfile
              , List<String> stateProfile
              , List<String> prognosisFields
@@ -95,6 +103,8 @@ public enum Language {
         this.editCommand = editCommand
         this.deleteCommand = deleteCommand
         this.buyPrognosis = buyPrognosis
+        this.inviteMessage = inviteMessage
+        this.inviteButton = inviteButton
         this.payProfile = payProfile
         this.stateProfile = stateProfile
         this.prognosisFields = prognosisFields
