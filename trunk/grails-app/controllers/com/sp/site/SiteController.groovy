@@ -16,27 +16,60 @@ class SiteController {
     private static final Language DEFAULT_LANGUAGE = Language.ENGLISH
     private static final COUNT_PROGNOSTICATOR_TEST_PASSED = 10;
 
+    private static final String FIND_POST_BY_NAME = "from Post as p where lower(p.name)=:postName and p.language=:language"
+    private static final String FIND_CATEGORY_BY_NAME = "from PostCategory as c where lower(c.name)=:categoryName and c.language=:language"
+    private static final String FIND_INVITE_BY_KEY = "from Invite as i where i.invite_key=:invite_key and i.invite_used=:invite_used"
+
     /////////////////////////////////////////// Site actions
 
-    /**
-     * index page
-     */
+    def search = {
+        UserProfile userProfile = getUserProfile()
+        Language language = DEFAULT_LANGUAGE
+        PostCategory categoryInstance = null
+        Post postInstance = null
+
+        if (params.search) {
+            String postName = String.valueOf(params.search).replaceAll("_", " ").toLowerCase()
+            postInstance = Post.find(FIND_POST_BY_NAME, [postName: postName, language: language])
+            if (postInstance) {
+                language = postInstance.language
+                SiteFunction function = parseSiteFunction(postInstance)
+                if (function) {
+                    callAction(function)
+                } else {
+                    if (userProfile) {
+                        render view: "index", model: [postInstance: postInstance, userProfile: userProfile]
+                    } else {
+                        render view: "index", model: [postInstance: postInstance, language: language.name()]
+                    }
+                }
+            } else {
+                String categoryName = String.valueOf(params.search).replaceAll("_", " ").toLowerCase()
+                categoryInstance = PostCategory.find(FIND_CATEGORY_BY_NAME, [categoryName: categoryName, language: language])
+                if (categoryInstance) {
+                    if (userProfile) {
+                        render view: "index", model: [categoryInstance: categoryInstance, userProfile: getUserProfile()]
+                    } else {
+                        render view: "index", model: [categoryInstance: categoryInstance, language: language.name()]
+                    }
+                }
+            }
+        }
+
+        if (!postInstance && !categoryInstance) {
+            redirect(action: index)
+        }
+    }
+
     def index = {
         UserProfile userProfile = getUserProfile()
-        if (params.category){
-            def postCategories = PostCategory.list()
-            PostCategory categoryInstance = postCategories!=null && !postCategories.isEmpty() ? postCategories.iterator().next() : null
-            Long categoryId = parseParameterAsId(params.category)
-            if (categoryId){
-                def get = PostCategory.get(categoryId)
-                if (get) categoryInstance = get
-            }
-            [categoryInstance: categoryInstance, userProfile: userProfile]
+        if (params.category) {
+            [categoryInstance: PostCategory.findById(params.category), userProfile: userProfile]
         }
         else {
             Post postInstance = parsePost()
             SiteFunction function = parseSiteFunction(postInstance)
-            if (function){
+            if (function) {
                 callAction(function)
             } else {
                 [postInstance: postInstance, userProfile: userProfile]
@@ -44,27 +77,17 @@ class SiteController {
         }
     }
 
-    /**
-     * index page of mobile version
-     */
     def mobile = {
-        Post postInstance = parsePost()
-        UserProfile userProfile = getUserProfile()
-        [postInstance: postInstance, userProfile: userProfile]
+        [postInstance: parsePost(), userProfile: getUserProfile()]
     }
 
-    /**
-     * changing language
-     */
     def language = {
         Language language = DEFAULT_LANGUAGE
-
         if (params.language) {
             language = Language.parseLanguageByName(params.language)
         }
-
         if (userService.authenticateService.isLoggedIn()) {
-            UserProfile userProfile = UserProfile.findByUser(userService.user)
+            UserProfile userProfile = getUserProfile()
             if (userProfile) {
                 userProfile.language = language
                 userProfile.save(flush: true)
@@ -89,16 +112,12 @@ class SiteController {
         redirect(controller: "userProfile", action: "profile")
     }
 
-    /**
-     * 1. check invite
-     * 2. redirect to register form
-     */
     def register = {
-        if (userService.authenticateService.isLoggedIn()){
+        if (userService.authenticateService.isLoggedIn()) {
             redirect(controller: "register", action: "index")
         } else {
-            if (params.invite){
-                if (!checkInvite(params.invite)){
+            if (params.invite) {
+                if (!checkInvite(params.invite)) {
                     flash.message = 'Ooops, Sorry, you have not invite to our club'
                     render view: 'register'
                 } else {
@@ -108,9 +127,6 @@ class SiteController {
         }
     }
 
-    /**
-     * redirect to admin panel
-     */
     @Secured(['ROLE_ADMIN'])
     def admin = {}
 
@@ -123,9 +139,9 @@ class SiteController {
     }
 
     /////////////////////////////////////////// Prognosis: user actions
-	@Secured(['ROLE_USER'])
+    @Secured(['ROLE_USER'])
     def purchased = {
-        def userProfile = UserProfile.findByUser(userService.getUser())
+        def userProfile = getUserProfile()
         def purchasedPrognosisList
         if (userProfile.payProfile.period == 0) {
             purchasedPrognosisList = userProfile.prognosisList
@@ -145,7 +161,7 @@ class SiteController {
     @Secured(['ROLE_USER'])
     def sold =
     {
-        def userProfile = UserProfile.findByUser(userService.getUser())
+        def userProfile = getUserProfile()
         def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
         [prognosisInstanceList: actualPrognosisList,
                 prognosisInstanceTotal: actualPrognosisList.size(),
@@ -156,9 +172,9 @@ class SiteController {
     /////////////////////////////////////////// Prognosis: handicapper actions
     @Secured(['ROLE_PROGNOSTICATOR', 'ROLE_ADMIN'])
     def checked = {
-        def userProfile = UserProfile.findByUser(userService.getUser())
-        def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userService.getUser(), Boolean.TRUE)
-        def predictedList = Prognosis.findAllByPrognosticator(userService.getUser())
+        def userProfile = getUserProfile()
+        def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userProfile.user, Boolean.TRUE)
+        def predictedList = Prognosis.findAllByPrognosticator(userProfile.user)
 
         def testCondition = checkedPrognosis.size() > COUNT_PROGNOSTICATOR_TEST_PASSED
         if (testCondition)
@@ -172,6 +188,29 @@ class SiteController {
     }
 
     /////////////////////////////////////////// other functions
+
+    private Post parsePost() {
+        Post postInstance = null
+        if (params.post) {
+            postInstance = Post.findById(params.post)
+        } else {
+            UserProfile userProfile = getUserProfile()
+            if (userProfile && userProfile.language)
+                postInstance = Post.findByNameAndLanguage(userProfile.language.homeName, userProfile.language)
+            else {
+                if (params.language) {
+                    Language language = Language.parseLanguageByName(params.language)
+                    postInstance = Post.findByNameAndLanguage(language.homeName, language)
+                } else {
+                    postInstance = Post.findByNameAndLanguage(DEFAULT_LANGUAGE.homeName, DEFAULT_LANGUAGE)
+                }
+                if (params.id) {
+                    postInstance = Post.findById(params.id)
+                }
+            }
+        }
+        return postInstance
+    }
 
     private redirectToPage(String pageName) {
         def post = Post.findByName(pageName)
@@ -187,44 +226,6 @@ class SiteController {
         return userProfile
     }
 
-    private Post parsePost() {
-        def listOfPosts = Post.list()
-        Post postInstance = listOfPosts!=null && !listOfPosts.isEmpty() ? listOfPosts.iterator().next() : null
-        if (params.post) {
-            Long postId = parseParameterAsId(params.post)
-            def get = Post.get(postId)
-            if (get) postInstance = get
-        } else {
-            UserProfile userProfile = getUserProfile()
-            if (userProfile && userProfile.language)
-                postInstance = Post.findByNameAndLanguage(userProfile.language.homeName, userProfile.language)
-            else {
-                if (params.language) {
-                    Language language = Language.parseLanguageByName(params.language)
-                    postInstance = Post.findByNameAndLanguage(language.homeName, language)
-                } else {
-                    postInstance = Post.findByNameAndLanguage(Language.ENGLISH.homeName, Language.ENGLISH)
-                }
-            }
-
-            if (params.id) {
-                Long postId = parseParameterAsId(params.id)
-                postInstance = Post.get(postId)
-            }
-        }
-        return postInstance
-    }
-
-    private Long parseParameterAsId(Object parameter) {
-        Long result = null
-        try {
-            result = Long.parseLong(String.valueOf(parameter))
-        } catch (NumberFormatException e) {
-            log.debug("parseParameterAsId:parameter=" + parameter + "; e:" + e)
-        }
-        return result
-    }
-
     private SiteFunction parseSiteFunction(Post post) {
         return post && post.name ? SiteFunction.parseByName(post.name) : null
     }
@@ -235,13 +236,11 @@ class SiteController {
 
     private boolean checkInvite(String inviteKey) {
         boolean isCorrectInvite = false
-        for (Invite invite: Invite.list()) {
-            if (invite.invite_key.equals(inviteKey) && !invite.invite_used) {
-                invite.invite_used = true
-                invite.save(flash: true);
-                isCorrectInvite = true
-                break
-            }
+        Invite invite = Invite.find(FIND_INVITE_BY_KEY, [invite_key: inviteKey, invite_used: 0])
+        if (invite) {
+            invite.invite_used = true
+            invite.save(flash: true);
+            isCorrectInvite = true
         }
         return isCorrectInvite
     }

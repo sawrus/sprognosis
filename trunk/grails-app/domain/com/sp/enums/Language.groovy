@@ -3,6 +3,7 @@ package com.sp.enums
 public enum Language {
     ENGLISH(
             "English",
+            "en",
             "Home",
             "Profile",
             "Sport Prognosis",
@@ -25,6 +26,7 @@ public enum Language {
     ),
     RUSSIAN(
             "Русский",
+            "ru",
             "Главная",
             "Профиль",
             "Спортивные прогнозы",
@@ -47,6 +49,7 @@ public enum Language {
     )
     
     String name
+    String shortName
     String homeName
     String profile
     String siteName
@@ -68,6 +71,7 @@ public enum Language {
     List<String> prognosisFields
 
     Language(String name
+             , String shortName
              , String homeName
              , String profile
              , String siteName
@@ -89,6 +93,7 @@ public enum Language {
              , List<String> prognosisFields
     ) {
         this.name = name
+        this.shortName = shortName
         this.homeName = homeName
         this.profile = profile
         this.siteName = siteName
@@ -120,6 +125,18 @@ public enum Language {
 
         for (Language lang: Language.values()){
             if (lang.name().equals(name)){
+                language = lang
+            }
+        }
+
+        return language
+    }
+
+    public static Language parseLanguageByShortName(String name){
+        Language language = Language.ENGLISH
+
+        for (Language lang: Language.values()){
+            if (lang.shortName.equals(name)){
                 language = lang
             }
         }

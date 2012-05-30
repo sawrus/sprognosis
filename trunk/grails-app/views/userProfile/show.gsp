@@ -45,7 +45,7 @@
                     class="prognosisv">${userProfileInstance?.payProfile?.price} ${userProfileInstance?.payProfile?.priceType}</td>
             </tr>
             <tr><td class="prognosisp">Actions</td><td
-                    class="prognosisv"><a href="${g.createLink(controller: 'userProfile', action: 'edit')}#h" class="button">${language.editPay}</a>
+                    class="prognosisv"><a href="${g.createLink(controller: 'userProfile', action: 'edit')}#p" class="button">${language.editPay}</a>
             </td></tr>
             </g:ifAnyGranted>
         </table>
