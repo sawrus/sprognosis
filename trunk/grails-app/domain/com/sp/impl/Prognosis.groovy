@@ -3,7 +3,6 @@ package com.sp.impl
 import com.sp.auth.User
 import com.sp.enums.PrognosisType
 import com.sp.enums.SportEvent
-import com.sp.profiles.UserProfile
 
 class Prognosis
 {
@@ -41,8 +40,6 @@ class Prognosis
 
     Integer vote = new Integer(0)
 
-    //static hasMany = [userProfileList: UserProfile]
-
     static constraints = {
         description(blank: false)
 
@@ -51,13 +48,6 @@ class Prognosis
         vote(display: false)
         actual(display: false)
         isValid(display: false)
-//        actualDate(validator: {val, obj->
-//            if (new Date().before(val))
-//            {
-//                return false
-//            }
-//        })
-
 		
         sportEvent(nullable: false)
         second(validator: { val, obj->

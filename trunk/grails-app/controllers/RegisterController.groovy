@@ -205,7 +205,6 @@ class RegisterController {
             def imageFile = request.getFile(SITE_IMAGE)
             def imageInstance = createUserImage(person.username, imageFile)
             if (imageInstance) imageInstance.save(flush: true)
-            if (acceptInvite) acceptInvite.save(flush: true)
             createUserProfile(person)
 		}
 		else {
