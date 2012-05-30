@@ -65,7 +65,7 @@
             <div class="grid_4">
                 <h2 class="ident-bot-2">${post.title.toUpperCase()}</h2>
                 <h4 class="ident-bot-3">
-                    <a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">
+                    <a href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#p">
                         ${post.title}
                     </a>
                 </h4>
@@ -79,7 +79,7 @@
                 </g:if>
                 ${post.announcement}
                 <a class="button"
-                   href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#h">
+                   href="${g.createLink(controller: 'site', action: 'index', params: [post: post?.id])}#p">
                     ${language.readMore}
                 </a>
             </div>
