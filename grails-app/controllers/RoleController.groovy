@@ -1,7 +1,5 @@
 import com.sp.auth.Role
-import com.sp.auth.RequestMap
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
-import com.sp.auth.User
 
 /**
  * Authority Controller.
@@ -140,29 +138,5 @@ class RoleController
         {
             render view: 'create', model: [authority: authority]
         }
-    }
-
-    def load = {
-        def roles = Arrays.asList(
-                new Role(authority: "ROLE_ADMIN", description: "admin role"),
-                new Role(authority: "ROLE_USER", description: "user role"),
-                new Role(authority: "ROLE_PROGNOSTICATOR", description: "prognosticator role")
-        )
-        for (Role role: roles)
-        {
-            if (!Role.list().contains(role))
-            {
-                role.save(flush: true)
-            }
-        }
-
-        User admin = new User(username: "admin", userRealName: "admin", passwd: "admin", enabled: true)
-        admin.addToAuthorities(roles.get(0))
-        if (!User.list().contains(admin))
-        {
-            admin.save(flush: true)
-        }
-
-        redirect action: index
     }
 }

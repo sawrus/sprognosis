@@ -195,7 +195,6 @@ class PrognosisController extends VoteSubscriptionController
 
     private list() {
         if (userService.hasPrognosticator) {
-            //redirect(action: "checked")
             redirect(controller: "site", action: "checked")
         } else {
             redirect(action: "list")
