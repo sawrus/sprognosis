@@ -9,6 +9,7 @@ import com.sp.profiles.PayProfile
 import com.sp.profiles.UserProfile
 import com.sp.site.Image
 import org.apache.commons.logging.LogFactory
+import com.sp.site.Invite
 
 /**
  * Registration controller.
@@ -18,6 +19,8 @@ class RegisterController {
 	def authenticateService
 	def daoAuthenticationProvider
 	def emailerService
+
+    private static final String FIND_INVITE_BY_KEY = "from Invite as i where i.invite_key=:invite_key and i.invite_used=:invite_used"
 
 	static Map allowedMethods = [save: 'POST', update: 'POST']
 
@@ -31,6 +34,10 @@ class RegisterController {
 			redirect action: show
 			return
 		}
+
+        def findInvite = Invite.find(FIND_INVITE_BY_KEY, [invite_key: String.valueOf(params.invite), invite_used: true])
+        System.out.println("params.invite="+params.invite + "; findInvite="+findInvite)
+        if (!params.invite || !findInvite) redirect uri: '/'
 
 		if (session.id) {
 			def person = new User()

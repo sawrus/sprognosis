@@ -6,7 +6,7 @@ public enum Language {
             "en",
             "Home",
             "Profile",
-            "Sport Prognosis",
+            "101 Betting Tips",
             "READ MODE",
             "Edit profile",
             "Edit pay profile",
@@ -20,6 +20,7 @@ public enum Language {
             "Buy prognosis",
             "Enter your invite code",
             "Be with us!",
+            "Watch purchased forecasts",
             Arrays.asList("Name","Price","Period","Description"),
             Arrays.asList("Commands","Categories","Prognosis","Posts","Active users"),
             Arrays.asList("Actual date","Sport event","Category","Bets URL","Commands","Points","Coefficient","Actions")
@@ -29,7 +30,7 @@ public enum Language {
             "ru",
             "Главная",
             "Профиль",
-            "Спортивные прогнозы",
+            "101 Betting Tips",
             "Подробнее",
             "Изменить профиль",
             "Изменить профиль оплаты",
@@ -43,6 +44,7 @@ public enum Language {
             "Купить прогноз",
             "Введите код приглашения",
             "Будьте с нами!",
+            "Смотреть купленные прогнозы",
             Arrays.asList("Имя","Цена","Период","Подробности"),
             Arrays.asList("Команд","Категорий","Прогнозов","Статей","Пользователей"),
             Arrays.asList("Дата события","Тип события","Категория","Ссылка на сервер","Команды","Очки","Коэффициенты","Действия")
@@ -66,6 +68,7 @@ public enum Language {
     String buyPrognosis
     String inviteMessage
     String inviteButton
+    String myPrognosis
     List<String> payProfile
     List<String> stateProfile
     List<String> prognosisFields
@@ -88,6 +91,7 @@ public enum Language {
              , String buyPrognosis
              , String inviteMessage
              , String inviteButton
+             , String myPrognosis
              , List<String> payProfile
              , List<String> stateProfile
              , List<String> prognosisFields
@@ -110,6 +114,7 @@ public enum Language {
         this.buyPrognosis = buyPrognosis
         this.inviteMessage = inviteMessage
         this.inviteButton = inviteButton
+        this.myPrognosis = myPrognosis
         this.payProfile = payProfile
         this.stateProfile = stateProfile
         this.prognosisFields = prognosisFields

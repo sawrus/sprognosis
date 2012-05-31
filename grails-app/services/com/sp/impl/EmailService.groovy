@@ -9,8 +9,8 @@ class EmailService {
 
     MailService mailService
 
-    public static final String DEFAULT_EMAIL = "sawrus@gmail.com"
-    public static final String DEFAULT_SUBJECT = "[sPrognosis]: "
+    public static final String DEFAULT_EMAIL = "101bettingtips@gmail.com"
+    public static final String DEFAULT_SUBJECT = "[101bettingtips]: "
     private static final log = LogFactory.getLog(this);
 
 

@@ -18,7 +18,7 @@ class SiteController {
 
     private static final String FIND_POST_BY_NAME = "from Post as p where lower(p.name)=:postName and p.language=:language"
     private static final String FIND_CATEGORY_BY_NAME = "from PostCategory as c where lower(c.name)=:categoryName and c.language=:language"
-    private static final String FIND_INVITE_BY_KEY = "from Invite as i where i.invite_key=:invite_key and i.invite_used=:invite_used"
+    public static final String FIND_INVITE_BY_KEY = "from Invite as i where i.invite_key=:invite_key and i.invite_used=:invite_used"
 
     /////////////////////////////////////////// Site actions
 
@@ -121,7 +121,7 @@ class SiteController {
                     flash.message = 'Ooops, Sorry, you have not invite to our club'
                     render view: 'register'
                 } else {
-                    redirect(controller: "register", action: "index")
+                    redirect(controller: "register", action: "index", params: [invite: params.invite])
                 }
             }
         }
@@ -144,7 +144,7 @@ class SiteController {
         def userProfile = getUserProfile()
         def purchasedPrognosisList
         if (userProfile.payProfile.period == 0) {
-            purchasedPrognosisList = userProfile.prognosisList
+            purchasedPrognosisList = userProfile?.prognosisList
             if (purchasedPrognosisList == null || purchasedPrognosisList.isEmpty()) {
                 redirect(action: "sold")
             }
@@ -153,19 +153,21 @@ class SiteController {
             purchasedPrognosisList = Prognosis.list()
         }
 
+        Language language = userProfile ? userProfile.language : DEFAULT_LANGUAGE
         [prognosisInstanceList: purchasedPrognosisList,
                 prognosisInstanceTotal: purchasedPrognosisList.size(),
-                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_USER.name, userProfile.language), userProfile: userProfile
+                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_USER.name, language), userProfile: userProfile
         ]
     }
     @Secured(['ROLE_USER'])
     def sold =
     {
         def userProfile = getUserProfile()
+        Language language = userProfile ? userProfile.language : DEFAULT_LANGUAGE
         def actualPrognosisList = Prognosis.findAllByActualAndVoteNotLessThan(Boolean.TRUE, 0)
         [prognosisInstanceList: actualPrognosisList,
                 prognosisInstanceTotal: actualPrognosisList.size(),
-                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_USER.name, userProfile.language), userProfile: userProfile
+                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_USER.name, language), userProfile: userProfile
         ]
     }
 
@@ -173,8 +175,9 @@ class SiteController {
     @Secured(['ROLE_PROGNOSTICATOR', 'ROLE_ADMIN'])
     def checked = {
         def userProfile = getUserProfile()
-        def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userProfile.user, Boolean.TRUE)
-        def predictedList = Prognosis.findAllByPrognosticator(userProfile.user)
+        Language language = userProfile ? userProfile.language : DEFAULT_LANGUAGE
+        def checkedPrognosis = Prognosis.findAllByPrognosticatorAndIsValid(userService.user, Boolean.TRUE)
+        def predictedList = Prognosis.findAllByPrognosticator(userService.user)
 
         def testCondition = checkedPrognosis.size() > COUNT_PROGNOSTICATOR_TEST_PASSED
         if (testCondition)
@@ -183,7 +186,7 @@ class SiteController {
             flash.message = checkedPrognosis.size() + " tests passed out of " + COUNT_PROGNOSTICATOR_TEST_PASSED
         [prognosisInstanceList: predictedList,
                 prognosisInstanceTotal: predictedList.size(),
-                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_HANDICAPPER.name, userProfile.language), userProfile: userProfile
+                postInstance: Post.findByNameAndLanguage(SiteFunction.AS_HANDICAPPER.name, language), userProfile: userProfile
         ]
     }
 
@@ -236,7 +239,7 @@ class SiteController {
 
     private boolean checkInvite(String inviteKey) {
         boolean isCorrectInvite = false
-        Invite invite = Invite.find(FIND_INVITE_BY_KEY, [invite_key: inviteKey, invite_used: 0])
+        Invite invite = Invite.find(FIND_INVITE_BY_KEY, [invite_key: inviteKey, invite_used: false])
         if (invite) {
             invite.invite_used = true
             invite.save(flash: true);

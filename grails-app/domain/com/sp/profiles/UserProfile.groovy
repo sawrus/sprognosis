@@ -12,6 +12,17 @@ class UserProfile
     PayProfile payProfile
     Image userImage
 
+    String address1=""
+    String address2=""
+    String zip_postal_code=""
+    String city=""
+    String state_province=""
+    String country=""
+    String telephone=""
+    String twitter_name=""
+    String facebook_profile=""
+    String site_url=""
+
     static hasMany = [prognosisList: Prognosis]
 
     Date payDate
