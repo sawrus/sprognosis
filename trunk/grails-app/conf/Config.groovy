@@ -55,9 +55,13 @@ grails.spring.bean.packages = []
 environments {
     production {
         grails.serverURL = "http://101tipsbetting.com"
+        grails.paypal.server = "https://www.paypal.com/cgi-bin/webscr"
+        grails.paypal.email = "101bettingtips@gmail.com"
     }
     development {
         grails.serverURL = "http://localhost"
+        grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+        grails.paypal.email = "101bettingtips@gmail.com"
     }
     test {
         grails.serverURL = "http://localhost"
@@ -95,8 +99,8 @@ grails {
     mail {
         host = "smtp.gmail.com"
         port = 465
-        username = "username@gmail.com"
-        password = "password"
+        username = "101bettingtips@gmail.com"
+        password = "YMPYWrC6X8wAzQRbBApW"
         props = ["mail.smtp.auth":"true",
                 "mail.smtp.socketFactory.port":"465",
                 "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",

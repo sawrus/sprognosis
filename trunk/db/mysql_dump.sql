@@ -45,7 +45,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (5,1,'As Soon As Possible',8,1,NULL,'ENGLISH');
+INSERT INTO `banner` VALUES (5,2,'<span class=\"banner\">\r\n	<span class=\"banner-inner-1\">Improve your</span>\r\n	<span class=\"banner-inner-2\">GOALKEEPER SKILLS \r\n		<a class=\"banner-button\" href=\"#\"></a>\r\n	</span>\r\n</span>',8,1,NULL,'ENGLISH');
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -185,8 +185,8 @@ CREATE TABLE `command` (
   UNIQUE KEY `SYS_IDX_50` (`ID`),
   KEY `SYS_IDX_209` (`COUNTRY_ID`),
   KEY `SYS_IDX_52` (`CATEGORY_ID`),
-  CONSTRAINT `FK38A5DF4B7FB59824` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK38A5DF4B47DA33FE` FOREIGN KEY (`COUNTRY_ID`) REFERENCES `country` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK38A5DF4B47DA33FE` FOREIGN KEY (`COUNTRY_ID`) REFERENCES `country` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK38A5DF4B7FB59824` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12434 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -216,7 +216,7 @@ CREATE TABLE `comment` (
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(15) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   `POST_ID` bigint(20) NOT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   `LANGUAGE` varchar(255) DEFAULT NULL,
@@ -226,10 +226,10 @@ CREATE TABLE `comment` (
   KEY `SYS_IDX_140` (`COMMENT_ID`),
   KEY `SYS_IDX_217` (`POST_ID`),
   KEY `FK38A5EE5FE1A08B17` (`COMMENT_ID`),
-  CONSTRAINT `FK38A5EE5FE1A08B17` FOREIGN KEY (`COMMENT_ID`) REFERENCES `comment` (`ID`),
   CONSTRAINT `FK38A5EE5F62DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK38A5EE5F6BC15BAF` FOREIGN KEY (`COMMENT_ID`) REFERENCES `comment` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK38A5EE5F7CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK38A5EE5F7CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK38A5EE5FE1A08B17` FOREIGN KEY (`COMMENT_ID`) REFERENCES `comment` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -258,7 +258,7 @@ CREATE TABLE `content` (
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LANGUAGE` varchar(255) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(100) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   `CLASS` varchar(255) NOT NULL,
   `RSSVISIBLE` tinyint(1) DEFAULT NULL,
@@ -278,10 +278,10 @@ CREATE TABLE `content` (
   KEY `SYS_IDX_201` (`AUTHOR_ID`),
   KEY `SYS_IDX_203` (`COMMENT_ID`),
   KEY `SYS_IDX_205` (`POST_ID`),
-  CONSTRAINT `FK38B734797CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `content` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK38B73479E1A08B17` FOREIGN KEY (`COMMENT_ID`) REFERENCES `content` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK38B734793ACAAA1D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `post_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK38B7347962DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK38B7347962DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK38B734797CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `content` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK38B73479E1A08B17` FOREIGN KEY (`COMMENT_ID`) REFERENCES `content` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -308,15 +308,15 @@ CREATE TABLE `content_category` (
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(15) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   `PARENT_ID` bigint(20) DEFAULT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_142` (`ID`),
   KEY `SYS_IDX_144` (`AUTHOR_ID`),
   KEY `SYS_IDX_146` (`PARENT_ID`),
-  CONSTRAINT `FKF41B204A40F1A24` FOREIGN KEY (`PARENT_ID`) REFERENCES `content_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKF41B20462DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FKF41B20462DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKF41B204A40F1A24` FOREIGN KEY (`PARENT_ID`) REFERENCES `content_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -344,7 +344,7 @@ CREATE TABLE `content_property` (
   `DESCRIPTION` varchar(1000) DEFAULT NULL,
   `IS_ACTIVE` tinyint(1) DEFAULT NULL,
   `LAST_UPDATED` timestamp NULL DEFAULT NULL,
-  `NAME` varchar(15) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
   `POST_ID` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_159` (`ID`),
@@ -439,7 +439,7 @@ CREATE TABLE `image` (
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(15) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   `DIR` varchar(255) DEFAULT NULL,
   `FILE` varchar(255) DEFAULT NULL,
   `STYLE` varchar(255) DEFAULT NULL,
@@ -456,7 +456,7 @@ CREATE TABLE `image` (
   `WIDTH` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_148` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,7 +465,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (8,0,'2012-05-28 17:33:18','','2012-05-28 17:33:18','Banner',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/1.jpg','1.jpg','/images/site','ENGLISH',1,0,NULL,NULL,'',433,990);
+INSERT INTO `image` VALUES (8,0,'2012-05-28 17:33:18','','2012-05-28 17:33:18','Banner',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/1.jpg','1.jpg','/images/site','ENGLISH',1,0,NULL,NULL,'',433,990),(9,0,'2012-05-30 15:47:14','sprognosis_prognosticator','2012-05-30 15:47:14','sprognosis_prognosticator',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/avatars/2.jpg','2.jpg','/images/site/avatars','ENGLISH',1,0,NULL,NULL,'/avatars',433,990),(10,0,'2012-05-30 17:10:07','sprognosis_user','2012-05-30 17:10:07','sprognosis_user',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/avatars/9.jpg','9.jpg','/images/site/avatars','ENGLISH',1,0,NULL,NULL,'/avatars',433,990);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -492,7 +492,7 @@ CREATE TABLE `invite` (
 
 LOCK TABLES `invite` WRITE;
 /*!40000 ALTER TABLE `invite` DISABLE KEYS */;
-INSERT INTO `invite` VALUES (1,3,'TEST_INVITE',1);
+INSERT INTO `invite` VALUES (1,8,'TEST_INVITE',1);
 /*!40000 ALTER TABLE `invite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,7 +514,7 @@ CREATE TABLE `pay_profile` (
   `DESCRIPTION` varchar(1000) DEFAULT NULL,
   `IS_ACTIVE` tinyint(1) DEFAULT NULL,
   `LAST_UPDATED` timestamp NULL DEFAULT NULL,
-  `NAME` varchar(15) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
   `LANGUAGE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_101` (`ID`)
@@ -551,7 +551,7 @@ CREATE TABLE `payment` (
   `transaction_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKD11C32064DF7D5C4` (`buyer_information_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -560,6 +560,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (1,0,2,NULL,'USD','0.00',NULL,'PENDING',0,'TRANS-2-1338399071081');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -626,7 +627,7 @@ CREATE TABLE `payment_item` (
   `payment_items_idx` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKE25C55AC2990F5A9` (`payment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -635,6 +636,7 @@ CREATE TABLE `payment_item` (
 
 LOCK TABLES `payment_item` WRITE;
 /*!40000 ALTER TABLE `payment_item` DISABLE KEYS */;
+INSERT INTO `payment_item` VALUES (1,0,'50.00','0.00','Two Week','2',1,1,0);
 /*!40000 ALTER TABLE `payment_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,7 +657,7 @@ CREATE TABLE `post` (
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(150) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   `TITLE` varchar(255) NOT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   `RSSVISIBLE` tinyint(1) DEFAULT NULL,
@@ -671,7 +673,7 @@ CREATE TABLE `post` (
   KEY `SYS_IDX_219` (`CATEGORY_ID`),
   CONSTRAINT `FK3498A03ACAAA1D` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `post_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK3498A062DA99BC` FOREIGN KEY (`AUTHOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -680,7 +682,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,11,'<p><span style=\"font-family: verdana, arial, helvetica, sans-serif; font-size: 11px; line-height: 12px; text-align: left; white-space: nowrap;\">Home Announcement</span></p>',1,6,'<p><span style=\"font-family: verdana, arial, helvetica, sans-serif; font-size: 11px; line-height: 12px; text-align: left; white-space: nowrap;\">Home</span><span style=\"font-family: verdana, arial, helvetica, sans-serif; font-size: 11px; line-height: 12px; text-align: left; white-space: nowrap;\">&nbsp;</span>Content</p>','2012-05-28 16:56:45','','2012-05-28 18:47:49','Home','Home Title',1,1,0,1,1,1,1,'ENGLISH'),(2,1,NULL,1,11,'<p>My Account</p>','2012-05-28 18:43:20','','2012-05-28 18:48:00','My Account','My Account',0,0,0,1,0,0,0,'ENGLISH'),(3,1,NULL,1,11,'<p>My Tips</p>','2012-05-28 18:44:24','','2012-05-28 18:48:11','My Tips','My Tips',0,0,0,1,0,0,0,'ENGLISH'),(4,1,NULL,1,11,'<p>Payment Information</p>','2012-05-28 18:46:07','','2012-05-28 18:48:20','Payment Information','Payment Information',0,0,0,1,0,0,0,'ENGLISH');
+INSERT INTO `post` VALUES (1,12,'<p class=\"inner-ident-1 ident-bot-4\">ZURICH &ndash; While the IIHF World Ranking positions were known before the medal day in Helsinki, the final results with points were calculated only after the conclusion of the 2012 IIHF Ice Hockey World Championship. And Russia is on top for the fourth time since 2009.</p>',1,6,'<p class=\"inner-ident-1 ident-bot-4\">ZURICH &ndash; While the IIHF World Ranking positions were known before the medal day in Helsinki, the final results with points were calculated only after the conclusion of the 2012 IIHF Ice Hockey World Championship. And Russia is on top for the fourth time since 2009.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The IIHF World Ranking system was calculated for the first time in 2003, but officially introduced and released after the 2004 IIHF World Championship in Czech Republic.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for the final 2012 men&rsquo;s IIHF World Ranking.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">In the eleven official men&rsquo;s World Rankings since it was introduced, only three countries have been Number One:\r\nCanada: Four times (2004, 2005, 2008, post-Olympic 2010)\r\nSweden: Three times (post-Olympic &amp; post-Worlds 2006, 2007)\r\nRussia: Four times (2009, post-Worlds 2010, 2011, 2012)</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The official annual World Ranking is normally calculated after the conclusion of the World Championship. The only exceptions are the Olympic years where the IIHF also releases a World Ranking immediately following the Olympic tournament.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">This consequently means that the Olympic years (so far 2006 and 2010) have been the only ones where two official World Rankings have been released, one in February and one in May.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Before 2004, the IIHF World Ranking was simply based on the final placing in the last World Championship. The IIHF realized that it was not entirely fair as an uncharacteristically poor showing in one tournament could see a country slip from, for example, first to seventh position from one year to another.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">To give the World Ranking more depth, a system was introduced which is based on awarding points for the final positions in the last four IIHF World Championships and in the last Olympic Ice Hockey Tournament.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">To have the ranking accurately reflect current performance, most importance is given to results of the last competition. To a lesser degree (annual point decline by 25 per cent) attention is also paid to results from previous years.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for an explanation of the World Ranking formula.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">So in the nine years in which the system has existed we have seen a gradual movement from an early Canadian dominance, to Sweden&rsquo;s ascendancy around 2006 to Russia&rsquo;s domination after 2009. The only out-of-the-line top ranking was Canada&rsquo;s short time as Number One after the win at the Vancouver Olympics in 2010, when it also enjoyed the highest ever point total for a Number One &ndash; 4105.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">That number consequently reflected not only the Olympic gold medal, but it also carried the value from the 2007 Worlds gold in Moscow and the silver positions from 2008 and 2009.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Sweden is the only other nation which was the number one rank with 4000 points or more. They earned 4095 points after winning gold in the 2006 Olympics in Turin and completing the historic double in Riga three months later.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The current 2012 World Ranking will also serve as the seeding of the groups for the Sochi Olympics 2014, despite that the ranking may change after the next year&rsquo;s World Championship.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">IIHF&rsquo;s Sports Director Dave Fitzpatrick explains why the 2012 ranking carries over to Sochi and thus why the 2013 ranking cannot be used for Olympic purposes (also including issues like allocation of locker rooms, practice times, etc.)</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">&ldquo;We need two seasons to complete the Olympic qualifications as teams ranked as low as thirty-three have applied for a chance to qualify,&rdquo; says Fitzpatrick. &ldquo;This means that we will need to start the qualification process already in autumn of 2012, with the final qualifications being played in February 2013 which is a condition from the IOC.&rdquo;</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">&ldquo;As the qualifications are part of the Olympic competition structure, we must freeze the Olympic ranking before the qualifications for Sochi begin this upcoming autumn.&rdquo;</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for a complete overview of the Olympic format including qualifications.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The men&rsquo;s groups in Sochi 2014, generated by the 2012 IIHF World Ranking, will be as follows:</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Group A: Russia (1), Slovakia (6), USA (7), Qualifier 3\r\nGroup B: Finland (2), Canada (5), Norway (8), Qualifier 2\r\nGroup C: Czech Republic (3), Sweden (4), Switzerland (9), Qualifier 1</p>','2012-05-28 16:56:45','','2012-05-30 17:40:01','Home','Home Title',1,1,0,1,1,1,1,'ENGLISH'),(2,1,NULL,1,11,'<p>My Account</p>','2012-05-28 18:43:20','','2012-05-28 18:48:00','My Account','My Account',0,0,0,1,0,0,0,'ENGLISH'),(3,1,NULL,1,11,'<p>My Tips</p>','2012-05-28 18:44:24','','2012-05-28 18:48:11','My Tips','My Tips',0,0,0,1,0,0,0,'ENGLISH'),(4,1,NULL,1,11,'<p>Payment Information</p>','2012-05-28 18:46:07','','2012-05-28 18:48:20','Payment Information','Payment Information',0,0,0,1,0,0,0,'ENGLISH'),(5,0,'<p>Contact us</p>',1,14,'<p>Contact us</p>','2012-05-30 18:06:46','','2012-05-30 18:06:46','Contact us','Contact us',1,1,1,1,1,1,1,'ENGLISH');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -698,7 +700,7 @@ CREATE TABLE `post_category` (
   `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `DESCRIPTION` varchar(1000) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(15) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   `PARENT_ID` bigint(20) DEFAULT NULL,
   `VISIBLE` tinyint(1) NOT NULL,
   `LANGUAGE` varchar(255) DEFAULT NULL,
@@ -733,8 +735,8 @@ CREATE TABLE `post_category_post` (
   `POST_ID` bigint(20) DEFAULT NULL,
   KEY `SYS_IDX_182` (`POST_CATEGORY_POSTS_ID`),
   KEY `SYS_IDX_184` (`POST_ID`),
-  CONSTRAINT `FKEAEBD5E27CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKEAEBD5E222C1CB6A` FOREIGN KEY (`POST_CATEGORY_POSTS_ID`) REFERENCES `post_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FKEAEBD5E222C1CB6A` FOREIGN KEY (`POST_CATEGORY_POSTS_ID`) REFERENCES `post_category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKEAEBD5E27CB6251D` FOREIGN KEY (`POST_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -761,9 +763,9 @@ CREATE TABLE `post_content_property` (
   KEY `SYS_IDX_164` (`POST_PROPERTIES_ID`),
   KEY `SYS_IDX_166` (`CONTENT_PROPERTY_ID`),
   KEY `SYS_IDX_168` (`POST_CONTENT_PROPERTY_ID`),
+  CONSTRAINT `FK27D1F09A17910CB3` FOREIGN KEY (`POST_PROPERTIES_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK27D1F09A4DC2772A` FOREIGN KEY (`CONTENT_PROPERTY_ID`) REFERENCES `content_property` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK27D1F09A8081C94B` FOREIGN KEY (`POST_CONTENT_PROPERTY_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK27D1F09A17910CB3` FOREIGN KEY (`POST_PROPERTIES_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK27D1F09A8081C94B` FOREIGN KEY (`POST_CONTENT_PROPERTY_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -790,9 +792,9 @@ CREATE TABLE `post_image` (
   KEY `SYS_IDX_187` (`IMAGE_ID`),
   KEY `SYS_IDX_189` (`POST_IMAAGES_ID`),
   KEY `SYS_IDX_191` (`POST_IMAGES_ID`),
-  CONSTRAINT `FK745EACFCB94A24D7` FOREIGN KEY (`IMAGE_ID`) REFERENCES `image` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK745EACFC25C2EC8B` FOREIGN KEY (`POST_IMAAGES_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK745EACFC2F451766` FOREIGN KEY (`POST_IMAGES_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK745EACFC25C2EC8B` FOREIGN KEY (`POST_IMAAGES_ID`) REFERENCES `post` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK745EACFCB94A24D7` FOREIGN KEY (`IMAGE_ID`) REFERENCES `image` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1005,13 +1007,13 @@ CREATE TABLE `prognosis` (
   KEY `SYS_IDX_70` (`FIRST_ID`),
   KEY `SYS_IDX_72` (`WINNER_ID`),
   KEY `SYS_IDX_74` (`CATEGORY_ID`),
+  CONSTRAINT `FKC60FB0626B4B1D4` FOREIGN KEY (`REAL_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB0627FB59824` FOREIGN KEY (`CATEGORY_ID`) REFERENCES `category` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKC60FB062F2F637FC` FOREIGN KEY (`WINNER_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB062BEA88BA7` FOREIGN KEY (`SECOND_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB062CE9D83EB` FOREIGN KEY (`FIRST_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKC60FB0626B4B1D4` FOREIGN KEY (`REAL_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKC60FB062D888D8FB` FOREIGN KEY (`PROGNOSTICATOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FKC60FB062D888D8FB` FOREIGN KEY (`PROGNOSTICATOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKC60FB062F2F637FC` FOREIGN KEY (`WINNER_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1020,6 +1022,7 @@ CREATE TABLE `prognosis` (
 
 LOCK TABLES `prognosis` WRITE;
 /*!40000 ALTER TABLE `prognosis` DISABLE KEYS */;
+INSERT INTO `prognosis` VALUES (1,0,0,'2012-06-21 20:00:00','2012-05-30 15:21:44','<p>TEST Prognosis #1</p>','2012-05-30 15:21:44',1,NULL,0,NULL,'��\0sr\0java.net.URL�%76\Z��r\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xp��������t\0code.google.comt\0 /p/sprognosis/issues/detail?id=7q\0~\0t\0httppx',2,1.7,0,NULL,NULL,6570,2.5,0,6570,'RANGE',104,'WORLD_CHAMPIONSHIP',6,NULL,0);
 /*!40000 ALTER TABLE `prognosis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1037,7 +1040,7 @@ CREATE TABLE `property` (
   `DESCRIPTION` varchar(1000) NOT NULL,
   `IS_ACTIVE` tinyint(1) NOT NULL,
   `LAST_UPDATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `NAME` varchar(15) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_157` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -1104,7 +1107,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,5,'ROLE_ADMIN',''),(2,64,'ROLE_USER',''),(3,10,'ROLE_PROGNOSTICATOR','');
+INSERT INTO `role` VALUES (1,5,'ROLE_ADMIN',''),(2,65,'ROLE_USER',''),(3,10,'ROLE_PROGNOSTICATOR','');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1122,8 +1125,8 @@ CREATE TABLE `role_people` (
   UNIQUE KEY `SYS_IDX_82` (`ROLE_ID`,`USER_ID`),
   KEY `SYS_IDX_213` (`USER_ID`),
   KEY `SYS_IDX_84` (`ROLE_ID`),
-  CONSTRAINT `FK28B75E785CF6E39C` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK28B75E78221A77C` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK28B75E78221A77C` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK28B75E785CF6E39C` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1133,7 +1136,7 @@ CREATE TABLE `role_people` (
 
 LOCK TABLES `role_people` WRITE;
 /*!40000 ALTER TABLE `role_people` DISABLE KEYS */;
-INSERT INTO `role_people` VALUES (1,1),(3,38);
+INSERT INTO `role_people` VALUES (1,1),(3,38),(2,39);
 /*!40000 ALTER TABLE `role_people` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1162,10 +1165,10 @@ CREATE TABLE `stage` (
   KEY `SYS_IDX_90` (`FIRST_ID`),
   KEY `SYS_IDX_92` (`PROGNOSIS_ID`),
   KEY `SYS_IDX_94` (`WINNER_ID`),
-  CONSTRAINT `FK68AC2FECE9D83EB` FOREIGN KEY (`FIRST_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK68AC2FEF2F637FC` FOREIGN KEY (`WINNER_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK68AC2FE620BB490` FOREIGN KEY (`PROGNOSIS_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK68AC2FEBEA88BA7` FOREIGN KEY (`SECOND_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK68AC2FE620BB490` FOREIGN KEY (`PROGNOSIS_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK68AC2FECE9D83EB` FOREIGN KEY (`FIRST_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK68AC2FEF2F637FC` FOREIGN KEY (`WINNER_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1191,7 +1194,7 @@ CREATE TABLE `tag` (
   `DATE_CREATED` timestamp NULL DEFAULT NULL,
   `DESCRIPTION` varchar(1000) DEFAULT NULL,
   `LAST_UPDATED` timestamp NULL DEFAULT NULL,
-  `NAME` varchar(15) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
   `LANGUAGE` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_179` (`ID`)
@@ -1229,7 +1232,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_96` (`ID`),
   UNIQUE KEY `SYS_IDX_SYS_CT_76_98` (`USERNAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1238,7 +1241,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,5,'','',0,1,'321fa970b38a682966be01e155998750591ec53d','sprognosis_admin','sprognosis_admin',NULL),(38,5,'test handicapper','',0,1,'c1493cb72318e0df063b5ed58258dee576c9e3ed','Neo','sprognosis_prognosticator',NULL);
+INSERT INTO `user` VALUES (1,5,'','',0,1,'321fa970b38a682966be01e155998750591ec53d','sprognosis_admin','sprognosis_admin',NULL),(38,5,'test handicapper','',0,1,'c1493cb72318e0df063b5ed58258dee576c9e3ed','Neo','sprognosis_prognosticator',NULL),(39,1,'','sawrus@yandex.ru',1,1,'dec667a6cff6307e9118f1e36d1faafa44826b61','User','sprognosis_user',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1257,15 +1260,25 @@ CREATE TABLE `user_profile` (
   `PAY_DATE` timestamp NULL DEFAULT NULL,
   `LANGUAGE` varchar(255) DEFAULT NULL,
   `USER_IMAGE_ID` bigint(20) DEFAULT NULL,
+  `address1` varchar(255) DEFAULT NULL,
+  `address2` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `facebook_profile` varchar(255) DEFAULT NULL,
+  `site_url` varchar(255) DEFAULT NULL,
+  `state_province` varchar(255) DEFAULT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
+  `twitter_name` varchar(255) DEFAULT NULL,
+  `zip_postal_code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_103` (`ID`),
   KEY `SYS_IDX_105` (`USER_ID`),
   KEY `SYS_IDX_107` (`PAY_PROFILE_ID`),
   KEY `SYS_IDX_215` (`USER_IMAGE_ID`),
+  CONSTRAINT `FK487E2135221A77C` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK487E2135BC4D7ECB` FOREIGN KEY (`USER_IMAGE_ID`) REFERENCES `image` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK487E2135CCF16DE9` FOREIGN KEY (`PAY_PROFILE_ID`) REFERENCES `pay_profile` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK487E2135221A77C` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK487E2135CCF16DE9` FOREIGN KEY (`PAY_PROFILE_ID`) REFERENCES `pay_profile` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1274,7 +1287,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (1,0,13,38,NULL,'ENGLISH',NULL);
+INSERT INTO `user_profile` VALUES (1,4,13,38,NULL,'ENGLISH',9,'South Highway 27/114','','Togliatty','Russia','','','Russia Federation','79277716793','','445047'),(2,0,13,39,NULL,'ENGLISH',10,'','','','','','','','','','');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1290,8 +1303,8 @@ CREATE TABLE `user_profile_prognosis` (
   `PROGNOSIS_ID` bigint(20) DEFAULT NULL,
   KEY `SYS_IDX_132` (`USER_PROFILE_PROGNOSIS_LIST_ID`),
   KEY `SYS_IDX_134` (`PROGNOSIS_ID`),
-  CONSTRAINT `FKFEB28DD8620BB490` FOREIGN KEY (`PROGNOSIS_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FKFEB28DD824F1EDB3` FOREIGN KEY (`USER_PROFILE_PROGNOSIS_LIST_ID`) REFERENCES `user_profile` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FKFEB28DD824F1EDB3` FOREIGN KEY (`USER_PROFILE_PROGNOSIS_LIST_ID`) REFERENCES `user_profile` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FKFEB28DD8620BB490` FOREIGN KEY (`PROGNOSIS_ID`) REFERENCES `prognosis` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1338,4 +1351,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-05-28 23:02:31
+-- Dump completed on 2012-05-30 22:10:07

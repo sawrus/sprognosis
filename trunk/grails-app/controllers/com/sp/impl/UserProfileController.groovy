@@ -5,11 +5,14 @@ import com.sp.profiles.UserProfile
 import com.sp.site.Image
 import org.apache.commons.logging.LogFactory
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.sp.site.Post
 
 @Secured(['ROLE_USER','ROLE_PROGNOSTICATOR'])
 class UserProfileController {
     PayService payService
     UserService userService
+
+    static allowedMethods = [update: "POST"]
 
     private static final log = LogFactory.getLog(this);
 
@@ -68,6 +71,33 @@ class UserProfileController {
         }
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'userProfile.label', default: 'UserProfile'), params.id])}"
+        }
+    }
+
+    def update = {
+        def userProfileInstance = UserProfile.get(params.id)
+        if (userProfileInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+                if (userProfileInstance.version > version) {
+
+                    userProfileInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'userProfileInstance.label', default: 'UserProfile')] as Object[], "Another user has updated this UserProfile while you were editing")
+                    render(view: "show", model: [userProfileInstance: userProfileInstance])
+                    return
+                }
+            }
+            userProfileInstance.properties = params
+            if (!userProfileInstance.hasErrors() && userProfileInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'userProfileInstance.label', default: 'UserProfile'), userProfileInstance.id])}"
+                render(view: "show", model: [userProfileInstance: userProfileInstance])
+            }
+            else {
+                render(view: "show", model: [userProfileInstance: userProfileInstance])
+            }
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'userProfileInstance.label', default: 'UserProfile'), params.id])}"
+            redirect(action: "profile")
         }
     }
 

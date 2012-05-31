@@ -20,7 +20,7 @@
     <h2 class="ident-bot-2"><g:renderErrors bean="${person}" as="list"/></h2></g:hasErrors>
     <h2 class="ident-bot-2">Please Register..</h2>
     <table width="100%">
-        <g:uploadForm action="save" method="post">
+        <g:uploadForm action="save" method="post" id="loginForm">
         <tr><td class="registerp">Login Name</td><td
                 class="registerv"><input type="text" name='username' size="40%" value="${person?.username?.encodeAsHTML()}"/></td></tr>
         <tr><td class="registerp">Full Name</td><td
@@ -45,11 +45,4 @@
         </g:uploadForm>
     </table>
 </div>
-<script type='text/javascript'>
-    <!--
-    (function(){
-        document.forms['loginForm'].elements['username'].focus();
-    })();
-    // -->
-</script>
 </body></html>

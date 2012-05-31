@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<h1>sPrognosis # Please, send text below to email: sawrus@gmail.com</h1>
+<h1>sPrognosis # Please, send text below to email: 101bettingtips@gmail.com</h1>
 
 <h2>Problem Details</h2>
 

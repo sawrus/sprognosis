@@ -58,6 +58,7 @@
 </div>
 <div class="main shadow extra-10">
     <nav>
+        <a id="m"/>
         <ul class="sf-menu sf-js-enabled sf-shadow">
             <g:ifAnyGranted role="ROLE_ADMIN"><li class="active"><a href="#">Manage</a>
                 <ul style="display: none; visibility: hidden">
@@ -82,12 +83,17 @@
             <li><a href="/s/${category.name.replaceAll(" ","_").toLowerCase()}#p">${category?.name}</a>
                 <ul style="display: none; visibility: hidden">
                     <g:each in="${posts}" var="post">
+                    <g:if test="${category.name=='Participate'}"><g:isLoggedIn>
+                    <li><a href="/s/${post.name.replaceAll(" ","_").toLowerCase()}#p">${post?.title}</a></li></g:isLoggedIn>
+                    </g:if>
+                    <g:else>
                     <li><a href="/s/${post.name.replaceAll(" ","_").toLowerCase()}#p">${post?.title}</a></li>
+                    </g:else>
                     </g:each>
                     <g:if test="${category.name=='Participate'}">
                     <g:isNotLoggedIn>
                     <li><g:link controller="login">Login</g:link></li>
-                    <li><g:link controller="site" action="register">Register</g:link></li>
+                    <li><a href="${g.createLink(controller: 'site', action: 'register')}#p">Register</a></li>
                     </g:isNotLoggedIn>
                     <g:isLoggedIn>
                     <li><g:link controller="logout" action="index">Logout</g:link></li>
@@ -110,13 +116,15 @@
     <section id="content">
         <div class="container_12">
             <div class="wrapper">
-                <a href="#p" id="p"/>
+                <a id="p"/>
                 <g:layoutBody/>
+                <g:ifAnyGranted role="ROLE_USER,ROLE_PROGNOSTICATOR">
                 <div class="grid_4">
-                    <div class="block-3 ident-top-2"><g:ifAnyGranted role="ROLE_USER">
+                    <div class="block-3 ident-top-2">
                         <h3 class="ident-bot-2">${language.profile}</h3><g:if test="${userProfile?.userImage}">
                         <div class="ident-bot-6">${userProfile?.userImage?.toHtmlTagWithResize(150, 150)}</div>
-                        <div class="line ident-bot-5"></div></g:if><g:set var="payProfile"
+                        </g:if><g:ifAnyGranted role="ROLE_USER">
+                        <div class="line ident-bot-5"></div><g:set var="payProfile"
                            value="${userProfile?.payProfile ? userProfile.payProfile : PayProfile.findByPeriod(0)}"/>
                         <div class="ident-bot-6">
                             <table>
@@ -133,27 +141,11 @@
                             </table>
                             <div class="clear"></div>
                         </div>
-                        <div class="line ident-bot-5"></div></g:ifAnyGranted>
-                        <div class="ident-bot-4">
-                            <table>
-                                <tr><td class="spanelp">${language.stateProfile.get(0)}</td><td
-                                        class="spanelv">${Command.count()}</td></tr>
-                                <tr><td class="spanelp">${language.stateProfile.get(1)}</td><td
-                                        class="spanelv">${com.sp.impl.Category.count()}</td></tr>
-                                <tr><td class="spanelp">${language.stateProfile.get(2)}</td><td
-                                        class="spanelv">${Prognosis.count()}</td></tr>
-                                <tr><td class="spanelp">${language.stateProfile.get(3)}</td><td
-                                        class="spanelv">${Post.count()}</td></tr>
-                                <tr><td class="spanelp">${language.stateProfile.get(4)}</td><td
-                                        class="spanelv">${User.count()}</td></tr>
-                            </table>
-                            <div class="clear"></div>
-                        </div>
-                        <g:isLoggedIn><g:ifNotGranted role="ROLE_ADMIN">
+                        </g:ifAnyGranted>
                         <a href="${g.createLink(controller: 'userProfile', action: 'profile')}#p" class="button">${language.edit}</a>
-                        </g:ifNotGranted></g:isLoggedIn>
                     </div>
                 </div>
+                </g:ifAnyGranted>
             </div>
         </div>
     </section>
@@ -164,13 +156,14 @@
                     <div class="line-2 ident-bot-3"></div>
                     <div class="fl-l">
                         <ul class="list-1">
+                            <li><a href="#m">Menu</a></li>
                             <g:each in="${Post.findAllByMainPageVisibleAndLanguage(true, language)}" var="post"
                                     status="i"><g:if test="${i == 0}">
-                            <li class="active-2"><a href="/s/${post.name.replaceAll(" ","_").toLowerCase()}#p">${post?.title}</a></li></g:if><g:else>
+                            <li class="active-2"><a href="/s/${post.name.replaceAll(" ","_").toLowerCase()}#p">${post?.name}</a></li></g:if><g:else>
                             <li><a href="/s/${post.name.replaceAll(" ","_").toLowerCase()}#p">${post?.title}</a></li></g:else></g:each>
                         </ul>
                     </div>
-                    <div class="fl-r policy">${language.siteName} © ${java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)}</div>
+                    <div class="fl-r policy">${language.siteName}</div>
                     <div class="clear"></div>
                     <div class="fl-r"></div>
                 </div>

@@ -15,10 +15,11 @@
 
 <body id="page1">
 <g:if test="${postInstance != null}">
-    <div class="grid_8">
+    <g:isLoggedIn><div class="grid_8"></g:isLoggedIn>
+    <g:isNotLoggedIn><div class="grid_12"></g:isNotLoggedIn>
         <g:hasErrors bean="${postInstance}"><h2 class="ident-bot-2"><g:renderErrors bean="${postInstance}" as="list"/></h2></g:hasErrors>
         <h2 class="ident-bot-2">${postInstance?.title}</h2>
-        <h4 class="ident-bot-3"><a href="#">${postInstance?.announcement}</a>
+        <h4 class="ident-bot-3"><a href="#p">${postInstance?.announcement}</a>
         </h4>
         <g:each in="${postInstance?.images}" var="image">
             <div style="float:inherit;" id="gallery">

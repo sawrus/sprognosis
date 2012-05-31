@@ -33,6 +33,7 @@ class User {
 		userRealName(blank: false, length: 3..18/*, validator: {val, obj->
             if (val.equals(obj.username)) return ['default.invalid.range.message']
         }*/)
+        email(blank: false, unique: true)
 		passwd(blank: false, length: 6..18)
 		enabled()
 	}
