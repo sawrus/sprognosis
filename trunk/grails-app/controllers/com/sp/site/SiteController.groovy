@@ -112,6 +112,15 @@ class SiteController {
         redirect(controller: "userProfile", action: "profile")
     }
 
+    def generateInvite = {
+        try {
+            com.sp.site.Invite.generateKey()
+        } catch (Exception e) {
+            log.debug("generateInvite.e:",e)
+        }
+        redirect(action: "index")
+    }
+
     def register = {
         if (userService.authenticateService.isLoggedIn()) {
             redirect(controller: "register", action: "index")
