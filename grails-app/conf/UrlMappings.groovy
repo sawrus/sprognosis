@@ -10,6 +10,6 @@ class UrlMappings {
 
         "/s/$search"(controller: "site", action: "search")
 
-		"500"(view:'/error')
+		"500"(controller = "site", action: "error")
     }
 }

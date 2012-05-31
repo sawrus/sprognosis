@@ -130,6 +130,9 @@ class SiteController {
     @Secured(['ROLE_ADMIN'])
     def admin = {}
 
+    def error = {
+    }
+
     def contact = {
         [postInstance: Post.findByName(SiteFunction.CONTACT_US.name), userProfile: userProfile]
     }
