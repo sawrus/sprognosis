@@ -77,7 +77,15 @@
                 </ul>
             </li>
             </g:ifAnyGranted><g:ifNotGranted role="ROLE_ADMIN">
-            <li class="active"><a href="${g.createLink(controller: 'site', action: 'index')}#p">${language.homeName}</a></li>
+            <li class="active"><a href="${g.createLink(controller: 'site', action: 'index')}#p">${language.homeName}</a>
+            <ul style="display: none; visibility: hidden">
+                <g:each in="${Language.values()}" var="lang">
+                <g:if test="${language!=lang}">
+                <li><g:link controller="site" action="language" params="[language: lang.name()]">${lang.name}</g:link></li>
+                </g:if>
+                </g:each>
+            </ul>
+            </li>
             </g:ifNotGranted>
             <g:each in="${PostCategory.findAllByLanguage(language)}" var="category"><g:if test="${category?.visible}"><g:set var="posts" value="${Post.findAllByCategoryAndLanguage(category, language)}"/><g:if test="${posts.size() == 1}">
             <li><a href="/s/${category.firstPost().name.replaceAll(" ","_").toLowerCase()}#p">${category?.name}</a></g:if><g:else>
