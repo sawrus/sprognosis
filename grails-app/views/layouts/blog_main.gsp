@@ -63,6 +63,7 @@
             <g:ifAnyGranted role="ROLE_ADMIN"><li class="active"><a href="#">Manage</a>
                 <ul style="display: none; visibility: hidden">
                     <li><g:link controller="userProfileAdmin">User profiles</g:link></li>
+                    <li><g:link controller="paymentInformationAdmin">Payment profiles</g:link></li>
                     <li><g:link controller="postCategoryAdmin">Post categories</g:link></li>
                     <li><g:link controller="post">Posts</g:link></li>
                     <li><g:link controller="commentAdmin">Comments</g:link></li>

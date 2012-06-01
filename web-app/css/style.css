@@ -683,4 +683,24 @@ img {
     padding-left: 10px;
     font: 600 18px/26px 'Open Sans', sans-serif;
 }
+
+/*Payment <TD> styles*/
+.paymentp {
+    background-color: #ccff99;
+    color: #000000;
+    padding-left: 10px;
+    font: 600 10px/18px 'Open Sans', sans-serif;
+    width: 160px;
+}
+.paymentv input{
+    color: #000000;
+    font: 600 10px/18px 'Open Sans', sans-serif;
+}
+.paymentp2 {
+    background-color: #f7ef0f;
+    color: #000000;
+    padding-left: 10px;
+    width: 160px;
+    font: 600 10px/18px 'Open Sans', sans-serif;
+}
 /*----------------------------- Custom project styles*/

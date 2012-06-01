@@ -16,7 +16,6 @@
 <g:if test="${postInstance != null}">
     <div class="grid_8">
         <g:if test="${flash.message}"><h2 class="ident-bot-2">${flash.message}</h2></g:if>
-        <g:hasErrors bean="${postInstance}"><h2 class="ident-bot-2"><g:renderErrors bean="${postInstance}" as="list"/></h2></g:hasErrors>
         <h2 class="ident-bot-2">${postInstance?.title}</h2>
         <h4 class="ident-bot-3"><a href="#">${postInstance?.announcement}</a>
         </h4>

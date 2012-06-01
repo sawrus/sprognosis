@@ -19,7 +19,7 @@
         <table width="100%">
             <g:ifAnyGranted role="ROLE_USER">
             <tr><td class="prognosisp">As user</td><td
-                    class="prognosisv"><g:link controller="site" action="purchased" class="button">${language.myPrognosis}</g:link></td>
+                    class="prognosisv"><g:link controller="site" action="purchased" class="button">${language.myPrognosis}</g:link> <g:link controller="site" action="sold" class="button">${language.buyPrognosis}</g:link></td>
             </tr>
             </g:ifAnyGranted>
             <tr><td class="prognosisp">Site language</td><td

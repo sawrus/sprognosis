@@ -7,7 +7,6 @@
 <body>
 <div data-role="content">
     <g:if test="${flash.message}"><h2 class="ident-bot-2">${flash.message}</h2></g:if>
-    <g:hasErrors bean="${postInstance}"><h2 class="ident-bot-2"><g:renderErrors bean="${postInstance}" as="list"/></h2></g:hasErrors>
     <g:if test="${postInstance?.images == null || postInstance?.images.isEmpty()}">
         <g:each in="${Banner.findByVisible(true)}" var="banner" status="b">
             <g:if test="${banner?.image?.visible}">

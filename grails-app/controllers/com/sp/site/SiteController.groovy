@@ -7,6 +7,7 @@ import com.sp.impl.UserService
 import com.sp.profiles.UserProfile
 import org.apache.commons.logging.LogFactory
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.sp.profiles.PaymentInformation
 
 class SiteController {
 
@@ -146,8 +147,11 @@ class SiteController {
         [postInstance: Post.findByName(SiteFunction.CONTACT_US.name), userProfile: userProfile]
     }
 
+    @Secured(['ROLE_PROGNOSTICATOR'])
     def payment = {
-        [postInstance: Post.findByName(SiteFunction.PAYMENT_INFORMATION.name), userProfile: userProfile]
+        [postInstance: Post.findByName(SiteFunction.PAYMENT_INFORMATION.name),
+                userProfile: userProfile,
+                paymentInformationInstance: PaymentInformation.findByUserProfile(userProfile)]
     }
 
     /////////////////////////////////////////// Prognosis: user actions
@@ -202,6 +206,33 @@ class SiteController {
         ]
     }
 
+    @Secured(['ROLE_PROGNOSTICATOR'])
+    def updatePayment = {
+        def paymentInformationInstance = PaymentInformation.get(params.id)
+        if (paymentInformationInstance) {
+            if (params.version) {
+                def version = params.version.toLong()
+                if (paymentInformationInstance.version > version) {
+
+                    paymentInformationInstance.errors.rejectValue("version", "default.optimistic.locking.failure", [message(code: 'paymentInformation.label', default: 'PaymentInformation')] as Object[], "Another user has updated this PaymentInformation while you were editing")
+                    redirect(controller: "site", action: "payment")
+                    return
+                }
+            }
+            paymentInformationInstance.properties = params
+            if (!paymentInformationInstance.hasErrors() && paymentInformationInstance.save(flush: true)) {
+                flash.message = "${message(code: 'default.updated.message', args: [message(code: 'paymentInformation.label', default: 'PaymentInformation'), paymentInformationInstance.id])}"
+                redirect(controller: "site", action: "payment")
+            }
+            else {
+                redirect(controller: "site", action: "payment")
+            }
+        }
+        else {
+            flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'paymentInformation.label', default: 'PaymentInformation'), params.id])}"
+            redirect(controller: "site", action: "payment")
+        }
+    }
     /////////////////////////////////////////// other functions
 
     private Post parsePost() {
