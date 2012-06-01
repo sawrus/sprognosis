@@ -10,6 +10,8 @@ import com.sp.profiles.UserProfile
 import com.sp.site.Image
 import org.apache.commons.logging.LogFactory
 import com.sp.site.Invite
+import com.sp.profiles.PaymentInformation
+import com.sp.enums.PaymentType
 
 /**
  * Registration controller.
@@ -246,6 +248,12 @@ class RegisterController {
         userProfile.userImage = Image.findByName(person.username)
 
         def userProfileSave = userProfile.save(flush: true)
+        if (person.authorities.contains(Role.ROLE_PROGNOSTICATOR)){
+            PaymentInformation paymentInformation = new PaymentInformation()
+            paymentInformation.userProfile = userProfile
+            paymentInformation.paymentType = PaymentType.PAYPAL
+            paymentInformation.save(flush: true)
+        }
         def auth = new AuthToken(person.username, params.passwd)
         def authtoken = daoAuthenticationProvider.authenticate(auth)
         SCH.context.authentication = authtoken

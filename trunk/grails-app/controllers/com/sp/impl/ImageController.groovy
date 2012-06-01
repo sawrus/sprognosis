@@ -6,6 +6,8 @@ import javax.imageio.ImageIO
 import org.apache.commons.lang.StringUtils
 import org.apache.commons.logging.LogFactory
 import org.codehaus.groovy.grails.plugins.springsecurity.Secured
+import com.sp.site.Banner
+import com.sp.profiles.UserProfile
 
 class ImageController {
 
@@ -161,31 +163,19 @@ class ImageController {
         }
     }
 
-    @Secured(['ROLE_ADMIN'])
-    def deleteAll = {
-        for (Post post: Post.list()){
-            for (Image image: post.images){
-                post.removeFromImages(image)
-            }
-            log.debug("clear images to post="+post)
-            post.save(flush: true)
-        }
-
-        Image.executeUpdate("delete Image");
-        redirect(action: "list")
-    }
-
     def delete = {
         def imageInstance = Image.get(params.id)
         final String imagePath = imageInstance.absolutePath
         if (imageInstance) {
             try {
+
+                cleanImageFromDomains(imageInstance)
+
                 imageInstance.delete(flush: true)
                 flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'image.label', default: 'Image'), params.id])}"
                 redirect(action: "list")
-
             }
-            catch (org.springframework.dao.DataIntegrityViolationException e) {
+            catch (org.springframework.dao.DataIntegrityViolationException e) {                
                 flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'image.label', default: 'Image'), params.id])}"
                 redirect(action: "show", id: params.id)
             }
@@ -196,6 +186,27 @@ class ImageController {
         else {
             flash.message = "${message(code: 'default.not.found.message', args: [message(code: 'image.label', default: 'Image'), params.id])}"
             redirect(action: "list")
+        }
+    }
+
+    private cleanImageFromDomains(Image imageInstance) {
+        for (Post post: Post.list()){
+            if (post.images.contains(imageInstance)){
+                post.removeFromImages(imageInstance)
+                post.save(flush: true)
+                break;
+            }
+        }
+        def banner = Banner.findByImage(imageInstance)
+        if (banner) {
+            banner.image = null
+            banner.save(flush: true)
+        }
+
+        def profile = UserProfile.findByUserImage(imageInstance)
+        if (profile) {
+            profile.userImage = null
+            profile.save(flush: true)
         }
     }
 }

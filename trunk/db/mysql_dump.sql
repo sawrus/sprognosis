@@ -45,7 +45,7 @@ CREATE TABLE `banner` (
 
 LOCK TABLES `banner` WRITE;
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
-INSERT INTO `banner` VALUES (5,2,'<span class=\"banner\">\r\n	<span class=\"banner-inner-1\">Improve your</span>\r\n	<span class=\"banner-inner-2\">GOALKEEPER SKILLS \r\n		<a class=\"banner-button\" href=\"#\"></a>\r\n	</span>\r\n</span>',8,1,NULL,'ENGLISH');
+INSERT INTO `banner` VALUES (5,4,'<span class=\"banner\">\r\n	<span class=\"banner-inner-1\">Improve your</span>\r\n	<span class=\"banner-inner-2\">GOALKEEPER SKILLS \r\n		<a class=\"banner-button\" href=\"#\"></a>\r\n	</span>\r\n</span>',11,1,NULL,'ENGLISH');
 /*!40000 ALTER TABLE `banner` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -456,7 +456,7 @@ CREATE TABLE `image` (
   `WIDTH` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `SYS_IDX_148` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -465,7 +465,7 @@ CREATE TABLE `image` (
 
 LOCK TABLES `image` WRITE;
 /*!40000 ALTER TABLE `image` DISABLE KEYS */;
-INSERT INTO `image` VALUES (8,0,'2012-05-28 17:33:18','','2012-05-28 17:33:18','Banner',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/1.jpg','1.jpg','/images/site','ENGLISH',1,0,NULL,NULL,'',433,990),(9,0,'2012-05-30 15:47:14','sprognosis_prognosticator','2012-05-30 15:47:14','sprognosis_prognosticator',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/avatars/2.jpg','2.jpg','/images/site/avatars','ENGLISH',1,0,NULL,NULL,'/avatars',433,990),(10,0,'2012-05-30 17:10:07','sprognosis_user','2012-05-30 17:10:07','sprognosis_user',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/avatars/9.jpg','9.jpg','/images/site/avatars','ENGLISH',1,0,NULL,NULL,'/avatars',433,990);
+INSERT INTO `image` VALUES (9,0,'2012-05-30 15:47:14','sprognosis_prognosticator','2012-05-30 15:47:14','sprognosis_prognosticator',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/avatars/2.jpg','2.jpg','/images/site/avatars','ENGLISH',1,0,NULL,NULL,'/avatars',433,990),(10,0,'2012-05-30 17:10:07','sprognosis_user','2012-05-30 17:10:07','sprognosis_user',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/avatars/9.jpg','9.jpg','/images/site/avatars','ENGLISH',1,0,NULL,NULL,'/avatars',433,990),(11,0,'2012-05-31 19:39:32','','2012-05-31 19:39:32','Banner',NULL,NULL,NULL,'/media/data/projects/groovy/sprognosis/web-app/images/site/1.jpg','1.jpg','/images/site','ENGLISH',1,0,NULL,NULL,'',433,990);
 /*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -492,7 +492,7 @@ CREATE TABLE `invite` (
 
 LOCK TABLES `invite` WRITE;
 /*!40000 ALTER TABLE `invite` DISABLE KEYS */;
-INSERT INTO `invite` VALUES (1,8,'TEST_INVITE',1);
+INSERT INTO `invite` VALUES (1,9,'TEST_INVITE',1);
 /*!40000 ALTER TABLE `invite` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -609,6 +609,60 @@ LOCK TABLES `payment_details` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `payment_information`
+--
+
+DROP TABLE IF EXISTS `payment_information`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment_information` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `version` bigint(20) NOT NULL,
+  `iwire_account_holder_name` varchar(255) NOT NULL,
+  `iwire_account_numberiban` varchar(255) NOT NULL,
+  `iwire_bank_address1` varchar(255) NOT NULL,
+  `iwire_bank_address2` varchar(255) NOT NULL,
+  `iwire_bank_city` varchar(255) NOT NULL,
+  `iwire_bank_country` varchar(255) NOT NULL,
+  `iwire_bank_name` varchar(255) NOT NULL,
+  `iwire_bank_prov_region` varchar(255) NOT NULL,
+  `iwire_bankzippostal_code` varchar(255) NOT NULL,
+  `iwireswiftcode` varchar(255) NOT NULL,
+  `uswire_account_holder_name` varchar(255) NOT NULL,
+  `uswire_account_number` varchar(255) NOT NULL,
+  `uswire_bank_address1` varchar(255) NOT NULL,
+  `uswire_bank_address2` varchar(255) NOT NULL,
+  `uswire_bank_city` varchar(255) NOT NULL,
+  `uswire_bank_name` varchar(255) NOT NULL,
+  `uswire_bank_state` varchar(255) NOT NULL,
+  `uswire_bankzippostal_code` varchar(255) NOT NULL,
+  `uswire_routing_number` varchar(255) NOT NULL,
+  `zippostal_code` varchar(255) NOT NULL,
+  `address1` varchar(255) NOT NULL,
+  `address2` varchar(255) NOT NULL,
+  `beneficiary_name` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL,
+  `pay_pal_account` varchar(255) NOT NULL,
+  `payment_type` varchar(255) NOT NULL,
+  `prov_region` varchar(255) NOT NULL,
+  `user_profile_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK85B62C73A3D24523` (`user_profile_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `payment_information`
+--
+
+LOCK TABLES `payment_information` WRITE;
+/*!40000 ALTER TABLE `payment_information` DISABLE KEYS */;
+INSERT INTO `payment_information` VALUES (1,3,'','','','','','','','','','','','','South Highway 27/114,,','','Togliatty','','Russia Federation','445047','','','','','','','','neo@paypal.com','US_WIRE','',1);
+/*!40000 ALTER TABLE `payment_information` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `payment_item`
 --
 
@@ -682,7 +736,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,12,'<p class=\"inner-ident-1 ident-bot-4\">ZURICH &ndash; While the IIHF World Ranking positions were known before the medal day in Helsinki, the final results with points were calculated only after the conclusion of the 2012 IIHF Ice Hockey World Championship. And Russia is on top for the fourth time since 2009.</p>',1,6,'<p class=\"inner-ident-1 ident-bot-4\">ZURICH &ndash; While the IIHF World Ranking positions were known before the medal day in Helsinki, the final results with points were calculated only after the conclusion of the 2012 IIHF Ice Hockey World Championship. And Russia is on top for the fourth time since 2009.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The IIHF World Ranking system was calculated for the first time in 2003, but officially introduced and released after the 2004 IIHF World Championship in Czech Republic.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for the final 2012 men&rsquo;s IIHF World Ranking.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">In the eleven official men&rsquo;s World Rankings since it was introduced, only three countries have been Number One:\r\nCanada: Four times (2004, 2005, 2008, post-Olympic 2010)\r\nSweden: Three times (post-Olympic &amp; post-Worlds 2006, 2007)\r\nRussia: Four times (2009, post-Worlds 2010, 2011, 2012)</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The official annual World Ranking is normally calculated after the conclusion of the World Championship. The only exceptions are the Olympic years where the IIHF also releases a World Ranking immediately following the Olympic tournament.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">This consequently means that the Olympic years (so far 2006 and 2010) have been the only ones where two official World Rankings have been released, one in February and one in May.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Before 2004, the IIHF World Ranking was simply based on the final placing in the last World Championship. The IIHF realized that it was not entirely fair as an uncharacteristically poor showing in one tournament could see a country slip from, for example, first to seventh position from one year to another.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">To give the World Ranking more depth, a system was introduced which is based on awarding points for the final positions in the last four IIHF World Championships and in the last Olympic Ice Hockey Tournament.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">To have the ranking accurately reflect current performance, most importance is given to results of the last competition. To a lesser degree (annual point decline by 25 per cent) attention is also paid to results from previous years.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for an explanation of the World Ranking formula.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">So in the nine years in which the system has existed we have seen a gradual movement from an early Canadian dominance, to Sweden&rsquo;s ascendancy around 2006 to Russia&rsquo;s domination after 2009. The only out-of-the-line top ranking was Canada&rsquo;s short time as Number One after the win at the Vancouver Olympics in 2010, when it also enjoyed the highest ever point total for a Number One &ndash; 4105.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">That number consequently reflected not only the Olympic gold medal, but it also carried the value from the 2007 Worlds gold in Moscow and the silver positions from 2008 and 2009.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Sweden is the only other nation which was the number one rank with 4000 points or more. They earned 4095 points after winning gold in the 2006 Olympics in Turin and completing the historic double in Riga three months later.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The current 2012 World Ranking will also serve as the seeding of the groups for the Sochi Olympics 2014, despite that the ranking may change after the next year&rsquo;s World Championship.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">IIHF&rsquo;s Sports Director Dave Fitzpatrick explains why the 2012 ranking carries over to Sochi and thus why the 2013 ranking cannot be used for Olympic purposes (also including issues like allocation of locker rooms, practice times, etc.)</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">&ldquo;We need two seasons to complete the Olympic qualifications as teams ranked as low as thirty-three have applied for a chance to qualify,&rdquo; says Fitzpatrick. &ldquo;This means that we will need to start the qualification process already in autumn of 2012, with the final qualifications being played in February 2013 which is a condition from the IOC.&rdquo;</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">&ldquo;As the qualifications are part of the Olympic competition structure, we must freeze the Olympic ranking before the qualifications for Sochi begin this upcoming autumn.&rdquo;</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for a complete overview of the Olympic format including qualifications.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The men&rsquo;s groups in Sochi 2014, generated by the 2012 IIHF World Ranking, will be as follows:</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Group A: Russia (1), Slovakia (6), USA (7), Qualifier 3\r\nGroup B: Finland (2), Canada (5), Norway (8), Qualifier 2\r\nGroup C: Czech Republic (3), Sweden (4), Switzerland (9), Qualifier 1</p>','2012-05-28 16:56:45','','2012-05-30 17:40:01','Home','Home Title',1,1,0,1,1,1,1,'ENGLISH'),(2,1,NULL,1,11,'<p>My Account</p>','2012-05-28 18:43:20','','2012-05-28 18:48:00','My Account','My Account',0,0,0,1,0,0,0,'ENGLISH'),(3,1,NULL,1,11,'<p>My Tips</p>','2012-05-28 18:44:24','','2012-05-28 18:48:11','My Tips','My Tips',0,0,0,1,0,0,0,'ENGLISH'),(4,1,NULL,1,11,'<p>Payment Information</p>','2012-05-28 18:46:07','','2012-05-28 18:48:20','Payment Information','Payment Information',0,0,0,1,0,0,0,'ENGLISH'),(5,0,'<p>Contact us</p>',1,14,'<p>Contact us</p>','2012-05-30 18:06:46','','2012-05-30 18:06:46','Contact us','Contact us',1,1,1,1,1,1,1,'ENGLISH');
+INSERT INTO `post` VALUES (1,14,'<p class=\"inner-ident-1 ident-bot-4\">ZURICH &ndash; While the IIHF World Ranking positions were known before the medal day in Helsinki, the final results with points were calculated only after the conclusion of the 2012 IIHF Ice Hockey World Championship. And Russia is on top for the fourth time since 2009.</p>',1,6,'<p class=\"inner-ident-1 ident-bot-4\">ZURICH &ndash; While the IIHF World Ranking positions were known before the medal day in Helsinki, the final results with points were calculated only after the conclusion of the 2012 IIHF Ice Hockey World Championship. And Russia is on top for the fourth time since 2009.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The IIHF World Ranking system was calculated for the first time in 2003, but officially introduced and released after the 2004 IIHF World Championship in Czech Republic.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for the final 2012 men&rsquo;s IIHF World Ranking.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">In the eleven official men&rsquo;s World Rankings since it was introduced, only three countries have been Number One:\r\nCanada: Four times (2004, 2005, 2008, post-Olympic 2010)\r\nSweden: Three times (post-Olympic &amp; post-Worlds 2006, 2007)\r\nRussia: Four times (2009, post-Worlds 2010, 2011, 2012)</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The official annual World Ranking is normally calculated after the conclusion of the World Championship. The only exceptions are the Olympic years where the IIHF also releases a World Ranking immediately following the Olympic tournament.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">This consequently means that the Olympic years (so far 2006 and 2010) have been the only ones where two official World Rankings have been released, one in February and one in May.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Before 2004, the IIHF World Ranking was simply based on the final placing in the last World Championship. The IIHF realized that it was not entirely fair as an uncharacteristically poor showing in one tournament could see a country slip from, for example, first to seventh position from one year to another.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">To give the World Ranking more depth, a system was introduced which is based on awarding points for the final positions in the last four IIHF World Championships and in the last Olympic Ice Hockey Tournament.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">To have the ranking accurately reflect current performance, most importance is given to results of the last competition. To a lesser degree (annual point decline by 25 per cent) attention is also paid to results from previous years.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for an explanation of the World Ranking formula.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">So in the nine years in which the system has existed we have seen a gradual movement from an early Canadian dominance, to Sweden&rsquo;s ascendancy around 2006 to Russia&rsquo;s domination after 2009. The only out-of-the-line top ranking was Canada&rsquo;s short time as Number One after the win at the Vancouver Olympics in 2010, when it also enjoyed the highest ever point total for a Number One &ndash; 4105.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">That number consequently reflected not only the Olympic gold medal, but it also carried the value from the 2007 Worlds gold in Moscow and the silver positions from 2008 and 2009.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Sweden is the only other nation which was the number one rank with 4000 points or more. They earned 4095 points after winning gold in the 2006 Olympics in Turin and completing the historic double in Riga three months later.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The current 2012 World Ranking will also serve as the seeding of the groups for the Sochi Olympics 2014, despite that the ranking may change after the next year&rsquo;s World Championship.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">IIHF&rsquo;s Sports Director Dave Fitzpatrick explains why the 2012 ranking carries over to Sochi and thus why the 2013 ranking cannot be used for Olympic purposes (also including issues like allocation of locker rooms, practice times, etc.)</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">&ldquo;We need two seasons to complete the Olympic qualifications as teams ranked as low as thirty-three have applied for a chance to qualify,&rdquo; says Fitzpatrick. &ldquo;This means that we will need to start the qualification process already in autumn of 2012, with the final qualifications being played in February 2013 which is a condition from the IOC.&rdquo;</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">&ldquo;As the qualifications are part of the Olympic competition structure, we must freeze the Olympic ranking before the qualifications for Sochi begin this upcoming autumn.&rdquo;</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Click here for a complete overview of the Olympic format including qualifications.</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">The men&rsquo;s groups in Sochi 2014, generated by the 2012 IIHF World Ranking, will be as follows:</p>\r\n<p class=\"inner-ident-1 ident-bot-4\">Group A: Russia (1), Slovakia (6), USA (7), Qualifier 3\r\nGroup B: Finland (2), Canada (5), Norway (8), Qualifier 2\r\nGroup C: Czech Republic (3), Sweden (4), Switzerland (9), Qualifier 1</p>','2012-05-28 16:56:45','','2012-05-31 19:41:51','Home','Home Title',1,1,0,1,1,1,1,'ENGLISH'),(2,1,NULL,1,11,'<p>My Account</p>','2012-05-28 18:43:20','','2012-05-28 18:48:00','My Account','My Account',0,0,0,1,0,0,0,'ENGLISH'),(3,1,NULL,1,11,'<p>My Tips</p>','2012-05-28 18:44:24','','2012-05-28 18:48:11','My Tips','My Tips',0,0,0,1,0,0,0,'ENGLISH'),(4,1,NULL,1,11,'<p>Payment Information</p>','2012-05-28 18:46:07','','2012-05-28 18:48:20','Payment Information','Payment Information',0,0,0,1,0,0,0,'ENGLISH'),(5,0,'<p>Contact us</p>',1,14,'<p>Contact us</p>','2012-05-30 18:06:46','','2012-05-30 18:06:46','Contact us','Contact us',1,1,1,1,1,1,1,'ENGLISH');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -804,7 +858,7 @@ CREATE TABLE `post_image` (
 
 LOCK TABLES `post_image` WRITE;
 /*!40000 ALTER TABLE `post_image` DISABLE KEYS */;
-INSERT INTO `post_image` VALUES (NULL,8,1);
+INSERT INTO `post_image` VALUES (NULL,11,1);
 /*!40000 ALTER TABLE `post_image` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1013,7 +1067,7 @@ CREATE TABLE `prognosis` (
   CONSTRAINT `FKC60FB062CE9D83EB` FOREIGN KEY (`FIRST_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB062D888D8FB` FOREIGN KEY (`PROGNOSTICATOR_ID`) REFERENCES `user` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FKC60FB062F2F637FC` FOREIGN KEY (`WINNER_ID`) REFERENCES `command` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1022,7 +1076,7 @@ CREATE TABLE `prognosis` (
 
 LOCK TABLES `prognosis` WRITE;
 /*!40000 ALTER TABLE `prognosis` DISABLE KEYS */;
-INSERT INTO `prognosis` VALUES (1,0,0,'2012-06-21 20:00:00','2012-05-30 15:21:44','<p>TEST Prognosis #1</p>','2012-05-30 15:21:44',1,NULL,0,NULL,'ï¿½ï¿½\0sr\0java.net.URLï¿½%76\Zï¿½ï¿½r\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½t\0code.google.comt\0 /p/sprognosis/issues/detail?id=7q\0~\0t\0httppx',2,1.7,0,NULL,NULL,6570,2.5,0,6570,'RANGE',104,'WORLD_CHAMPIONSHIP',6,NULL,0);
+INSERT INTO `prognosis` VALUES (1,0,0,'2012-06-21 20:00:00','2012-05-30 15:21:44','<p>TEST Prognosis #1</p>','2012-05-30 15:21:44',1,NULL,0,NULL,'ï¿½ï¿½\0sr\0java.net.URLï¿½%76\Zï¿½ï¿½r\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½t\0code.google.comt\0 /p/sprognosis/issues/detail?id=7q\0~\0t\0httppx',2,1.7,0,NULL,NULL,6570,2.5,0,6570,'RANGE',104,'WORLD_CHAMPIONSHIP',6,NULL,0),(2,0,0,'2012-06-14 20:00:00','2012-05-31 19:50:11','<p>World champion [Football]</p>\r\n<p>English / Russia</p>\r\n<p>Some interesting match ..</p>\r\n<p>bla .. bla .. bla</p>','2012-05-31 19:50:11',38,NULL,0,NULL,'¬í\0sr\0java.net.URL–%76\Züär\0I\0hashCodeI\0portL\0	authorityt\0Ljava/lang/String;L\0fileq\0~\0L\0hostq\0~\0L\0protocolq\0~\0L\0refq\0~\0xpÿÿÿÿÿÿÿÿt\0mail.yandex.rut\0/neo2/q\0~\0t\0httpst\0message/2360000000076101528x',2,2.7,4,NULL,NULL,6527,1.9,1,2,'COUNT',104,'WORLD_CHAMPIONSHIP',0,NULL,0);
 /*!40000 ALTER TABLE `prognosis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1287,7 +1341,7 @@ CREATE TABLE `user_profile` (
 
 LOCK TABLES `user_profile` WRITE;
 /*!40000 ALTER TABLE `user_profile` DISABLE KEYS */;
-INSERT INTO `user_profile` VALUES (1,4,13,38,NULL,'ENGLISH',9,'South Highway 27/114','','Togliatty','Russia','','','Russia Federation','79277716793','','445047'),(2,0,13,39,NULL,'ENGLISH',10,'','','','','','','','','','');
+INSERT INTO `user_profile` VALUES (1,4,13,38,NULL,'ENGLISH',9,'South Highway 27/114','','Togliatty','Russia','','','Russia Federation','79277716793','','445047'),(2,1,13,39,NULL,'ENGLISH',10,'South Highway 27/114','','Togliatty','Russia','','','Russia Federation','79277716793','','445047');
 /*!40000 ALTER TABLE `user_profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1351,4 +1405,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-05-30 22:10:07
+-- Dump completed on 2012-05-31 23:56:18
