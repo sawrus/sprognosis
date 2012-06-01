@@ -53,6 +53,11 @@
     <header>
         <div class="wrapper">
             <div class="fl-l ident-top-1 ident-bot-18"><div class="slogan fl-l">${language.siteName}</div></div>
+            <div class="block-2">
+                <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+                <div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,lj,gplus"></div>
+
+            </div>
         </div>
     </header>
 </div>
